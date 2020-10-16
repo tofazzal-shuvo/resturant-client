@@ -22,7 +22,7 @@ const Items = ({ item = {}, fromCard = true, menuStyle = {} }) => {
         <IncDecBtn fromCard={fromCard} id={_id} name={name} price={price} />
       </div>
       <p style={{ width: "75%", color: "#717171" }}>{desc}</p>
-      <p style={style}>RSD {Number(price || 0).toFixed(2)}</p>
+      <p style={{...style, fontSize:"1.2rem"}}>RSD {Number(price || 0).toFixed(2)}</p>
     </div>
   );
 };

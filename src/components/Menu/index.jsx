@@ -7,14 +7,15 @@ import { Badge } from "antd";
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-const Menu = (props) => {
+const Menu = () => {
   const location = useLocation();
   const { pathname } = location;
   const show =
     pathname === "/menu-items" ||
     pathname === "/cards" ||
     pathname === "/call-waiter" ||
-    pathname === "/comming-soon";
+    pathname === "/comming-soon"||
+    pathname === "/complete-order";
   if (!show) return null;
   return (
     <div className="d-flex justify-content-around menu">
@@ -37,7 +38,7 @@ const menuItems = [
     icon: <HomeOutlined style={{ fontSize: "30px" }} />,
   },
   {
-    text: "View card",
+    text: "View cart",
     path: "/cards",
     icon: <ShoppingCartOutlined style={{ fontSize: "30px" }} />,
   },

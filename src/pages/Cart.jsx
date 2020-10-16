@@ -57,7 +57,7 @@ const Card = () => {
         },
       });
       if (CreateOrder.success) {
-        // dispatch(clearCard());
+        dispatch(clearCard());
         notification.success({
           message: CreateOrder.message,
           placement: "bottomRight",
