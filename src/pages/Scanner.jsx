@@ -1,21 +1,21 @@
 import React, { useState } from "react";
+// import QrReader from "react-qr-scanner";
 import QrReader from "react-qr-reader";
 import { useHistory } from "react-router-dom";
 
 const Scanner = () => {
-  const [tableId, setTableId] = useState("");
   const [show, setShow] = useState(false);
-  const history = useHistory()
+  const history = useHistory();
   const previewStyle = {
     height: 240,
     width: 320,
     margin: "auto",
   };
-  const handleScan = (data) => {
-    setShow(true);
-    setTableId(data);
-    history.push('/welcome')
-  };
+  const handleScan = (data) =>
+    history.push(
+      `/welcome?table=${data?.table}&restaurant=${data?.restaurant}`
+    );
+
   const handleError = (err) => {
     console.error(err);
   };
@@ -35,7 +35,7 @@ const Scanner = () => {
             )}
             {show && (
               <QrReader
-                // delay={this.state.delay}
+                delay={300}
                 style={previewStyle}
                 onError={handleError}
                 onScan={handleScan}

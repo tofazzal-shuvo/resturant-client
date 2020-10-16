@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { ReadOutlined } from "@ant-design/icons";
-import { Button, Spin } from "antd";
-import Modal from "antd/lib/modal/Modal";
+import { Button, Spin, Modal } from "antd";
 import { useQuery } from "@apollo/react-hooks";
 import { FETCH_MEUNU } from "../graphql/modules";
 import Category from "../components/Menu/Category";
 import { useLocation } from "react-router-dom";
 
 const MenuItems = () => {
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const restaurant = query.get("restaurant");
+  const table = query.get("table");
+  const lang = query.get("lang");
+
   const [category, setCategory] = useState({});
   const [open, setOpen] = useState(false);
   // functions
   const onClose = () => setOpen(false);
   const onOpen = () => setOpen(true);
   // finding query
-  const location = useLocation();
-  const lang = new URLSearchParams(location.search).get("lang");
 
   const { data, loading } = useQuery(FETCH_MEUNU, {
     variables: {
       limit: 100,
       offset: 0,
-      resId: "5f72b1281ffe10001acab3ba",
+      resId: restaurant,
       lang,
     },
   });
