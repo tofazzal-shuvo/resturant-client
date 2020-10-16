@@ -1,0 +1,160 @@
+body {
+  font-family: 'Roboto', sans-serif;
+
+h1,h2,h3,h4,h5,h6,p{
+  margin: 0;
+}
+h4{
+ font-size: 1.3rem;
+}
+  a {
+    display: inline-block;
+  }
+  .mb-4 {
+    margin-bottom: 1.4rem;
+  }
+  .custom-btn{
+    border: none;
+    background: #71ACD8;
+    padding: 7px 22px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 3px;
+    outline-style: none;
+    transition: 0.4s;
+    &:hover{
+      background-color: #679fca;
+    }
+    &:focus{
+      border: none
+    }
+  }
+  .ant-btn:disabled {
+    border-color: #40a9ffab;
+    background-color: #40a9ffab;
+    color: gainsboro;
+    &:hover {
+      background-color: #40a9ffab;
+      border-color: #40a9ffab;
+      background-color: #40a9ffab;
+      color: gainsboro;
+    }
+  }
+  .text-white {
+    color: #fff;
+  }
+  .ant-switch-checked {
+    background-color: #58D68D;
+}
+i {
+  font-size: 19px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+.fa-trash {
+  color: red;
+}
+  // h2{
+  //   font-family: 'Raleway', sans-serif;
+  // }
+  .ant-menu-item .anticon,
+  .ant-menu-submenu-title .anticon {
+    min-width: 14px;
+    margin-right: 10px;
+    font-size: 18px;
+    -webkit-transition: font-size 0.15s cubic-bezier(0.215, 0.61, 0.355, 1),
+      margin 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: font-size 0.15s cubic-bezier(0.215, 0.61, 0.355, 1),
+      margin 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+  
+  .mb-2 {
+    margin-bottom: 0.8rem;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  textarea {
+    resize: none;
+  }
+  
+  
+  
+  
+
+  .ant-tabs-tab {
+    span {
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+  .ant-pagination {
+    .ant-pagination-item-link {
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+ 
+  .bg-light {
+    .container {
+      padding: 0;
+    }
+    .navbar-brand {
+      padding: 15px 0;
+    }
+    img {
+      width: 55px;
+      height: 50px;
+      margin-right: 30px;
+    }
+    .logo {
+      color: #9c27b0;
+      font-weight: 700;
+    }
+
+    .right-items {
+      .signin {
+        color: #000000c7;
+        font-weight: 600;
+        font-size: 19px;
+      }
+      .get-app {
+        background-color: #9c27b0;
+        font-size: 13px;
+        color: #fff;
+        padding: 10px 16px;
+        border-radius: 23px;
+        display: none;
+        font-weight: 600;
+      }
+    }
+    transition: all 0.3s;
+    .shadow {
+      box-shadow: -1px 1px 8px #00000069;
+    }
+    .visible {
+      .signin {
+        display: none;
+      }
+      .get-app {
+        display: block;
+      }
+    }
+  }
+}
+
+.sticky-top {
+  animation: fadeIn 500ms;
+}
+
+@keyframes fadeIn {
+  from {
+    top: -100px;
+  }
+  to {
+    top: 0px;
+  }
+}
