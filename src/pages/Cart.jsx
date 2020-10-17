@@ -6,13 +6,19 @@ import Items from "../components/Menu/Items";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_ORDER } from "../graphql/modules";
 import { clearCard } from "../store/modules";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Button, Spinner } from "react-bootstrap";
 
 const Card = () => {
   const cards = useSelector((state) => state.card);
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
+
+  const query = new URLSearchParams(location.search);
+  const restaurant = query.get("restaurant");
+  const table = query.get("table");
+  const lang = query.get("lang");
 
   const [cardItems, setCardItems] = useState([]);
   const [note, setNote] = useState("");
@@ -20,7 +26,7 @@ const Card = () => {
   const [items, setItems] = useState([]);
 
   const orderData = {
-    tableId: "5f764c0d284f9c47dd588128",
+    tableId: table,
     currency: "RSD",
     total: String(total),
     paymentMethod: "cash",
@@ -62,7 +68,9 @@ const Card = () => {
           message: CreateOrder.message,
           placement: "bottomRight",
         });
-        history.push("/complete-order");
+        history.push(
+          `/complete-ordertable=${table}&restaurant=${restaurant}&lang=${lang}`
+        );
       } else {
         notification.warn({
           message: CreateOrder.message,

@@ -34,8 +34,8 @@ const Welcome = () => {
                 key={item.key}
                 txt={item.name}
                 symble={item.key}
-                table={table}
                 restaurant={restaurant}
+                table={table}
               />
             ))}
           </div>
@@ -47,7 +47,7 @@ const Welcome = () => {
 
 export default Welcome;
 
-const SingleBtn = ({ txt, symble, table, restaurant }) => {
+const SingleBtn = ({ txt, symble, restaurant, table }) => {
   const history = useHistory();
   return (
     <Button

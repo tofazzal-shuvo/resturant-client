@@ -5,18 +5,42 @@ import {
 } from "@ant-design/icons";
 import { Badge } from "antd";
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 
 const Menu = () => {
   const location = useLocation();
-  const { pathname } = location;
+  const { pathname, search } = location;
   const show =
     pathname === "/menu-items" ||
     pathname === "/cards" ||
     pathname === "/call-waiter" ||
-    pathname === "/comming-soon"||
+    pathname === "/comming-soon" ||
     pathname === "/complete-order";
   if (!show) return null;
+
+  const query = new URLSearchParams(search);
+  const restaurant = query.get("restaurant");
+  const table = query.get("table");
+  const lang = query.get("lang");
+
+  const menuItems = [
+    {
+      text: "Menu",
+      path: `/menu-items?table=${table}&restaurant=${restaurant}&lang=${lang}`,
+      icon: <HomeOutlined style={{ fontSize: "30px" }} />,
+    },
+    {
+      text: "View cart",
+      path: `/cards?table=${table}&restaurant=${restaurant}&lang=${lang}`,
+      icon: <ShoppingCartOutlined style={{ fontSize: "30px" }} />,
+    },
+    {
+      text: "Call weater",
+      path: `/call-waiter?table=${table}&restaurant=${restaurant}&lang=${lang}`,
+      icon: <SoundOutlined style={{ fontSize: "30px" }} />,
+    },
+  ];
+
   return (
     <div className="d-flex justify-content-around menu">
       {menuItems.map((item) => (
@@ -31,21 +55,4 @@ const Menu = () => {
   );
 };
 
-const menuItems = [
-  {
-    text: "Menu",
-    path: "/menu-items",
-    icon: <HomeOutlined style={{ fontSize: "30px" }} />,
-  },
-  {
-    text: "View cart",
-    path: "/cards",
-    icon: <ShoppingCartOutlined style={{ fontSize: "30px" }} />,
-  },
-  {
-    text: "Call weater",
-    path: "/call-waiter",
-    icon: <SoundOutlined style={{ fontSize: "30px" }} />,
-  },
-];
 export default Menu;
