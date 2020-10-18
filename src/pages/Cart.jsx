@@ -6,48 +6,30 @@ import Items from "../components/Menu/Items";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_ORDER } from "../graphql/modules";
 import { clearCard } from "../store/modules";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Button, Spinner } from "react-bootstrap";
 
 const Card = () => {
-  const cards = useSelector((state) => state.card);
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const location = useLocation();
-
-  const query = new URLSearchParams(location.search);
-  const restaurant = query.get("restaurant");
-  const table = query.get("table");
-  const lang = query.get("lang");
-
   const [cardItems, setCardItems] = useState([]);
   const [note, setNote] = useState("");
   const [total, setTotal] = useState(0);
   const [items, setItems] = useState([]);
 
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const { card, info } = useSelector((state) => state);
+
+  const onChange = (e) => setNote(e.target.value);
+
   const orderData = {
-    tableId: table,
+    tableId: info?.tableId,
     currency: "RSD",
     total: String(total),
     paymentMethod: "cash",
     paymentStatus: "paid",
   };
 
-  useEffect(() => {
-    let sum = 0;
-    const menuItems = [];
-    const data = Object.keys(cards).map((item) => {
-      const temp = cards[item];
-      sum = sum + +temp.price * +temp.quantity;
-      menuItems.push({ item: temp._id, quantity: temp.quantity });
-      return temp;
-    });
-    setItems(menuItems);
-    setCardItems(data);
-    setTotal(sum);
-  }, [cards]);
-
-  const onChange = (e) => setNote(e.target.value);
   const [createOrder, { loading }] = useMutation(CREATE_ORDER);
   const onOrder = async () => {
     try {
@@ -62,15 +44,14 @@ const Card = () => {
           },
         },
       });
+
       if (CreateOrder.success) {
         dispatch(clearCard());
         notification.success({
           message: CreateOrder.message,
           placement: "bottomRight",
         });
-        history.push(
-          `/complete-ordertable=${table}&restaurant=${restaurant}&lang=${lang}`
-        );
+        history.push(`/complete-order`);
       } else {
         notification.warn({
           message: CreateOrder.message,
@@ -79,6 +60,22 @@ const Card = () => {
       }
     } catch (err) {}
   };
+
+  useEffect(() => {
+    let sum = 0;
+    const menuItems = [];
+    const data = Object.keys(card).map((item) => {
+      const temp = card[item];
+      sum = sum + +temp.price * +temp.quantity;
+      menuItems.push({ item: temp._id, quantity: temp.quantity });
+      return temp;
+    });
+    setItems(menuItems);
+    setCardItems(data);
+    setTotal(sum);
+    console.log(card)
+  }, [card]);
+
   return (
     <div className="cards">
       <h2 className="main-title mb-4">Your orders</h2>

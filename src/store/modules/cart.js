@@ -15,7 +15,7 @@ export const CardReducer = (state = initialState, action) => {
     case ADD_CARD:
       const { id, ...rest } = payload;
       state[id] = { item: id, ...rest, _id: id };
-      return state;
+      return {...state};
 
     case DELETE_ITEM:
       let data = state;

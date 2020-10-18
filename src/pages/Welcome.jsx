@@ -1,22 +1,33 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Button, Spin } from "antd";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { FETCH_LANGUAGES } from "../graphql/modules";
+import { addInfo } from "../store/modules";
 
 const Welcome = () => {
+  const dispatch = useDispatch();
   const location = useLocation();
+  const history = useHistory();
+
   const query = new URLSearchParams(location.search);
-  const restaurant = query.get("restaurant");
-  const table = query.get("table");
+  const restaurantId = query.get("restaurant");
+  const tableId = query.get("table");
 
   const { data, loading } = useQuery(FETCH_LANGUAGES, {
     variables: {
-      restaurant,
+      restaurant: restaurantId,
       active: true,
     },
   });
   const lenguages = data?.FetchLanguagesByRestaurant?.result || [];
+
+  const onSelectLanguage = (lang) => {
+    dispatch(addInfo({ tableId, restaurantId, lang }));
+    history.push(`/menu-items`);
+  };
+
   return (
     <Spin spinning={loading}>
       <div className="container welcome">
@@ -29,14 +40,17 @@ const Welcome = () => {
             />
 
             <h2 className="mb-5">Welcome</h2>
-            {lenguages.map((item) => (
-              <SingleBtn
-                key={item.key}
-                txt={item.name}
-                symble={item.key}
-                restaurant={restaurant}
-                table={table}
-              />
+            <Button className="mb-4" onClick={() => onSelectLanguage("")}>
+              English
+            </Button>
+            {lenguages.map(({ name, key }) => (
+              <Button
+                className="mb-4"
+                onClick={() => onSelectLanguage(key)}
+                key={key}
+              >
+                {name}
+              </Button>
             ))}
           </div>
         </div>
@@ -46,19 +60,3 @@ const Welcome = () => {
 };
 
 export default Welcome;
-
-const SingleBtn = ({ txt, symble, restaurant, table }) => {
-  const history = useHistory();
-  return (
-    <Button
-      className="mb-4"
-      onClick={() =>
-        history.push(
-          `/menu-items?table=${table}&restaurant=${restaurant}&lang=${symble}`
-        )
-      }
-    >
-      {txt}
-    </Button>
-  );
-};

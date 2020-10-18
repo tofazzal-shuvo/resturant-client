@@ -3,18 +3,20 @@ import { IncDecBtn } from "../Shared";
 
 const Items = ({ item = {}, fromCard = true, menuStyle = {} }) => {
   const [style, setStyle] = useState(initialStyle);
+
   const { _id, price, desc } = item;
   let name =
     item?.translation?.length === 0
       ? item?.name
       : Array.isArray(item?.translation) && item?.translation[0].name;
   if (!name) name = item.name;
-  console.log({ menuStyle });
+
   useEffect(() => {
     if (Object.keys(menuStyle).length !== 0) {
       setStyle(menuStyle);
     }
   }, [menuStyle]);
+
   return (
     <div className="mb-3">
       <div className="d-flex justify-content-between">
@@ -22,7 +24,7 @@ const Items = ({ item = {}, fromCard = true, menuStyle = {} }) => {
         <IncDecBtn fromCard={fromCard} id={_id} name={name} price={price} />
       </div>
       <p style={{ width: "75%", color: "#717171" }}>{desc}</p>
-      <p style={{...style, fontSize:"1.2rem"}}>RSD {Number(price || 0).toFixed(2)}</p>
+      <p style={{...style, fontSize:"1rem"}}>RSD {Number(price || 0).toFixed(2)}</p>
     </div>
   );
 };

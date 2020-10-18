@@ -1,13 +1,13 @@
 export const USER_COOKIE = "restaurent_cookie";
 
 export function getAuthData() {
-  const cards = localStorage.getItem(USER_COOKIE);
-  console.log({ cardsdata: cards });
-  if (typeof cards === "string") return JSON.parse(cards);
+  const state = localStorage.getItem(USER_COOKIE);
+
+  if (typeof state === "string") return JSON.parse(state);
   else return {};
 }
 
-export function setAuthData(card) {
-  const strState = JSON.stringify(card);
+export function setAuthData(state) {
+  const strState = JSON.stringify(state);
   localStorage.setItem(USER_COOKIE, strState);
 }

@@ -4,12 +4,12 @@ import {
   SoundOutlined,
 } from "@ant-design/icons";
 import { Badge } from "antd";
-import React, { useState } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Menu = () => {
-  const location = useLocation();
-  const { pathname, search } = location;
+  const { pathname } = useLocation();
+
   const show =
     pathname === "/menu-items" ||
     pathname === "/cards" ||
@@ -18,25 +18,20 @@ const Menu = () => {
     pathname === "/complete-order";
   if (!show) return null;
 
-  const query = new URLSearchParams(search);
-  const restaurant = query.get("restaurant");
-  const table = query.get("table");
-  const lang = query.get("lang");
-
   const menuItems = [
     {
       text: "Menu",
-      path: `/menu-items?table=${table}&restaurant=${restaurant}&lang=${lang}`,
+      path: `/menu-items`,
       icon: <HomeOutlined style={{ fontSize: "30px" }} />,
     },
     {
       text: "View cart",
-      path: `/cards?table=${table}&restaurant=${restaurant}&lang=${lang}`,
+      path: `/cards`,
       icon: <ShoppingCartOutlined style={{ fontSize: "30px" }} />,
     },
     {
       text: "Call weater",
-      path: `/call-waiter?table=${table}&restaurant=${restaurant}&lang=${lang}`,
+      path: `/call-waiter`,
       icon: <SoundOutlined style={{ fontSize: "30px" }} />,
     },
   ];

@@ -4,39 +4,39 @@ import { Button, Spin, Modal } from "antd";
 import { useQuery } from "@apollo/react-hooks";
 import { FETCH_MEUNU } from "../graphql/modules";
 import Category from "../components/Menu/Category";
-import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const MenuItems = () => {
-  const location = useLocation();
-  const query = new URLSearchParams(location.search);
-  const restaurant = query.get("restaurant");
-  const table = query.get("table");
-  const lang = query.get("lang");
-
   const [category, setCategory] = useState({});
   const [open, setOpen] = useState(false);
+
+  const { restaurantId, lang } = useSelector((state) => state.info);
+
   // functions
   const onClose = () => setOpen(false);
   const onOpen = () => setOpen(true);
-  // finding query
 
+  // query
   const { data, loading } = useQuery(FETCH_MEUNU, {
     variables: {
       limit: 100,
       offset: 0,
-      resId: restaurant,
+      resId: restaurantId,
       lang,
     },
   });
   const menu = data?.FetchMenuByRestaurantId?.result || [];
   const menuStyle = data?.FetchMenuByRestaurantId?.restaurant?.menuStyle || {};
+
   useEffect(() => {
     setCategory(menu[0]);
   }, [menu]);
+
   const categoryName =
     category?.translation?.length === 0
       ? category?.category
       : Array.isArray(category?.translation) && category?.translation[0].name;
+
   return (
     <Spin spinning={loading}>
       <div className="container">
@@ -99,6 +99,7 @@ const MenuItems = () => {
   );
 };
 export default MenuItems;
+
 // filter component
 const SingleMenuItems = ({ item, setCategory, setOpen }) => {
   return (
