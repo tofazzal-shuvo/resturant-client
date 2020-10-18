@@ -5,11 +5,13 @@ import { useQuery } from "@apollo/react-hooks";
 import { FETCH_MEUNU } from "../graphql/modules";
 import Category from "../components/Menu/Category";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const MenuItems = () => {
   const [category, setCategory] = useState({});
   const [open, setOpen] = useState(false);
 
+  const history = useHistory();
   const { restaurantId, lang } = useSelector((state) => state.info);
 
   // functions
@@ -28,14 +30,18 @@ const MenuItems = () => {
   const menu = data?.FetchMenuByRestaurantId?.result || [];
   const menuStyle = data?.FetchMenuByRestaurantId?.restaurant?.menuStyle || {};
 
-  useEffect(() => {
-    setCategory(menu[0]);
-  }, [menu]);
-
   const categoryName =
     category?.translation?.length === 0
       ? category?.category
       : Array.isArray(category?.translation) && category?.translation[0].name;
+
+  useEffect(() => {
+    setCategory(menu[0]);
+  }, [menu]);
+
+  useEffect(() => {
+    if (!restaurantId) history.push("/welcome");
+  }, [restaurantId]);
 
   return (
     <Spin spinning={loading}>

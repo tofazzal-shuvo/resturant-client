@@ -76,6 +76,10 @@ const Card = () => {
     console.log(card)
   }, [card]);
 
+  useEffect(() => {
+    if (!info.tableId) history.push("/welcome");
+  }, [info]);
+
   return (
     <div className="cards">
       <h2 className="main-title mb-4">Your orders</h2>

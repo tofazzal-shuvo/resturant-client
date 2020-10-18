@@ -16,7 +16,7 @@ const Items = ({ item = {}, fromCard = true, menuStyle = {} }) => {
       setStyle(menuStyle);
     }
   }, [menuStyle]);
-
+  
   return (
     <div className="mb-3">
       <div className="d-flex justify-content-between">
