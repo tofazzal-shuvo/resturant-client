@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Items from "../components/Menu/Items";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_ORDER } from "../graphql/modules";
-import { clearCard } from "../store/modules";
+import { addInfo, clearCard, clearNote } from "../store/modules";
 import { useHistory } from "react-router-dom";
 import { Button, Spinner } from "react-bootstrap";
 
 const Card = () => {
   const [cardItems, setCardItems] = useState([]);
-  const [note, setNote] = useState("");
   const [total, setTotal] = useState(0);
+  const [quantity, setQuantity] = useState(0);
   const [items, setItems] = useState([]);
 
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const Card = () => {
 
   const { card, info } = useSelector((state) => state);
 
-  const onChange = (e) => setNote(e.target.value);
+  const onChange = (e) => dispatch(addInfo({ note: e.target.value }));
 
   const orderData = {
     tableId: info?.tableId,
@@ -29,7 +29,6 @@ const Card = () => {
     paymentMethod: "cash",
     paymentStatus: "paid",
   };
-
   const [createOrder, { loading }] = useMutation(CREATE_ORDER);
   const onOrder = async () => {
     try {
@@ -39,14 +38,14 @@ const Card = () => {
         variables: {
           orderData: {
             ...orderData,
-            note,
+            note: info?.note,
             items,
           },
         },
       });
-
       if (CreateOrder.success) {
         dispatch(clearCard());
+        dispatch(clearNote());
         notification.success({
           message: CreateOrder.message,
           placement: "bottomRight",
@@ -62,18 +61,20 @@ const Card = () => {
   };
 
   useEffect(() => {
-    let sum = 0;
+    let sum = 0,
+      quant = 0;
     const menuItems = [];
     const data = Object.keys(card).map((item) => {
       const temp = card[item];
       sum = sum + +temp.price * +temp.quantity;
+      quant = quant + Number(temp.quantity);
       menuItems.push({ item: temp._id, quantity: temp.quantity });
       return temp;
     });
     setItems(menuItems);
     setCardItems(data);
     setTotal(sum);
-    console.log(card)
+    setQuantity(quant);
   }, [card]);
 
   useEffect(() => {
@@ -82,7 +83,9 @@ const Card = () => {
 
   return (
     <div className="cards">
-      <h2 className="main-title mb-4">Your orders</h2>
+      <h2 className="main-title mb-4">
+        {cardItems.length ? "Your orders" : "Empty cart"}
+      </h2>
       <div className="container">
         <div className="row">
           <div className="col-md-12">
@@ -92,7 +95,7 @@ const Card = () => {
             <div style={{ width: "95%", margin: "150px auto 0" }}>
               <p style={{ color: "#6d9d62", fontSize: "1.5rem" }}>Order note</p>
               <TextArea
-                value={note}
+                value={info?.note}
                 onChange={onChange}
                 placeholder="order note..."
                 rows={5}
@@ -109,7 +112,7 @@ const Card = () => {
               }}
             >
               <p style={{ color: "#6d9d62", fontSize: "1.3rem" }}>
-                {cardItems.length} items in chart
+                {quantity} items in cart
               </p>
               <div className="d-flex justify-content-between align-items-center">
                 <p style={{ color: "#6d9d62", fontSize: "1.6rem" }}>Total</p>
@@ -120,8 +123,9 @@ const Card = () => {
             </div>
             <div className="text-center">
               <Button
+                disabled={!cardItems.length}
                 style={{
-                  backgroundColor: "#6d9d62",
+                  backgroundColor: "#717171",
                   color: "#fff",
                   border: "none",
                   fontSize: "20px",

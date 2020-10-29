@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 const CallWeiter = () => {
   const history = useHistory();
-  const redirect = () => history.push("/comming-soon");
+  const redirect = () => history.push("/ask-for-waiter");
   const redirectToOrder = () => history.push("/menu-items");
 
   return (
@@ -74,4 +74,5 @@ const CallWeiter = () => {
     </div>
   );
 };
+
 export default CallWeiter;

@@ -15,7 +15,7 @@ const Submenu = ({ subMenu = {}, menuStyle }) => {
           fontFamily: menuStyle.fontFamily || "inherit",
         }}
       >
-        Subcategory &gt; {submenuName}
+        {submenuName}
       </h3>
       {subMenu?.items.map((item) => (
         <Items

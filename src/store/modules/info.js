@@ -1,11 +1,15 @@
+import { ADD_CARD } from "./cart";
+
 //Constant
 const ADD_INFO = "ADD_INFO";
+const CLEAR_NOTE = "CLEAR_NOTE";
 
 // initial state
 const initialState = {
   tableId: "",
   restaurantId: "",
   lang: "",
+  note: "",
 };
 
 export const InfoReducer = (state = initialState, action) => {
@@ -13,6 +17,9 @@ export const InfoReducer = (state = initialState, action) => {
   switch (type) {
     case ADD_INFO:
       return { ...state, ...payload };
+
+    case CLEAR_NOTE:
+      return { ...state, note: "" };
 
     default: {
       return state;
@@ -23,4 +30,8 @@ export const InfoReducer = (state = initialState, action) => {
 export const addInfo = (payload) => ({
   type: ADD_INFO,
   payload,
+});
+
+export const clearNote = () => ({
+  type: CLEAR_NOTE,
 });
