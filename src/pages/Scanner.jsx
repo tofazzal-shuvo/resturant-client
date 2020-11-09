@@ -11,16 +11,16 @@ const Scanner = () => {
     width: 320,
     margin: "auto",
   };
-  const handleScan = (data) =>
-    history.push(
-      `/welcome?table=${data?.table}&restaurant=${data?.restaurant}`
-    );
-  const handleError = (err) => {
-    console.error(err);
-  };
+  // const handleScan = (data) =>
+  //   history.push(
+  //     `/welcome?table=${data?.table}&restaurant=${data?.restaurant}`
+  //   );
+  // const handleError = (err) => {
+  //   console.error(err);
+  // };
   const redirect = () =>
     history.push(
-      `/welcome?table=5f7719bcf10b4a001aaa9c13&restaurant=5f72b1281ffe10001acab3ba`
+      `/welcome?table=5f8aa725168d67001a15c7f8&restaurant=5f72b1281ffe10001acab3ba`
     );
   return (
     <div className="container qrCode">
