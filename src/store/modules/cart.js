@@ -10,7 +10,7 @@ export const CardReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case CLEAR_ITEM:
-      return initialState;
+      return {};
 
     case ADD_CARD:
       const { id, ...rest } = payload;
