@@ -1,26 +1,22 @@
 import React, { useState } from "react";
-// import QrReader from "react-qr-scanner";
-import QrReader from "react-qr-reader";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 const Scanner = () => {
-  const [show, setShow] = useState(false);
+  const location = useLocation();
   const history = useHistory();
+
+  const query = new URLSearchParams(location.search);
+  const restaurantId = query.get("restaurant");
+  const tableId = query.get("table");
+
   const previewStyle = {
     height: 240,
     width: 320,
     margin: "auto",
   };
-  // const handleScan = (data) =>
-  //   history.push(
-  //     `/welcome?table=${data?.table}&restaurant=${data?.restaurant}`
-  //   );
-  // const handleError = (err) => {
-  //   console.error(err);
-  // };
   const redirect = () =>
     history.push(
-      `/welcome?table=5f8aa725168d67001a15c7f8&restaurant=5f72b1281ffe10001acab3ba`
+      `/welcome?table=${tableId}&restaurant=${restaurantId}`
     );
   return (
     <div className="container qrCode">
@@ -36,15 +32,6 @@ const Scanner = () => {
               onClick={redirect}
               // onClick={() => setShow(true)}
             />
-            {/* )} */}
-            {/* {show && (
-              <QrReader
-                delay={300}
-                style={previewStyle}
-                onError={handleError}
-                onScan={handleScan}
-              />
-            )} */}
           </div>
         </div>
       </div>
