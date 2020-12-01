@@ -29,19 +29,32 @@ const FilterItem = ({ item, onClose, open }) => {
         showArrow={false}
         className="custom-collaps"
       >
-        {submenu.map((singleItem) => (
-          <Link
-            to={singleItem._id}
-            key={singleItem._id}
-            spy={true}
-            smooth={true}
-            duration={500}
-            onClick={onClose}
-            style={sortItemStyle}
-          >
-            {singleItem.category}
-          </Link>
-        ))}
+        {console.log(submenu)}
+        {submenu.map((singleItem) => {
+          const { translation } = singleItem;
+          let name;
+          if (Array.isArray(translation)) {
+            name =
+              translation.length !== 0
+                ? translation[0].name
+                : singleItem.category;
+          } else {
+            name = singleItem.category;
+          }
+          return (
+            <Link
+              to={singleItem._id}
+              key={singleItem._id}
+              spy={true}
+              smooth={true}
+              duration={500}
+              onClick={onClose}
+              style={sortItemStyle}
+            >
+              {name}
+            </Link>
+          );
+        })}
       </Panel>
     </Collapse>
   );
