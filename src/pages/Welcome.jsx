@@ -11,10 +11,10 @@ const Welcome = () => {
   const tableId = query.get("table");
 
   const redirect = () =>
-    // history.push(`/language?table=${tableId}&restaurant=${restaurantId}`);
-    history.push(
-      `/language?table=5f8aa725168d67001a15c7f8&restaurant=5f72b1281ffe10001acab3ba`
-    );
+    history.push(`/language?table=${tableId}&restaurant=${restaurantId}`);
+  // history.push(
+  //   `/language?table=5f8aa725168d67001a15c7f8&restaurant=5f72b1281ffe10001acab3ba`
+  // );
   useEffect(() => {
     redirect();
     if (tableId && restaurantId) {
