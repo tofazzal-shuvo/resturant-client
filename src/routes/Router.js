@@ -1,21 +1,21 @@
 import {
   AskForBill,
   CallWaiter,
-  Card,
+  Cart,
   AskForWaiter,
   CompleteOrder,
   MenuItems,
-  Scanner,
+  Language,
   Welcome,
   CommingSoon,
 } from "../pages";
 
 // Public Routes
 export const Public = [
-  { path: "/", exact: true, component: Scanner },
-  { path: "/welcome", exact: true, component: Welcome },
+  { path: "/", exact: true, component: Welcome },
+  { path: "/language", exact: true, component: Language },
   { path: "/menu-items", exact: true, component: MenuItems },
-  { path: "/cards", exact: true, component: Card },
+  { path: "/cart", exact: true, component: Cart },
   { path: "/call-waiter", exact: true, component: CallWaiter },
   { path: "/ask-for-waiter", exact: true, component: AskForWaiter },
   { path: "/ask-for-bill", exact: true, component: AskForBill },

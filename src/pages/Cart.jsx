@@ -9,7 +9,7 @@ import { addInfo, clearCard, clearNote } from "../store/modules";
 import { useHistory } from "react-router-dom";
 import { Button, Spinner } from "react-bootstrap";
 
-const Card = () => {
+const Cart = () => {
   const [cardItems, setCardItems] = useState([]);
   const [total, setTotal] = useState(0);
   const [quantity, setQuantity] = useState(0);
@@ -44,8 +44,8 @@ const Card = () => {
         },
       });
       if (CreateOrder.success) {
-        dispatch(clearCard());
-        dispatch(clearNote());
+        // dispatch(clearCard());
+        // dispatch(clearNote());
         notification.success({
           message: CreateOrder.message,
           placement: "bottomRight",
@@ -78,20 +78,20 @@ const Card = () => {
   }, [card]);
 
   useEffect(() => {
-    if (!info.tableId) history.push("/welcome");
+    if (!info.tableId) history.push("/language");
   }, [info]);
 
   return (
-    <div className="cards">
+    <div className="cart">
       <h2 className="main-title mb-4">
         {cardItems.length ? "Your orders" : "Empty cart"}
       </h2>
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            {cardItems.map((item) => {
-              return <Items item={item} />;
-            })}
+            {cardItems.map((item) => (
+              <Items item={item} key={item._id} />
+            ))}
             <div style={{ width: "95%", margin: "150px auto 0" }}>
               <p style={{ color: "#6d9d62", fontSize: "1.5rem" }}>Order note</p>
               <TextArea
@@ -154,4 +154,4 @@ const Card = () => {
   );
 };
 
-export default Card;
+export default Cart;

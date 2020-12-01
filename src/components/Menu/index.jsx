@@ -14,7 +14,7 @@ const Menu = () => {
 
   const show =
     pathname === "/menu-items" ||
-    pathname === "/cards" ||
+    pathname === "/cart" ||
     pathname === "/complete-order" ||
     pathname === "/comming-soon" ||
     pathname === "/call-waiter" ||
@@ -31,7 +31,7 @@ const Menu = () => {
     },
     {
       text: "View cart",
-      path: `/cards`,
+      path: `/cart`,
       icon: <ShoppingCartOutlined style={{ fontSize: "30px" }} />,
     },
     {
@@ -41,7 +41,10 @@ const Menu = () => {
     },
   ];
   const showMark = (currentPath, idx) => {
-    if (idx === 2) {
+    if (idx === 1) {
+      const data = pathname === "/complete-order" || pathname === "/cart";
+      return data;
+    } else if (idx === 2) {
       const data =
         pathname === "/comming-soon" ||
         pathname === "/call-waiter" ||
@@ -55,7 +58,7 @@ const Menu = () => {
   return (
     <div className="d-flex justify-content-around menu">
       {menuItems.map((item, idx) => (
-        <div className="position-relative">
+        <div className="position-relative" key={item.path}>
           {item.text === "View cart" && <span style={spanStyle}>{count}</span>}
           <Link to={item.path} className="text-center" key={item.path}>
             <span className="d-block">{item.icon}</span>
