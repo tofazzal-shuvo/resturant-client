@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
 const Welcome = () => {
@@ -10,12 +11,16 @@ const Welcome = () => {
   const tableId = query.get("table");
 
   const redirect = () =>
+    // history.push(`/language?table=${tableId}&restaurant=${restaurantId}`);
     history.push(
-      `/language?table=${tableId}&restaurant=${restaurantId}`
+      `/language?table=5f8aa725168d67001a15c7f8&restaurant=5f72b1281ffe10001acab3ba`
     );
-    // history.push(
-    //   `/language?table=5f8aa725168d67001a15c7f8&restaurant=5f72b1281ffe10001acab3ba`
-    // );
+  useEffect(() => {
+    redirect();
+    if (tableId && restaurantId) {
+      redirect();
+    }
+  }, [tableId, restaurantId]);
   return (
     <div className="container qrCode">
       <div className="row">
@@ -26,7 +31,7 @@ const Welcome = () => {
             <img
               src="/img/custom-scanner.png"
               className="img-fluid"
-              onClick={redirect}
+              // onClick={redirect}
             />
           </div>
         </div>

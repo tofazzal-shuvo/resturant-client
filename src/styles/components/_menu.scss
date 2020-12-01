@@ -17,3 +17,21 @@
     right: 50%;
   }
 }
+.custom-filter {
+  padding: 0 4px;
+  border-radius: 3px;
+}
+.custom-collaps {
+  border: none !important;
+  background: transparent;
+  padding: 0;
+  .ant-collapse-header {
+    padding: 0 !important;
+    font-size: 1.5rem;
+    color: #6d9d62 !important;
+    background: transparent;
+  }
+}
+.ant-collapse-borderless {
+  background-color: transparent;
+}

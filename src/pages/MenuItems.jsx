@@ -6,11 +6,8 @@ import { FETCH_MEUNU } from "../graphql/modules";
 import Category from "../components/Menu/Category";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import {
-  Link,
-  Element,
-  animateScroll as scroll,
-} from "react-scroll";
+import { Element } from "react-scroll";
+import { FilterItem } from "../components/MenuItems";
 
 const MenuItems = () => {
   const [open, setOpen] = useState(false);
@@ -53,14 +50,14 @@ const MenuItems = () => {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <div className="mt-3 mb-3">
+            <div className="mt-3 mb-3 position-fixed custom-filter">
               <ReadOutlined style={{ fontSize: "30px" }} onClick={onOpen} />
             </div>
-            <div className="text-center">
+            <div className="text-center mt-5">
               <img src="/img/logo.png" alt="logo" className="img-fluid mb-3" />
             </div>
             {menu.map((item) => (
-              <Element name={item._id} key={item._id} className="element">
+              <Element name={item._id} key={item._id}>
                 <div style={menuItemStyle}>
                   <h2 style={cetagoryStyle} className="mb-4">
                     {item?.translation?.length === 0
@@ -78,13 +75,19 @@ const MenuItems = () => {
       <Modal
         title="Filter menu"
         visible={open}
+        onCancel={onClose}
         footer={null}
         style={modalStyle}
         bodyStyle={modalBodyStyle}
       >
         <div>
           {menu.map((item) => (
-            <SingleMenuItems key={item._id} item={item} onClose={onClose} />
+            <FilterItem
+              key={item._id}
+              item={item}
+              onClose={onClose}
+              open={open}
+            />
           ))}
         </div>
       </Modal>
@@ -93,33 +96,7 @@ const MenuItems = () => {
 };
 export default MenuItems;
 
-// filter component
-const SingleMenuItems = ({ item, onClose }) => {
-  return (
-    <Link
-      to={item._id}
-      spy={true}
-      smooth={true}
-      duration={500}
-      onClick={onClose}
-      style={sortItemStyle}
-    >
-      {item.category}
-    </Link>
-  );
-};
-
 // styles
-const sortItemStyle = {
-  display: "block",
-  border: "none",
-  paddingLeft: 0,
-  paddingRight: 0,
-  fontSize: "1.5rem",
-  color: "#6d9d62",
-  marginBottom: "10px",
-  textTransform: "capitalize",
-};
 const modalStyle = {
   paddingTop: 0,
   paddingBottom: 0,
