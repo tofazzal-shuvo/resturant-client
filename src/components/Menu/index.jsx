@@ -4,13 +4,23 @@ import {
   SoundOutlined,
 } from "@ant-design/icons";
 import { Badge } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
 const Menu = () => {
   const { pathname } = useLocation();
-  const count = useSelector((state) => Object.keys(state.card).length);
+  const { card } = useSelector((state) => state);
+
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let qty = 0;
+    Object.values(card).map((item) => {
+      qty += item.quantity;
+    });
+    setCount(qty);
+  }, [card]);
 
   const show =
     pathname === "/menu-items" ||

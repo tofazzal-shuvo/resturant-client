@@ -27,7 +27,7 @@ const Cart = () => {
     currency: "RSD",
     total: String(total),
     paymentMethod: "cash",
-    paymentStatus: "paid",
+    // paymentStatus: "paid",
   };
   const [createOrder, { loading }] = useMutation(CREATE_ORDER);
   const onOrder = async () => {

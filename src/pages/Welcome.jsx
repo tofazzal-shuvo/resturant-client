@@ -10,17 +10,18 @@ const Welcome = () => {
   const restaurantId = query.get("restaurant");
   const tableId = query.get("table");
 
-  const redirect = () =>
+  const redirect = () => {
     history.push(`/language?table=${tableId}&restaurant=${restaurantId}`);
-  // history.push(
-  //   `/language?table=5f8aa725168d67001a15c7f8&restaurant=5f72b1281ffe10001acab3ba`
-  // );
+  };
+ 
+
   useEffect(() => {
-    redirect();
+    // redirect();
     if (tableId && restaurantId) {
       redirect();
     }
   }, [tableId, restaurantId]);
+
   return (
     <div className="container qrCode">
       <div className="row">
