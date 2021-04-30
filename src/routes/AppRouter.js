@@ -5,21 +5,21 @@ import { Router, Switch, Route } from "react-router-dom";
 
 // Index Routes
 import { Public } from "./Router";
-import Menu from "../components/Menu";
+import Navber from "../components/Navber";
 
 // Components
 export const history = createBrowserHistory();
 
 const RouterConfig = () => {
   return (
-    <div style={{paddingBottom:"91px"}}>
+    <div style={{ paddingBottom: "91px" }}>
       <Router history={history}>
         <Switch>
           {Public.map((R, k) => {
             return <Route key={k} {...R} />;
           })}
         </Switch>
-        <Menu />
+        <Navber />
       </Router>
     </div>
   );

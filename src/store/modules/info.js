@@ -10,6 +10,9 @@ const initialState = {
   restaurantId: "",
   lang: "",
   note: "",
+  isMenuItem: false,
+  category: [],
+  menuItems: [],
 };
 
 export const InfoReducer = (state = initialState, action) => {

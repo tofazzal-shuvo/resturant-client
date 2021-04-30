@@ -53,11 +53,11 @@ body {
   .ant-switch-checked {
     background-color: #58d68d;
   }
- .ant-spin-dot-item{
-  //  i {
-     background-color: green;
-  // }
- } 
+  .ant-spin-dot-item {
+    //  i {
+    background-color: green;
+    // }
+  }
   .fa-trash {
     color: red;
   }
@@ -153,4 +153,19 @@ body {
 .not-active:focus,
 .not-active:hover {
   color: rgba(0, 0, 0, 0.85);
+}
+
+.close-btn-right {
+  .ant-modal-close {
+    margin: 0;
+    color: #fff;
+    font-size: 22px;
+    left: 10px;
+    top: -10px;
+    .ant-modal-close-x {
+      width: 22px;
+      height: 30px;
+      font-size: 25px;
+    }
+  }
 }

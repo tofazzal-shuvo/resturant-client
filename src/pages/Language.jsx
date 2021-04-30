@@ -3,6 +3,7 @@ import { Button, Spin } from "antd";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
+import { Banner, Layout } from "../components/Shared";
 import { FETCH_LANGUAGES } from "../graphql/modules";
 import { addInfo } from "../store/modules";
 
@@ -12,7 +13,7 @@ const Language = () => {
   const history = useHistory();
 
   const query = new URLSearchParams(location.search);
-  const restaurantId = query.get("restaurant");
+  const restaurantId = query.get("restaurant") || "6043515b45cbda7b7d23d625";
   const tableId = query.get("table");
 
   const { data, loading } = useQuery(FETCH_LANGUAGES, {
@@ -25,35 +26,27 @@ const Language = () => {
 
   const onSelectLanguage = (lang) => {
     dispatch(addInfo({ tableId, restaurantId, lang }));
-    history.push(`/menu-items`);
+    history.push(`/menu`);
   };
 
   return (
     <Spin spinning={loading}>
-      <div className="container welcome">
-        <div className="row">
-          <div className="col-md-12 text-center">
-            <img
-              src="/img/logo.png"
-              alt="logo"
-              className="img-fluid mt-5 mb-5"
-            />
-
-            <h2 className="mb-5">Welcome</h2>
-            <Button className="mb-4" onClick={() => onSelectLanguage("")}>
-              English
+      <div className="welcome text-center">
+        <Banner text="Reastaurant" />
+        <Layout>
+          <Button className="mb-2" onClick={() => onSelectLanguage("")}>
+            English
+          </Button>
+          {lenguages.map(({ name, key }) => (
+            <Button
+              className="mb-2"
+              onClick={() => onSelectLanguage(key)}
+              key={key}
+            >
+              {name}
             </Button>
-            {lenguages.map(({ name, key }) => (
-              <Button
-                className="mb-4"
-                onClick={() => onSelectLanguage(key)}
-                key={key}
-              >
-                {name}
-              </Button>
-            ))}
-          </div>
-        </div>
+          ))}
+        </Layout>
       </div>
     </Spin>
   );

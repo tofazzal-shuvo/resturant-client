@@ -1,8 +1,4 @@
 .welcome {
-  h2 {
-    color: #6d9d62;
-    font-size: 1.8rem;
-  }
   button {
     display: block;
     margin: auto;
@@ -10,8 +6,14 @@
     border: none;
     padding-left: 0;
     padding-right: 0;
-    &:hover, &:active, &:focus {
-      border-bottom: 1px solid red;
+    color: #4b4b4b;
+    // font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    &:hover,
+    &:active,
+    &:focus {
+      border-bottom: 1px solid #707070;
       color: rgba(0, 0, 0, 0.85);
     }
   }

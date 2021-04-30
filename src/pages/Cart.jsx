@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { notification } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import { useDispatch, useSelector } from "react-redux";
-import Items from "../components/Menu/Items";
+import Items from "../components/Navber/Items";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_ORDER } from "../graphql/modules";
 import { addInfo, clearCard, clearNote } from "../store/modules";

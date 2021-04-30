@@ -4,7 +4,7 @@ import {
   Cart,
   AskForWaiter,
   CompleteOrder,
-  MenuItems,
+  Menu,
   Language,
   Welcome,
   CommingSoon,
@@ -12,9 +12,10 @@ import {
 
 // Public Routes
 export const Public = [
-  { path: "/", exact: true, component: Welcome },
-  { path: "/language", exact: true, component: Language },
-  { path: "/menu-items", exact: true, component: MenuItems },
+  // { path: "/", exact: true, component: Welcome },
+  { path: "/", exact: true, component: Language },
+  { path: "/menu", exact: false, component: Menu },
+
   { path: "/cart", exact: true, component: Cart },
   { path: "/call-waiter", exact: true, component: CallWaiter },
   { path: "/ask-for-waiter", exact: true, component: AskForWaiter },

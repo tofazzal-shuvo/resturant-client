@@ -1,13 +1,14 @@
 import gql from "graphql-tag";
+import { MENU_FRAGMENT } from "../fragments";
 
 export const FETCH_MEUNU = gql`
-  query FetchMenuByRestaurantId(
+  query FetchMenuByRestaurant(
     $limit: Int
     $offset: Int
     $lang: String
     $resId: ID!
   ) {
-    FetchMenuByRestaurantId(
+    FetchMenuByRestaurant(
       limit: $limit
       offset: $offset
       lang: $lang
@@ -15,68 +16,14 @@ export const FETCH_MEUNU = gql`
     ) {
       code
       message
-      count
-      success
-      restaurant {
-        menuStyle {
-          color
-          fontFamily
-          fontSize
-          backgroundColor
-        }
-      }
       result {
-        _id
-        category
-        owner
-        lang
-        active
-        translation {
-          lang
-          name
-          price
-          method
-        }
-        submenu {
-          _id
-          active
-          category
-          translation {
-            lang
-            name
-            price
-            desc
-          }
-          items {
-            _id
-            name
-            active
-            desc
-            price
-            translation {
-              lang
-              name
-              price
-              desc
-            }
-          }
-        }
-        items {
-          _id
-          name
-          active
-          desc
-          price
-          translation {
-            lang
-            name
-            price
-            desc
-          }
-        }
+        ...MenuType
       }
+      code
+      success
     }
   }
+  ${MENU_FRAGMENT}
 `;
 export const CREATE_ORDER = gql`
   mutation CreateOrder($orderData: OrderInput) {
