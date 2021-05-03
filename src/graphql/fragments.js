@@ -52,6 +52,7 @@ export const MENU_EXTRAS_FRAGMENT = gql`
     menuItem {
       _id
       name
+      price
     }
     allergens
   }
@@ -95,7 +96,11 @@ export const DROPDOWN_FRAGMENT = gql`
     active
     position
     category
+    extras {
+      ...MenuExtraType
+    }
   }
+  ${MENU_EXTRAS_FRAGMENT}
 `;
 
 export const MENU_DROPDOWN_FRAGMENT = gql`

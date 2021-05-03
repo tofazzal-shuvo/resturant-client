@@ -9,7 +9,12 @@ const MenuItemInfoModal = ({
   name,
 }) => {
   return (
-    <Modal visible={visible === "info"} onCancel={onCancel} footer={null}>
+    <Modal
+      visible={visible === "info"}
+      onCancel={onCancel}
+      footer={null}
+      className="custom-positioning-modal close-left"
+    >
       <h3 style={{ color: "#000000", textAlign: "center", margin: "30px 0 0" }}>
         {name}
       </h3>

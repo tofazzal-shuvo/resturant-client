@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "antd";
 import SizingInput from "./SizingInput";
+import DropdownInput from "./DropdownInput";
+import ExtraInput from "./ExtraInput";
+import RecommendationsInput from "./RecommendationsInput";
+import { IncDecBtn } from "../Shared";
+import { CheckOutlined } from "@ant-design/icons";
 
 const MenuItemViewModal = ({
   visible,
@@ -13,15 +18,33 @@ const MenuItemViewModal = ({
   dropdowns,
   image,
   desc,
-  ...rest
 }) => {
-  console.log(rest);
+  const [state, setState] = useState({});
+  const [totalPrice, setTotalPrice] = useState(price);
+  const [selectExtras, setExtras] = useState([]);
+  const [selectSizing, setSizing] = useState([]);
+  const [selectDropdown, setDropdown] = useState([]);
+
+  const onChangeQuantity = (quantity) => setState({ ...state, quantity });
+  const onChangeNote = (e) => setState({ ...state, note: e.target.value });
+
+  useEffect(() => {
+    let temp = +price;
+    selectDropdown.map(({ price }) => (temp += +price));
+    selectExtras.map(({ price, quantity }) => (temp += +price * +quantity));
+    selectSizing.map(({ price }) => (temp += +price));
+    setTotalPrice(temp);
+  }, [selectDropdown, selectExtras, selectSizing]);
+  useEffect(() => {
+    setTotalPrice(0);
+  }, [visible]);
   return (
     <Modal
       visible={visible === "view"}
       onCancel={onCancel}
       footer={null}
-      bodyStyle={{ padding: "0" }}
+      bodyStyle={{ padding: "0", paddingBottom: "30px" }}
+      className="custom-positioning-modal"
     >
       <div
         style={{
@@ -57,13 +80,56 @@ const MenuItemViewModal = ({
             borderBottom: "1px solid #D8D8D8",
           }}
         ></div>
-        <SizingInput title="Sizing" options={sizings} />
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos
-          non ipsum, iusto quae, amet fugiat expedita molestias tempore fuga
-          libero molestiae quibusdam! Voluptate vero alias natus maxime iste qui
-          repellendus?
-        </p>
+        <SizingInput
+          options={sizings}
+          selectSizing={selectSizing}
+          setSizing={setSizing}
+          totalPrice={totalPrice}
+          setTotalPrice={setTotalPrice}
+        />
+        <DropdownInput
+          options={dropdowns}
+          selectDropdown={selectDropdown}
+          setDropdown={setDropdown}
+          totalPrice={totalPrice}
+          setTotalPrice={setTotalPrice}
+        />
+        <ExtraInput
+          extras={extras}
+          selectExtras={selectExtras}
+          setExtras={setExtras}
+          totalPrice={totalPrice}
+          setTotalPrice={setTotalPrice}
+        />
+        <RecommendationsInput recommendations={recommendations} />
+        <h2 style={{ fontSize: "18px", marginTop: "8px" }}>Note</h2>
+        <textarea rows="5" style={{ width: "100%" }} onChange={onChangeNote} />
+        <div className="d-flex align-items-center justify-content-between mb-5 mt-3">
+          <IncDecBtn onChange={onChangeQuantity} />
+          <button
+            style={{
+              border: "none",
+              backgroundColor: "#fff",
+              marginLeft: "-35px",
+            }}
+          >
+            <span
+              style={{
+                padding: "9px 9px",
+                backgroundColor: "#B6B7B6",
+                fontSize: "20px",
+                borderRadius: "4px",
+                display: "inline-flex",
+                color: "#fff",
+              }}
+            >
+              <CheckOutlined />
+            </span>
+
+            <p>ADD TO ORDER</p>
+          </button>
+          <p style={{ color: "#848383", fontSize: "22px" }}>${totalPrice}</p>
+        </div>
       </div>
     </Modal>
   );

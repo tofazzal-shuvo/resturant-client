@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 import { MENU_FRAGMENT } from "../fragments";
 
-export const FETCH_MEUNU = gql`
+export const FETCH_MENU_BY_RESTAURANT = gql`
   query FetchMenuByRestaurant(
     $limit: Int
     $offset: Int

@@ -13,7 +13,7 @@ const CategoryModal = ({ visible, onClose, menu }) => {
       bodyStyle={modalBodyStyle}
       className="welcome close-btn-right"
     >
-      <Banner text={menu.name} />
+      <Banner text={menu?.name} />
       <Layout>
         {menu?.category?.map((category) => (
           <SingleCategory category={category} />

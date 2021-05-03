@@ -25,8 +25,9 @@ const Banner = ({ text, style = {} }) => {
   };
   const backgroundImgStyle = {
     backgroundImage: `url(${backgroundImage || "/img/bg-banner.jpg"})`,
-    backgroundRepeat: "repeat",
-    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   };
   const backgroundColorStyle = { backgroundColor: backgroundColor };
   const wrapperStyle = { ...backgroundImgStyle, padding: "40px 0" };

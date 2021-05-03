@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import SingleSizing from "./SingleSizing";
 
-const SizingInput = ({ title, options }) => {
-  console.log({ options });
+const SizingInput = ({
+  selectSizing,
+  setSizing,
+  totalPrice,
+  setTotalPrice,
+  options,
+}) => {
+  const defaultSelected = [];
   return (
     <>
-      <h2>{title}</h2>
+      <h2 style={{ fontSize: "18px", marginTop: "8px" }}>Sizing</h2>
       {options.map((item) => (
-        <SingleSizing {...item} key={item._id} />
+        <SingleSizing
+          {...item}
+          defaultSelected={defaultSelected}
+          key={item._id}
+          selectSizing={selectSizing}
+          setSizing={setSizing}
+        />
       ))}
     </>
   );

@@ -1,57 +1,76 @@
-import React from "react";
-import ButtonGroup from "antd/lib/button/button-group";
-import { DeleteOutlined, MinusOutlined, PlusOutlined } from "@ant-design/icons";
+import React, { useState } from "react";
+import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Input } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { addCard, deleteCard } from "../../store/modules";
+import ButtonGroup from "antd/lib/button/button-group";
 
-const IncDecBtn = ({ fromCard, id, name, price }) => {
-  const count = useSelector((state) => state?.card[id]?.quantity);
-  const dispatch = useDispatch();
-
-  const increase = () =>
-    dispatch(addCard({ id, name, price, quantity: (count || 0) + 1 }));
-
+const IncDecBtn = ({ style, onChange }) => {
+  const [quantity, setQuantity] = useState(0);
+  const setData = (data) => {
+    setQuantity(data);
+    onChange(data);
+  };
+  const increase = () => {
+    const data = quantity + 1;
+    setData(data);
+  };
   const decrease = () => {
-    let quantity = count - 1;
-    if (quantity < 0) quantity = 0;
-    dispatch(addCard({ id, quantity, name, price }));
+    let data = quantity - 1;
+    if (data < 0) data = 0;
+    setData(data);
   };
   const onValueChange = (e) => {
     let value = e.target.value;
     if (!value) {
       value = 0;
     }
-    dispatch(addCard({ id, quantity: parseInt(value), name, price }));
+    setData(value);
   };
-  const onDelete = () => dispatch(deleteCard({ id }));
   return (
     <div>
-      <ButtonGroup style={{ maxWidth: "100px", marginLeft: "30px" }}>
-        <Button onClick={decrease} style={{ padding: "4px 10px" }}>
+      <ButtonGroup style={style}>
+        <Button
+          onClick={decrease}
+          style={{
+            padding: "4px 6px",
+            borderRight: "none",
+            display: "flex",
+            alignItems: "center",
+            color: "red",
+          }}
+        >
           <MinusOutlined />
         </Button>
         <Input
-          value={count || 0}
+          value={quantity}
           onChange={onValueChange}
+          type="number"
           style={{
             borderRight: "none",
             borderLeft: "none",
             textAlign: "center",
             padding: 0,
-            minWidth: "32px",
+            maxWidth: "20px",
           }}
         />
-        <Button onClick={increase} style={{ padding: "4px 10px" }}>
+        <Button
+          onClick={increase}
+          style={{
+            padding: "4px 6px",
+            borderLeft: "none",
+            display: "flex",
+            alignItems: "center",
+            color: "green",
+          }}
+        >
           <PlusOutlined />
         </Button>
       </ButtonGroup>
-      {fromCard && (
+      {/* {fromCard && (
         <DeleteOutlined
           style={{ color: "red", marginLeft: "10px" }}
           onClick={onDelete}
         />
-      )}
+      )} */}
     </div>
   );
 };

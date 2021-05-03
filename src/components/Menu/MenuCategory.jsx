@@ -16,11 +16,11 @@ const MenuCategory = ({ name, items, subcategory, translation }) => {
       </h2>
       {Array.isArray(items) &&
         items.length > 0 &&
-        items.map((item) => <SingleMenuItem item={item} />)}
+        items.map((item) => <SingleMenuItem item={item} key={item._id} />)}
       {Array.isArray(subcategory) &&
         subcategory.length > 0 &&
-        subcategory.map(({ name, items }) => (
-          <div className="mt-3 mb-3 d-inline-block w-100">
+        subcategory.map(({ name, items, _id }) => (
+          <div className="mt-3 mb-3 d-inline-block w-100" key={_id}>
             <h2
               style={{
                 border: "1px solid #000000",
@@ -35,7 +35,9 @@ const MenuCategory = ({ name, items, subcategory, translation }) => {
             </h2>
             {Array.isArray(items) &&
               items.length > 0 &&
-              items.map((item) => <SingleMenuItem item={item} />)}
+              items.map((item) => (
+                <SingleMenuItem item={item} key={item._id} />
+              ))}
           </div>
         ))}
     </div>
