@@ -1,6 +1,7 @@
 import { Button } from "antd";
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { Banner } from "../components/Shared";
 
 const CallWeiter = () => {
   const history = useHistory();
@@ -9,24 +10,22 @@ const CallWeiter = () => {
   const askFoBill = () => history.push("/ask-for-bill");
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-md-12 text-center">
-          <img src="/img/logo.png" alt="logo" className="img-fluid mt-5 mb-5" />
-          <div className="mt-5">
-            <Button
-              style={{ ...btnStyle, marginBottom: "30px" }}
-              onClick={waiterCall}
-            >
-              Call waiter
-            </Button>
-            <Button style={btnStyle} onClick={askFoBill}>
-              Ask for bill
-            </Button>
-          </div>
+    <>
+      <Banner text="Restaurant" />
+      <div className="text-center pl-2 pr-2">
+        <div style={{ marginTop: "45%" }}>
+          <Button
+            style={{ ...btnStyle, marginBottom: "30px" }}
+            onClick={waiterCall}
+          >
+            Call waiter
+          </Button>
+          <Button style={btnStyle} onClick={askFoBill}>
+            Ask for bill
+          </Button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default CallWeiter;

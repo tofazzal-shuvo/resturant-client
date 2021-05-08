@@ -4,8 +4,6 @@ import SingleSizing from "./SingleSizing";
 const SizingInput = ({
   selectSizing,
   setSizing,
-  totalPrice,
-  setTotalPrice,
   options,
 }) => {
   const defaultSelected = [];

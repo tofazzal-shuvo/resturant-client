@@ -1,8 +1,15 @@
 .cart {
   h2.main-title {
-    color: #6d9d62;
-    border: 1px solid #6d9d62;
+    color: #000000;
+    border: 1px solid #656565;
     text-align: center;
     padding: 20px 0;
+  }
+  .order-btn {
+    background-color: "#717171";
+    color: "#fff";
+    border: "none";
+    font-size: "20px";
+    margin-bottom: "30px";
   }
 }

@@ -22,6 +22,7 @@ const Banner = ({ text, style = {} }) => {
     letterSpacing: "3px",
     textTransform: "uppercase",
     fontWeight: "400",
+    whiteSpace:"nowrap"
   };
   const backgroundImgStyle = {
     backgroundImage: `url(${backgroundImage || "/img/bg-banner.jpg"})`,

@@ -171,10 +171,12 @@ body {
 }
 .inc-desc-btn {
   input {
-    max-width: 50px;
+    max-width: 40px;
+    text-align: center;
   }
   button {
-    max-width: 30px;
+    // max-width: 30px;
+    padding: 4px 5px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -209,7 +211,6 @@ body {
     width: 19px;
     height: 19px;
     font-size: 16px;
-    
   }
 }
 .custom-positioning-modal {
@@ -239,4 +240,8 @@ body {
     color: #656464;
     border-color: #656464;
   }
+}
+
+button:disabled {
+  cursor: not-allowed !important;
 }

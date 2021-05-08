@@ -11,7 +11,7 @@ const ExtraInput = ({ extras, selectExtras, setExtras }) => {
   const { Panel } = Collapse;
   const groupedExtras = groupExtrasItems(extras);
 
-  const onChangeQuantity = ({ extra, quantity, extraName, price }) => {
+  const onChangeQuantity = ({ extra, quantity, name, price }) => {
     let data = selectExtras,
       isFound = false;
     if (quantity === 0) {
@@ -26,7 +26,7 @@ const ExtraInput = ({ extras, selectExtras, setExtras }) => {
         isFound = true;
       }
     });
-    if (!isFound) data.push({ extra, quantity, extraName, price });
+    if (!isFound) data.push({ extra, quantity, name, price });
     setExtras([...data]);
   };
   return (
@@ -70,7 +70,7 @@ const ExtraInput = ({ extras, selectExtras, setExtras }) => {
                         onChangeQuantity({
                           extra: _id,
                           quantity,
-                          extraName: menuItem?.name || name,
+                          name: menuItem?.name || name,
                           price: menuItem?.price || price,
                         })
                       }

@@ -3,7 +3,11 @@ import { Collapse } from "antd";
 import { RightCircleOutlined } from "@ant-design/icons";
 import SingleRecommendation from "./SingleRecommendation";
 
-const RecommendationsInput = ({ recommendations }) => {
+const RecommendationsInput = ({
+  recommendations,
+  selectRecommendaton,
+  setRecommendaton,
+}) => {
   const [activeKey, setActiveKey] = useState("");
   const onChange = (key) => setActiveKey(key);
   const { Panel } = Collapse;
@@ -21,7 +25,12 @@ const RecommendationsInput = ({ recommendations }) => {
         key={"key"}
       >
         {recommendations.map((item) => (
-          <SingleRecommendation {...item} key={item._id} />
+          <SingleRecommendation
+            {...item}
+            key={item._id}
+            selectRecommendaton={selectRecommendaton}
+            setRecommendaton={setRecommendaton}
+          />
         ))}
       </Panel>
     </Collapse>

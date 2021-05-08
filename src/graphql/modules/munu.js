@@ -27,7 +27,7 @@ export const FETCH_MENU_BY_RESTAURANT = gql`
 `;
 export const CREATE_ORDER = gql`
   mutation CreateOrder($orderData: OrderInput) {
-    CreateOrder(orderData: $orderData) {
+    CreateOrder(data: $orderData) {
       code
       success
       message

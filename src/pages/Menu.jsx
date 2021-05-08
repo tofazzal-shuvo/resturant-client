@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import { Menu, MenuItems } from "../components/Menu";
 
 const MenuPage = ({ location, match }) => {
-  console.log({match})
+  // console.log({match})
   return (
     <Switch location={location}>
       <Route path={`${match.path}/`} exact={true} component={Menu} />

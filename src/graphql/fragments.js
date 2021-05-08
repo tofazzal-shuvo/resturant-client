@@ -114,6 +114,13 @@ export const MENU_DROPDOWN_FRAGMENT = gql`
   }
   ${DROPDOWN_FRAGMENT}
 `;
+export const ALLERGENS_FRAGMENT = gql`
+  fragment AllergenType on AllergenType {
+    _id
+    name
+    active
+  }
+`;
 export const MENU_ITEM_RECOMMENDATION_FRAGMENT = gql`
   fragment MenuItemRecommendationType on MenuItem {
     _id
@@ -128,6 +135,9 @@ export const MENU_ITEM_RECOMMENDATION_FRAGMENT = gql`
     subcategory
     category
     menu
+    allergens {
+      ...AllergenType
+    }
     translation {
       ...TranslationType
     }
@@ -148,7 +158,9 @@ export const MENU_ITEM_RECOMMENDATION_FRAGMENT = gql`
   ${TRANSLATION_FRAGMENT}
   ${MENU_EXTRAS_FRAGMENT}
   ${MENU_SIZING_FRAGMENT}
+  ${ALLERGENS_FRAGMENT}
 `;
+
 export const MENU_ITEM_FRAGMENT = gql`
   fragment MenuItemType on MenuItem {
     _id
@@ -157,13 +169,15 @@ export const MENU_ITEM_FRAGMENT = gql`
     active
     desc
     ingredient
-    allergens
     image
     position
     fixedPrice
     subcategory
     category
     menu
+    allergens {
+      ...AllergenType
+    }
     translation {
       ...TranslationType
     }
@@ -187,6 +201,7 @@ export const MENU_ITEM_FRAGMENT = gql`
   ${TRANSLATION_FRAGMENT}
   ${MENU_EXTRAS_FRAGMENT}
   ${MENU_SIZING_FRAGMENT}
+  ${ALLERGENS_FRAGMENT}
 `;
 
 export const EXTRAS_FRAGMENT = gql`
@@ -210,13 +225,7 @@ export const EXTRAS_FRAGMENT = gql`
   }
   ${MENU_ITEM_FRAGMENT}
 `;
-export const ALLERGENS_FRAGMENT = gql`
-  fragment AllergenType on AllergenType {
-    _id
-    name
-    active
-  }
-`;
+
 export const EXTRA_CATEGORY_FRAGMENT = gql`
   fragment ExtraCategoryType on ExtraCategory {
     _id

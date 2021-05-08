@@ -23,7 +23,7 @@ const MenuItemInfoModal = ({
       <div style={{ marginLeft: "10px" }}>
         <p>
           {allergens?.map(
-            (item, idx) => `${item}${idx + 1 === allergens.length ? "." : ", "}`
+            (item, idx) => `${item?.name}${idx + 1 === allergens.length ? "." : ", "}`
           )}
         </p>
       </div>

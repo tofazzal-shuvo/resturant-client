@@ -6,6 +6,8 @@ import ExtraInput from "./ExtraInput";
 import RecommendationsInput from "./RecommendationsInput";
 import { IncDecBtn } from "../Shared";
 import { CheckOutlined } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
+import { addCart } from "../../store/modules";
 
 const MenuItemViewModal = ({
   visible,
@@ -18,12 +20,18 @@ const MenuItemViewModal = ({
   dropdowns,
   image,
   desc,
+  _id,
 }) => {
-  const [state, setState] = useState({});
+  const dispatch = useDispatch();
+  const [state, setState] = useState({ quantity: 1 });
   const [totalPrice, setTotalPrice] = useState(price);
   const [selectExtras, setExtras] = useState([]);
   const [selectSizing, setSizing] = useState([]);
   const [selectDropdown, setDropdown] = useState([]);
+  const [selectRecommendaton, setRecommendaton] = useState({
+    dropdowns: [],
+    sizing: [],
+  });
 
   const onChangeQuantity = (quantity) => setState({ ...state, quantity });
   const onChangeNote = (e) => setState({ ...state, note: e.target.value });
@@ -35,9 +43,31 @@ const MenuItemViewModal = ({
     selectSizing.map(({ price }) => (temp += +price));
     setTotalPrice(temp);
   }, [selectDropdown, selectExtras, selectSizing]);
+
+  // useEffect(() => {
+  //   dispatch({
+  //     type: "CLEAR_ITEM",
+  //   });
+  // }, []);
+
+  const onAddToCard = () => {
+    const addedItem = {
+      item: _id,
+      name,
+      price,
+      ...state,
+      extras: selectExtras,
+      dropdowns: selectDropdown,
+      sizing: selectSizing,
+      recommendation: selectRecommendaton,
+    };
+    dispatch(addCart(addedItem));
+    onCancel();
+  };
   useEffect(() => {
     setTotalPrice(0);
   }, [visible]);
+
   return (
     <Modal
       visible={visible === "view"}
@@ -101,17 +131,24 @@ const MenuItemViewModal = ({
           totalPrice={totalPrice}
           setTotalPrice={setTotalPrice}
         />
-        <RecommendationsInput recommendations={recommendations} />
+        <RecommendationsInput
+          recommendations={recommendations}
+          selectRecommendaton={selectRecommendaton}
+          setRecommendaton={setRecommendaton}
+        />
         <h2 style={{ fontSize: "18px", marginTop: "8px" }}>Note</h2>
         <textarea rows="5" style={{ width: "100%" }} onChange={onChangeNote} />
         <div className="d-flex align-items-center justify-content-between mb-5 mt-3">
-          <IncDecBtn onChange={onChangeQuantity} />
+          <IncDecBtn value={1} onChange={onChangeQuantity} />
           <button
             style={{
               border: "none",
               backgroundColor: "#fff",
               marginLeft: "-35px",
+              cursor: "pointer",
             }}
+            onClick={onAddToCard}
+            disabled={!state.quantity}
           >
             <span
               style={{

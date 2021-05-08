@@ -29,7 +29,7 @@ const SingleSizing = ({
       temp.push({
         menuSizing,
         size: value,
-        sizingName: name,
+        name: name,
         sizingItemName: selectedItem?.item?.name,
         price: selectedItem.price,
       });
@@ -43,7 +43,7 @@ const SingleSizing = ({
           let temp = {
             menuSizing,
             size: _id,
-            sizingName: name,
+            name,
             sizingItemName: item.name,
             price,
           };

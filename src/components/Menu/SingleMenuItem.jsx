@@ -7,7 +7,7 @@ import MenuItemViewModal from "./MenuItemViewModal";
 const SingleMenuItem = ({ item }) => {
   const [visible, setVisible] = useState("");
   const onCancel = () => setVisible("");
-  console.log(item.image);
+  // console.log(item.image);
   return (
     <div className="m-2 mt-4 mb-4">
       {item.image && (

@@ -3,9 +3,13 @@ import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Input } from "antd";
 import ButtonGroup from "antd/lib/button/button-group";
 
-const IncDecBtn = ({ style, onChange }) => {
-  const [quantity, setQuantity] = useState(0);
+const IncDecBtn = ({ style, onChange, value, beforSetZero }) => {
+  const [quantity, setQuantity] = useState(value || 0);
   const setData = (data) => {
+    if (typeof beforSetZero === "function" && data === 0) {
+      beforSetZero();
+      return;
+    }
     setQuantity(data);
     onChange(data);
   };
@@ -27,18 +31,16 @@ const IncDecBtn = ({ style, onChange }) => {
   };
   return (
     <div>
-      <ButtonGroup style={style}>
+      <ButtonGroup style={style} className="inc-desc-btn">
         <Button
           onClick={decrease}
           style={{
-            padding: "4px 6px",
             borderRight: "none",
-            display: "flex",
-            alignItems: "center",
             color: "red",
           }}
         >
-          <MinusOutlined />
+          {/* <MinusOutlined /> */}
+          <i className="fas fa-minus"></i>
         </Button>
         <Input
           value={quantity}
@@ -47,22 +49,17 @@ const IncDecBtn = ({ style, onChange }) => {
           style={{
             borderRight: "none",
             borderLeft: "none",
-            textAlign: "center",
-            padding: 0,
-            maxWidth: "20px",
           }}
         />
         <Button
           onClick={increase}
           style={{
-            padding: "4px 6px",
             borderLeft: "none",
-            display: "flex",
-            alignItems: "center",
             color: "green",
           }}
         >
-          <PlusOutlined />
+          {/* <PlusOutlined /> */}
+          <i className="fas fa-plus"></i>
         </Button>
       </ButtonGroup>
       {/* {fromCard && (

@@ -1,29 +1,30 @@
+import React, { useEffect, useState } from "react";
+import { Badge } from "antd";
+import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 import {
   HomeOutlined,
   ShoppingCartOutlined,
   SoundOutlined,
 } from "@ant-design/icons";
-import { Badge } from "antd";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
 
-const Menu = () => {
+const Navber = () => {
   const { pathname } = useLocation();
   const { card } = useSelector((state) => state);
 
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    let qty = 0;
-    Object.values(card).map((item) => {
-      qty += item.quantity;
-    });
-    setCount(qty);
+    // let qty = 0;
+    // Object.values(card).map((item) => {
+    //   qty += item.quantity;
+    // });
+    // setCount(qty);
   }, [card]);
-
+  // console.log({ pathname });
   const show =
-    pathname === "/menu-items" ||
+    pathname === "/menu" ||
+    pathname === "/menu/items" ||
     pathname === "/cart" ||
     pathname === "/complete-order" ||
     pathname === "/comming-soon" ||
@@ -35,23 +36,26 @@ const Menu = () => {
 
   const menuItems = [
     {
-      text: "Menu",
-      path: `/menu-items`,
-      icon: <HomeOutlined style={{ fontSize: "30px" }} />,
+      text: "MENU",
+      path: `/menu`,
+      icon: <i className="fas fa-utensils"></i>,
     },
     {
-      text: "View cart",
+      text: "YOUR ORDER",
       path: `/cart`,
-      icon: <ShoppingCartOutlined style={{ fontSize: "30px" }} />,
+      icon: <i className="fas fa-check-square"></i>,
     },
     {
-      text: "Call waiter",
+      text: "WAITER",
       path: `/call-waiter`,
-      icon: <SoundOutlined style={{ fontSize: "30px" }} />,
+      icon: <i className="fas fa-allergies"></i>,
     },
   ];
   const showMark = (currentPath, idx) => {
-    if (idx === 1) {
+    if (idx === 0) {
+      const data = pathname === "/menu" || pathname === "/menu/items";
+      return data;
+    } else if (idx === 1) {
       const data = pathname === "/complete-order" || pathname === "/cart";
       return data;
     } else if (idx === 2) {
@@ -82,7 +86,7 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default Navber;
 
 const spanStyle = {
   position: "absolute",

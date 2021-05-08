@@ -10,7 +10,7 @@ const SingleDropdown = ({
 }) => {
   const [value, setDefaultValue] = useState(null);
   const { extras = [], name } = dropdown || {};
-  console.log({ selectDropdown });
+  // console.log({ selectDropdown });
 
   const handleChange = (value) => {
     setDefaultValue(value ? value : null);
@@ -25,7 +25,7 @@ const SingleDropdown = ({
     temp.map((item) => {
       if (item.dropdown === _id) {
         item.extra = value;
-        item.extraName = selectedExtra.name;
+        item.name = selectedExtra.name;
         item.price = selectedExtra?.menuItem?.price || selectedExtra.price || 0;
         isFound = true;
       }
@@ -34,9 +34,9 @@ const SingleDropdown = ({
     if (!isFound)
       temp.push({
         dropdown: _id,
-        dropdownName: name,
+        name: name,
         extra: value,
-        extraName: selectedExtra.name,
+        name: selectedExtra.name,
         price: isFree
           ? 0
           : selectedExtra?.menuItem?.price || selectedExtra.price || 0,

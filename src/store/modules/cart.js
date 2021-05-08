@@ -1,26 +1,36 @@
 //Constant
-export const ADD_CARD = "ADD_CARD";
+export const ADD_CART = "ADD_CART";
 export const CLEAR_ITEM = "CLEAR_ITEM";
 export const DELETE_ITEM = "DELETE_ITEM";
+export const UPDATE_QUANTITY = "UPDATE_QUANTITY";
 
 // initial state
-const initialState = {};
+const initialState = {
+  addedItems: [],
+};
 
-export const CardReducer = (state = initialState, action) => {
+export const CartReducer = (state = initialState, action) => {
   const { type, payload } = action;
+  let addedItems;
   switch (type) {
     case CLEAR_ITEM:
-      return {};
+      return { addedItems: [] };
 
-    case ADD_CARD:
-      const { id, ...rest } = payload;
-      state[id] = { item: id, ...rest, _id: id };
-      return {...state};
+    case ADD_CART:
+      state.addedItems.push(payload);
+      return { ...state };
 
     case DELETE_ITEM:
-      let data = state;
-      delete data[payload.id];
-      return { ...data };
+      addedItems = state.addedItems.filter(({ item }) => item !== payload.item);
+      console.log(addedItems, payload)
+      return { ...state, addedItems };
+    case UPDATE_QUANTITY:
+      addedItems = state.addedItems.map((item) => {
+        if (item.item === payload.item) item.quantity = payload.quantity;
+        return item;
+      });
+      // console.log(payload, addedItems);
+      return { ...state, addedItems };
     default: {
       return state;
     }
@@ -31,12 +41,17 @@ export const clearCard = () => ({
   type: CLEAR_ITEM,
 });
 
-export const deleteCard = (payload) => ({
+export const deleteCardItem = (payload) => ({
   type: DELETE_ITEM,
   payload,
 });
 
-export const addCard = (payload) => ({
-  type: ADD_CARD,
+export const updateCardItemQnt = (payload) => ({
+  type: UPDATE_QUANTITY,
+  payload,
+});
+
+export const addCart = (payload) => ({
+  type: ADD_CART,
   payload,
 });
