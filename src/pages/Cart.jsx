@@ -11,20 +11,20 @@ import { Banner } from "../components/Shared";
 
 const Cart = () => {
   const [note, setNote] = useState("");
+  const { tableId } = useSelector((state) => state.info);
 
   const dispatch = useDispatch();
   const history = useHistory();
 
   const { addedItems } = useSelector((state) => state.cart);
   const info = useSelector((state) => state.info);
-  // console.log({ addedItems });
 
   const [createOrder, { loading }] = useMutation(CREATE_ORDER);
   const onOrder = async () => {
     const items = getFormatedData(addedItems);
     const orderData = {
       items,
-      tableId: "606d56ab45cbda7b7d23d704",
+      tableId,
       paymentMethod: "cash",
       note,
     };
@@ -38,7 +38,6 @@ const Cart = () => {
       });
       if (CreateOrder.success) {
         dispatch(clearCard());
-        dispatch(clearNote());
         notification.success({
           message: CreateOrder.message,
           placement: "bottomRight",
@@ -57,25 +56,28 @@ const Cart = () => {
   return (
     <div className="cart">
       <Banner text="Your Order" />
-      {addedItems.map((item) => (
-        <CartItem {...item} key={item._id} />
+      {addedItems.map((item, idx) => (
+        <CartItem {...item} key={idx} idx={idx} />
       ))}
-      <h3
-        style={{
-          color: "black",
-          textTransform: "capitalize",
-          fontWeight: "700",
-          fontSize: "28px",
-        }}
-      >
-        Add note
-      </h3>
-      <TextArea
-        className="mt-2 mb-2"
-        onChange={(value) => {
-          setNote(value);
-        }}
-      />
+      <div className="p-2">
+        <h3
+          style={{
+            color: "black",
+            textTransform: "capitalize",
+            fontWeight: "700",
+            fontSize: "28px",
+          }}
+        >
+          Add note
+        </h3>
+        <TextArea
+          className="mt-2 mb-2"
+          rows="5"
+          onChange={(e) => {
+            setNote(e.target.value);
+          }}
+        />
+      </div>
       {addedItems?.length !== 0 && (
         <div className="text-center">
           <Button

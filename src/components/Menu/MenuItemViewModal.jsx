@@ -73,7 +73,7 @@ const MenuItemViewModal = ({
       visible={visible === "view"}
       onCancel={onCancel}
       footer={null}
-      bodyStyle={{ padding: "0", paddingBottom: "30px" }}
+      bodyStyle={{ padding: "0" }}
       className="custom-positioning-modal"
     >
       <div
@@ -138,7 +138,7 @@ const MenuItemViewModal = ({
         />
         <h2 style={{ fontSize: "18px", marginTop: "8px" }}>Note</h2>
         <textarea rows="5" style={{ width: "100%" }} onChange={onChangeNote} />
-        <div className="d-flex align-items-center justify-content-between mb-5 mt-3">
+        <div className="d-flex align-items-center justify-content-between pb-3 mt-3">
           <IncDecBtn value={1} onChange={onChangeQuantity} />
           <button
             style={{

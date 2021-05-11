@@ -14,8 +14,8 @@ const Language = () => {
 
   const query = new URLSearchParams(location.search);
   const restaurantId = query.get("restaurant") || "6043515b45cbda7b7d23d625";
-  const tableId = query.get("table");
-
+  const tableId = query.get("table") || "606d56ab45cbda7b7d23d704";
+// console.log()
   const { data, loading } = useQuery(FETCH_LANGUAGES, {
     variables: {
       restaurant: restaurantId,

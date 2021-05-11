@@ -27,7 +27,7 @@ const NoOrder = () => {
         </Link>
       </h3>
       <i
-        class="fas fa-utensils"
+        className="fas fa-utensils"
         aria-hidden="true"
         style={{ color: "#707070", marginTop: ".5em", fontSize: "6em" }}
       ></i>

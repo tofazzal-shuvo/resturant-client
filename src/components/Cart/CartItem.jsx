@@ -19,11 +19,12 @@ const Items = (props) => {
     recommendation,
     quantity,
     item,
+    idx
   } = props;
   const [totalPrice, setTotalPrice] = useState(0);
 
   const onChangeQnt = (quantity) =>
-    dispatch(updateCardItemQnt({ item, quantity }));
+    dispatch(updateCardItemQnt({ idx, quantity }));
   const beforSetZero = () => {
     Modal.confirm({
       title: "By setting quantity zero, the cart item will be delete.",
@@ -31,6 +32,11 @@ const Items = (props) => {
       onOk() {
         dispatch(deleteCardItem({ item }));
       },
+      okButtonProps:{
+        style:{
+          background:"red"
+        }
+      }
     });
   };
 

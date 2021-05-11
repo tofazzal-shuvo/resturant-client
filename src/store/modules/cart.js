@@ -22,15 +22,16 @@ export const CartReducer = (state = initialState, action) => {
 
     case DELETE_ITEM:
       addedItems = state.addedItems.filter(({ item }) => item !== payload.item);
-      console.log(addedItems, payload)
+      console.log(addedItems, payload);
       return { ...state, addedItems };
     case UPDATE_QUANTITY:
-      addedItems = state.addedItems.map((item) => {
-        if (item.item === payload.item) item.quantity = payload.quantity;
-        return item;
-      });
+      state.addedItems[payload.idx].quantity = payload.quantity;
+      // addedItems = state.addedItems.map((item) => {
+      //   if (item.item === payload.item) item.quantity = payload.quantity;
+      //   return item;
+      // });
       // console.log(payload, addedItems);
-      return { ...state, addedItems };
+      return { ...state };
     default: {
       return state;
     }
