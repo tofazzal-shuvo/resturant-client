@@ -3,7 +3,7 @@ import { Modal } from "antd";
 import { Banner, Layout } from "../Shared";
 import SingleCategory from "./SingleCategory";
 
-const CategoryModal = ({ visible, onClose, menu }) => {
+const CategoryModal = ({ visible, onClose, menu, resTemplate }) => {
   return (
     <Modal
       visible={visible}
@@ -16,7 +16,7 @@ const CategoryModal = ({ visible, onClose, menu }) => {
       <Banner text={menu?.name} />
       <Layout>
         {menu?.category?.map((category) => (
-          <SingleCategory category={category} />
+          <SingleCategory category={category} resTemplate={resTemplate} />
         ))}
       </Layout>
     </Modal>

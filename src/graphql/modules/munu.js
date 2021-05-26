@@ -1,5 +1,9 @@
 import gql from "graphql-tag";
-import { MENU_FRAGMENT } from "../fragments";
+import {
+  MENU_FRAGMENT,
+  MENU_ITEM_FRAGMENT,
+  RESTAURANT_FRAGMENT,
+} from "../fragments";
 
 export const FETCH_MENU_BY_RESTAURANT = gql`
   query FetchMenuByRestaurant(
@@ -25,6 +29,20 @@ export const FETCH_MENU_BY_RESTAURANT = gql`
   }
   ${MENU_FRAGMENT}
 `;
+
+export const FETCH_MENU_ITEM = gql`
+  query FetchMenuItem($id: ID!, $lang: String) {
+    FetchMenuItem(id: $id, lang: $lang) {
+      message
+      success
+      item {
+        ...MenuItemType
+      }
+    }
+  }
+  ${MENU_ITEM_FRAGMENT}
+`;
+
 export const CREATE_ORDER = gql`
   mutation CreateOrder($orderData: OrderInput) {
     CreateOrder(data: $orderData) {
@@ -50,4 +68,18 @@ export const FETCH_LANGUAGES = gql`
       }
     }
   }
+`;
+
+export const FETCH_RESTAURANT = gql`
+  query FetchRestaurant($restaurantId: ID) {
+    FetchRestaurant(id: $restaurantId) {
+      code
+      message
+      success
+      restaurant {
+        ...RestaurantType
+      }
+    }
+  }
+  ${RESTAURANT_FRAGMENT}
 `;

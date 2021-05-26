@@ -2,13 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Banner } from "../Shared";
 
-const NoOrder = () => {
+const NoOrder = ({ general }) => {
   return (
     <div className="text-center">
       <Banner text="No Order" />
       <h3
         style={{
-          color: "#656464",
+          color: general?.defaultColor || "#656464",
           fontWeight: "400",
           fontSize: "28px",
           marginTop: "2.5em",
@@ -20,7 +20,7 @@ const NoOrder = () => {
         <Link
           to="/menu"
           style={{
-            color: "#656464",
+            color: general?.defaultColor || "#656464",
           }}
         >
           Click here to go to the main menu
@@ -29,7 +29,11 @@ const NoOrder = () => {
       <i
         className="fas fa-utensils"
         aria-hidden="true"
-        style={{ color: "#707070", marginTop: ".5em", fontSize: "6em" }}
+        style={{
+          color: general?.defaultColor || "#707070",
+          marginTop: ".5em",
+          fontSize: "6em",
+        }}
       ></i>
     </div>
   );

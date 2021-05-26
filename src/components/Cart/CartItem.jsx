@@ -19,7 +19,8 @@ const Items = (props) => {
     recommendation,
     quantity,
     item,
-    idx
+    idx,
+    defaultColor,
   } = props;
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -32,11 +33,11 @@ const Items = (props) => {
       onOk() {
         dispatch(deleteCardItem({ item }));
       },
-      okButtonProps:{
-        style:{
-          background:"red"
-        }
-      }
+      okButtonProps: {
+        style: {
+          background: "red",
+        },
+      },
     });
   };
 
@@ -54,7 +55,7 @@ const Items = (props) => {
       <div style={{ width: "65%" }}>
         <h3
           style={{
-            color: "black",
+            color: defaultColor || "black",
             textTransform: "capitalize",
             fontWeight: "700",
             fontSize: "28px",
@@ -62,9 +63,22 @@ const Items = (props) => {
         >
           {name}
         </h3>
-        <InnerItemOfMenuItem title="Options" options={dropdowns} />
-        <InnerItemOfMenuItem title="Sizing" options={sizing} />
-        <InnerItemOfMenuItem title="Extras" options={extras} from="extra" />
+        <InnerItemOfMenuItem
+          title="Options"
+          options={dropdowns}
+          defaultColor={defaultColor}
+        />
+        <InnerItemOfMenuItem
+          title="Sizing"
+          options={sizing}
+          defaultColor={defaultColor}
+        />
+        <InnerItemOfMenuItem
+          title="Extras"
+          options={extras}
+          from="extra"
+          defaultColor={defaultColor}
+        />
         {note && (
           <p style={{ fontSize: "16px" }}>
             <span style={{ fontWeight: "bold", fontSize: "18px" }}>Note: </span>

@@ -49,6 +49,7 @@ const IncDecBtn = ({ style, onChange, value, beforSetZero }) => {
           style={{
             borderRight: "none",
             borderLeft: "none",
+            borderRadius: "0",
           }}
         />
         <Button
@@ -58,16 +59,9 @@ const IncDecBtn = ({ style, onChange, value, beforSetZero }) => {
             color: "green",
           }}
         >
-          {/* <PlusOutlined /> */}
           <i className="fas fa-plus"></i>
         </Button>
       </ButtonGroup>
-      {/* {fromCard && (
-        <DeleteOutlined
-          style={{ color: "red", marginLeft: "10px" }}
-          onClick={onDelete}
-        />
-      )} */}
     </div>
   );
 };

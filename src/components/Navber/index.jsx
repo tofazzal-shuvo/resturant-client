@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Badge } from "antd";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import {
-  HomeOutlined,
-  ShoppingCartOutlined,
-  SoundOutlined,
-} from "@ant-design/icons";
 
 const Navber = () => {
   const { pathname } = useLocation();
   const { addedItems } = useSelector((state) => state.cart);
+  const { background, iconColor, badgeColor, textColor } = useSelector(
+    (state) => state?.info?.resTemplate?.bottomNavigation || {}
+  );
 
   const show =
     pathname === "/menu" ||
@@ -60,16 +58,23 @@ const Navber = () => {
     return currentPath === pathname;
   };
   return (
-    <div className="d-flex justify-content-around menu">
+    <div className="d-flex justify-content-around menu" style={{ background }}>
       {menuItems.map((item, idx) => (
         <div className="position-relative" key={item.path}>
           {item.text === "YOUR ORDER" && (
             <span style={spanStyle}>{addedItems.length}</span>
           )}
           <Link to={item.path} className="text-center" key={item.path}>
-            <span className="d-block">{item.icon}</span>
-            <Badge dot={showMark(item.path, idx)}>
-              <span className="menu-text">{item.text}</span>
+            <span className="d-block" style={{ color: iconColor }}>
+              {item.icon}
+            </span>
+            <Badge
+              dot={showMark(item.path, idx)}
+              style={{ background: badgeColor }}
+            >
+              <span className="menu-text" style={{ color: textColor }}>
+                {item.text}
+              </span>
             </Badge>
           </Link>
         </div>

@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { notification, Button } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import { useDispatch, useSelector } from "react-redux";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_ORDER } from "../graphql/modules";
-import { addInfo, clearCard, clearNote } from "../store/modules";
+import { addInfo, clearCard } from "../store/modules";
 import { useHistory } from "react-router-dom";
 import { CartItem, NoOrder } from "../components/Cart";
 import { Banner } from "../components/Shared";
 
 const Cart = () => {
-  const [note, setNote] = useState("");
-  const { tableId } = useSelector((state) => state.info);
-
   const dispatch = useDispatch();
   const history = useHistory();
 
   const { addedItems } = useSelector((state) => state.cart);
-  const info = useSelector((state) => state.info);
+  const { tableId, note, resTemplate } = useSelector((state) => state.info);
+
+  const onChangeNote = (e) => {
+    dispatch(addInfo({ note: e.target.value }));
+  };
 
   const [createOrder, { loading }] = useMutation(CREATE_ORDER);
   const onOrder = async () => {
@@ -52,17 +53,18 @@ const Cart = () => {
     } catch (err) {}
   };
 
-  if (!addedItems.length) return <NoOrder />;
+  if (!addedItems.length) return <NoOrder {...resTemplate} />;
+  const defaultColor = resTemplate?.general?.defaultColor;
   return (
     <div className="cart">
       <Banner text="Your Order" />
       {addedItems.map((item, idx) => (
-        <CartItem {...item} key={idx} idx={idx} />
+        <CartItem {...item} key={idx} idx={idx} defaultColor={defaultColor} />
       ))}
-      <div className="p-2">
+      <div className="p-2 mt-4">
         <h3
           style={{
-            color: "black",
+            color: defaultColor || "black",
             textTransform: "capitalize",
             fontWeight: "700",
             fontSize: "28px",
@@ -73,9 +75,8 @@ const Cart = () => {
         <TextArea
           className="mt-2 mb-2"
           rows="5"
-          onChange={(e) => {
-            setNote(e.target.value);
-          }}
+          value={note}
+          onChange={onChangeNote}
         />
       </div>
       {addedItems?.length !== 0 && (

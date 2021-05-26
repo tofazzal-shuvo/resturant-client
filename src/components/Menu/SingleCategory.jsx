@@ -4,7 +4,7 @@ import { Button } from "antd";
 import { useDispatch } from "react-redux";
 import { addInfo } from "../../store/modules";
 
-const SingleCategory = ({ category }) => {
+const SingleCategory = ({ category, resTemplate }) => {
   const [show, setShow] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -27,7 +27,11 @@ const SingleCategory = ({ category }) => {
     <>
       <Button
         className="mb-2"
-        style={show === true ? { borderBottom: "1px solid #707070" } : {}}
+        style={{
+          background: "transparent",
+          color: resTemplate?.general?.categoryColor,
+          borderBottom: show === true ? "1px solid #707070" : "none",
+        }}
         onClick={onClickCategory}
       >
         {name}
@@ -35,8 +39,12 @@ const SingleCategory = ({ category }) => {
       {show &&
         subcategory.map((item) => (
           <Button
-            style={{ color: "#A2A2A2", fontSize: ".9rem" }}
             onClick={redirectToMenuItems}
+            style={{
+              background: "transparent",
+              color: resTemplate?.general?.subcategoryColor,
+              fontSize: ".9rem",
+            }}
           >
             {item.name}
           </Button>

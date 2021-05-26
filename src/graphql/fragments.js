@@ -294,7 +294,17 @@ export const MENU_FRAGMENT = gql`
       ...TranslationType
     }
     items {
-      ...MenuItemType
+      _id
+      name
+      price
+      active
+      desc
+      ingredient
+      image
+      fixedPrice
+      allergens {
+        ...AllergenType
+      }
     }
     category {
       ...CategoryType
@@ -303,7 +313,7 @@ export const MENU_FRAGMENT = gql`
       ...MenuScheduleType
     }
   }
-  ${MENU_ITEM_FRAGMENT}
+  ${ALLERGENS_FRAGMENT}
   ${CATEGORY_FRAGMENT}
   ${MENU_SCHEDULE_FRAGMENT}
 `;
@@ -381,6 +391,7 @@ export const GENERAL_FRAGMENT = gql`
     background
     menuBackground
     menuColor
+    defaultColor
     categoryColor
     subcategoryColor
     itemColor
