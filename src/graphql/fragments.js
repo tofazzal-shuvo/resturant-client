@@ -305,6 +305,9 @@ export const MENU_FRAGMENT = gql`
       allergens {
         ...AllergenType
       }
+      translation {
+        ...TranslationType
+      }
     }
     category {
       ...CategoryType

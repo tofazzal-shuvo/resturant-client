@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Banner } from "../components/Shared";
 
-const CallWeiter = () => {
+const CallWAITER = () => {
   const history = useHistory();
   const defaultColor = useSelector(
     (state) => state?.info?.resTemplate?.general?.defaultColor || ""
@@ -54,4 +54,4 @@ const CallWeiter = () => {
   );
 };
 
-export default CallWeiter;
+export default CallWAITER;

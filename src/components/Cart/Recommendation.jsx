@@ -1,7 +1,8 @@
 import React from "react";
+import { getTranslation } from "../../util";
 import InnerItemOfMenuItem from "./InnerItemOfMenuItem";
 
-const Recommendation = ({ name, dropdowns, sizing, extras }) => {
+const Recommendation = ({ dropdowns, sizing, ...rest }) => {
   return (
     <div className="ml-2">
       <h3
@@ -12,7 +13,7 @@ const Recommendation = ({ name, dropdowns, sizing, extras }) => {
           fontSize: "26px",
         }}
       >
-        {name}
+        {getTranslation(rest)}
       </h3>
 
       <InnerItemOfMenuItem title="Options" options={dropdowns} />

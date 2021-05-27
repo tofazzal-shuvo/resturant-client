@@ -5,6 +5,7 @@ import { StopPropagation } from "../Shared";
 import MenuItemInfoModal from "./MenuItemInfoModal";
 import SizingInput from "./SizingInput";
 import DropdownInput from "./DropdownInput";
+import { getTranslation } from "../../util";
 
 const SingleRecommendation = ({
   name,
@@ -16,6 +17,7 @@ const SingleRecommendation = ({
   allergens,
   selectRecommendaton,
   setRecommendaton,
+  translation,
 }) => {
   const [visible, setVisible] = useState("");
   const [selectSizing, setSizing] = useState([]);
@@ -55,7 +57,7 @@ const SingleRecommendation = ({
             <div className="d-flex justify-content-between align-items-center">
               <div className="d-flex align-items-center">
                 <h2 style={{ display: "inline-block", fontSize: "16px" }}>
-                  {name}
+                  {getTranslation({ name, translation })}
                 </h2>
                 <StopPropagation>
                   <InfoCircleOutlined

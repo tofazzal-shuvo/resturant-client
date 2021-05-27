@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import { Button } from "antd";
 import { useDispatch } from "react-redux";
 import { addInfo } from "../../store/modules";
+import { getTranslation } from "../../util";
 
 const SingleCategory = ({ category, resTemplate }) => {
   const [show, setShow] = useState(false);
@@ -34,7 +35,7 @@ const SingleCategory = ({ category, resTemplate }) => {
         }}
         onClick={onClickCategory}
       >
-        {name}
+        {getTranslation(category)}
       </Button>
       {show &&
         subcategory.map((item) => (
@@ -46,7 +47,7 @@ const SingleCategory = ({ category, resTemplate }) => {
               fontSize: ".9rem",
             }}
           >
-            {item.name}
+            {getTranslation(item)}
           </Button>
         ))}
     </>

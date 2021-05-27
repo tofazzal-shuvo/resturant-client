@@ -1,6 +1,7 @@
 import { ClockCircleOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Banner } from "../components/Shared";
@@ -30,7 +31,7 @@ const AskForBill = () => {
       <div className="pl-2 pr-2 text-center">
         <div style={{ marginTop: "40%" }}>
           <Button style={buttonStyle} className="not-active">
-            Your bill is on his way
+            <FormattedMessage id="APP.WAITER.YOUR_BILL_ON_HIS_WAY" />
           </Button>
           <ClockCircleOutlined
             style={{
@@ -46,7 +47,7 @@ const AskForBill = () => {
             }}
             onClick={redirect}
           >
-            Call Waiter
+            <FormattedMessage id="APP.WAITER.CALL_WAITER" />
           </Button>
         </div>
       </div>

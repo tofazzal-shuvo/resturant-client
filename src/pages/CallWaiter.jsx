@@ -1,10 +1,11 @@
 import { Button } from "antd";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Banner } from "../components/Shared";
 
-const CallWeiter = () => {
+const CallWAITER = () => {
   const history = useHistory();
   const defaultColor = useSelector(
     (state) => state?.info?.resTemplate?.general?.defaultColor || ""
@@ -21,6 +22,7 @@ const CallWeiter = () => {
     margin: "auto",
     fontSize: "1.5rem",
     background: "transparent",
+    textTransform: "uppercase",
   };
 
   return (
@@ -32,14 +34,14 @@ const CallWeiter = () => {
             style={{ ...btnStyle, marginBottom: "30px" }}
             onClick={waiterCall}
           >
-            Call waiter
+            <FormattedMessage id="APP.WAITER.CALL_WAITER" />
           </Button>
           <Button style={btnStyle} onClick={askFoBill}>
-            Ask for bill
+            <FormattedMessage id="APP.WAITER.ASK_FOR_BILL" />
           </Button>
         </div>
       </div>
     </>
   );
 };
-export default CallWeiter;
+export default CallWAITER;

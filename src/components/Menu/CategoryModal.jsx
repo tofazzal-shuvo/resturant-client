@@ -2,6 +2,7 @@ import React from "react";
 import { Modal } from "antd";
 import { Banner, Layout } from "../Shared";
 import SingleCategory from "./SingleCategory";
+import { getTranslation } from "../../util";
 
 const CategoryModal = ({ visible, onClose, menu, resTemplate }) => {
   return (
@@ -13,7 +14,7 @@ const CategoryModal = ({ visible, onClose, menu, resTemplate }) => {
       bodyStyle={modalBodyStyle}
       className="welcome close-btn-right"
     >
-      <Banner text={menu?.name} />
+      <Banner text={getTranslation(menu)} />
       <Layout>
         {menu?.category?.map((category) => (
           <SingleCategory category={category} resTemplate={resTemplate} />

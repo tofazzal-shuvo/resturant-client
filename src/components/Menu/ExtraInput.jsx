@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Collapse } from "antd";
-import { groupExtrasItems } from "../../util";
+import { getTranslation, groupExtrasItems } from "../../util";
 import { RightCircleOutlined } from "@ant-design/icons";
 import { IncDecBtn } from "../Shared";
 
@@ -41,7 +41,7 @@ const ExtraInput = ({ extras, selectExtras, setExtras }) => {
               header={
                 <div className="d-flex align-items-center">
                   <h2 style={{ minWidth: "max-content", fontSize: "14px" }}>
-                    {data[0]?.category?.name}
+                    {getTranslation(data[0]?.category)}
                   </h2>
                   <RightCircleOutlined
                     style={{ ...iconStyle }}
@@ -59,7 +59,7 @@ const ExtraInput = ({ extras, selectExtras, setExtras }) => {
               }
               key={key}
             >
-              {data.map(({ name, _id, menuItem, price }) => (
+              {data.map(({ name, _id, menuItem, price, translation }) => (
                 <div
                   className="d-flex justify-content-between align-items-center mt-1"
                   key={_id}
@@ -76,7 +76,7 @@ const ExtraInput = ({ extras, selectExtras, setExtras }) => {
                       }
                     />
                     <p style={{ marginLeft: "10px" }}>
-                      {menuItem?.name || name || "No name"}
+                      {menuItem? getTranslation(menuItem) : getTranslation({name, translation})}
                     </p>
                   </div>
                   <p>${menuItem?.price || price || "0"}</p>

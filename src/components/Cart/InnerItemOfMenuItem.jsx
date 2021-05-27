@@ -1,4 +1,5 @@
 import React from "react";
+import { getTranslation } from "../../util";
 
 const InnerItemOfMenuItem = ({
   title,
@@ -11,10 +12,12 @@ const InnerItemOfMenuItem = ({
     <p style={{ fontSize: "16px", color: defaultColor }}>
       <span style={{ fontWeight: "bold", fontSize: "18px" }}>{title}: </span>
       {options.map(
-        ({ name, quantity }, idx) =>
-          `${from === "extra" ? `${quantity} ${name}` : name}${
-            options.length !== idx + 1 ? ", " : ""
-          }`
+        ({ quantity, ...rest }, idx) =>
+          `${
+            from === "extra"
+              ? `${quantity} ${getTranslation(rest)}`
+              : getTranslation(rest)
+          }${options.length !== idx + 1 ? ", " : ""}`
       )}
     </p>
   );

@@ -1,0 +1,20 @@
+{
+  "APP.BANNER.MENU": "তালিকা",
+  "APP.BANNER.YOUR_ORDER": "তোমার আদেশ",
+  "APP.BANNER.NO_ORDER": "কোন নির্দেশ নেই",
+  "APP.NO_ORDER.TEXT-1": "দেখে মনে হচ্ছে আপনি অর্ডার করেননি।",
+  "APP.NO_ORDER.TEXT-2": "প্রধান মেনুতে যেতে এখানে ক্লিক করুন।",
+  "APP.WAITER.ASK_FOR_BILL": "বিলের জন্য জিজ্ঞাসা করুন",
+  "APP.WAITER.YOUR_BILL_ON_HIS_WAY": "আপনার বিল তার পথে",
+  "APP.WAITER.CALL_WAITER": "কল লেখক",
+  "APP.WAITER.YOUR_WAITER_ON_HIS_WAY": "আপনার ওয়েটার তার পথে",
+  "APP.NAVBER.MENU": "তালিকা",
+  "APP.NAVBER.YOUR_ORDER": "তোমার আদেশ",
+  "APP.NAVBER.WAITER": "লেখক",
+  "APP.BUTTON.ORDER": "আদেশ",
+  "APP.RECOMMENDATIONS": "সুপারিশ",
+  "APP.EXTRAS": "অতিরিক্ত",
+  "APP.OPTIONS": "বিকল্পগুলি",
+  "APP.SIZING": "সাইজিং",
+  "APP.NOTE": "বিঃদ্রঃ"
+}

@@ -3,6 +3,7 @@ import { Modal } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteCardItem, updateCardItemQnt } from "../../store/modules";
+import { getTranslation } from "../../util";
 import { IncDecBtn } from "../Shared";
 import InnerItemOfMenuItem from "./InnerItemOfMenuItem";
 import Recommendation from "./Recommendation";
@@ -10,7 +11,6 @@ import Recommendation from "./Recommendation";
 const Items = (props) => {
   const dispatch = useDispatch();
   const {
-    name,
     price,
     dropdowns,
     sizing,
@@ -61,7 +61,7 @@ const Items = (props) => {
             fontSize: "28px",
           }}
         >
-          {name}
+          {getTranslation(props)}
         </h3>
         <InnerItemOfMenuItem
           title="Options"

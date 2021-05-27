@@ -1,5 +1,6 @@
 import { Select, Tag } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { getTranslation } from "../../util";
 
 const SingleDropdown = ({
   isFree,
@@ -49,7 +50,7 @@ const SingleDropdown = ({
   return (
     <div>
       <h3 style={{ margin: "10px 0px 5px", fontSize: "14px" }}>
-        {name} {isFree && <Tag color="green">Free</Tag>}
+        {getTranslation(dropdown)} {isFree && <Tag color="green">Free</Tag>}
       </h3>
       <Select
         value={value}
@@ -61,9 +62,11 @@ const SingleDropdown = ({
         <Option value={null} disabled>
           Select
         </Option>
-        {extras?.map(({ _id, menuItem, name, price }) => (
+        {extras?.map(({ _id, menuItem, name, price, translation }) => (
           <Option value={_id} key={_id} key={_id}>
-            {menuItem?.name || name}{" "}
+            {menuItem
+              ? getTranslation(menuItem)
+              : getTranslation({ name, translation })}{" "}
             {!isFree && `- $${menuItem?.price || price}`}
           </Option>
         ))}

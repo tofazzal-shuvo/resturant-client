@@ -2,6 +2,7 @@ import React from "react";
 import { Badge } from "antd";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 
 const Navber = () => {
   const { pathname } = useLocation();
@@ -24,17 +25,19 @@ const Navber = () => {
 
   const menuItems = [
     {
-      text: "MENU",
+      text: <FormattedMessage id="APP.NAVBER.MENU" />,
+      // "MENU",
       path: `/menu`,
       icon: <i className="fas fa-utensils"></i>,
     },
     {
-      text: "YOUR ORDER",
+      text: <FormattedMessage id="APP.NAVBER.YOUR_ORDER" />,
+      // "YOUR ORDER",
       path: `/cart`,
       icon: <i className="fas fa-check-square"></i>,
     },
     {
-      text: "WAITER",
+      text: <FormattedMessage id="APP.NAVBER.WAITER" />,
       path: `/call-waiter`,
       icon: <i className="fas fa-allergies"></i>,
     },

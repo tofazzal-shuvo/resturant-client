@@ -7,6 +7,8 @@ import CategoryModal from "./CategoryModal";
 import { Banner, Layout } from "../Shared";
 import { useHistory } from "react-router";
 import { addInfo } from "../../store/modules";
+import { getTranslation } from "../../util";
+import { FormattedMessage } from "react-intl";
 
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState();
@@ -32,18 +34,17 @@ const Menu = () => {
   const onClose = () => setVisible(false);
 
   const redirectToMenuitemPage = (data) => {
-    console.log(data);
     if (Array.isArray(data.items) && data.items.length > 0) {
       dispatch(
         addInfo({
           menuItems: data.items,
-          menuName: data.name,
+          menuName: getTranslation(data),
           isMenuItem: true,
         })
       );
       history.push("/menu/items");
     } else {
-      dispatch(addInfo({ menuName: data.name }));
+      dispatch(addInfo({ menuName: getTranslation(data) }));
       setSelectedMenu(data);
       setVisible(true);
     }
@@ -52,7 +53,7 @@ const Menu = () => {
   return (
     <Spin spinning={loading}>
       <div className="welcome text-center">
-        <Banner text="Menu" />
+        <Banner text={<FormattedMessage id="APP.BANNER.MENU"/>} />
         <Layout>
           {menu.map((item) => (
             <Button
@@ -64,7 +65,7 @@ const Menu = () => {
                 color: resTemplate?.general?.menuColor,
               }}
             >
-              {item.name}
+              {getTranslation(item)}
             </Button>
           ))}
         </Layout>

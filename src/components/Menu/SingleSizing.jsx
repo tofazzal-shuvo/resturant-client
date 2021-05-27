@@ -1,5 +1,6 @@
 import { Select } from "antd";
 import React, { useEffect, useState } from "react";
+import { getTranslation } from "../../util";
 
 const SingleSizing = ({
   selectSizing,
@@ -8,6 +9,7 @@ const SingleSizing = ({
   items,
   _id: menuSizing,
   defaultSelected,
+  translation,
 }) => {
   const [value, setDefaultValue] = useState(null);
   // console.log({ selectSizing });
@@ -58,7 +60,9 @@ const SingleSizing = ({
   const { Option } = Select;
   return (
     <div>
-      <h3 style={{ margin: "10px 0px 5px", fontSize: "14px" }}>{name}</h3>
+      <h3 style={{ margin: "10px 0px 5px", fontSize: "14px" }}>
+        {getTranslation({ name, translation })}
+      </h3>
       <Select
         value={value}
         className="custom-select-padding"
@@ -67,7 +71,7 @@ const SingleSizing = ({
       >
         {items?.map(({ _id, item, price }) => (
           <Option value={_id} key={_id} key={_id}>
-            {`${item.name} - $${price}`}
+            {`${getTranslation(item)} - $${price}`}
           </Option>
         ))}
       </Select>

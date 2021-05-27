@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCart } from "../../store/modules";
 import { FETCH_MENU_ITEM } from "../../graphql/modules";
 import { useLazyQuery, useQuery } from "@apollo/react-hooks";
-import { getImage } from "../../util";
+import { getImage, getTranslation } from "../../util";
 
 const MenuItemViewModal = ({ visible, onCancel, _id }) => {
   const dispatch = useDispatch();
@@ -33,6 +33,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     dropdowns = [],
     image,
     desc,
+    translation,
   } = data?.FetchMenuItem?.item || {};
   // state
   const [state, setState] = useState({ quantity: 1 });
@@ -103,7 +104,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
               padding: "3px 7px",
             }}
           >
-            {name}
+            {getTranslation({ name, translation })}
           </h2>
         </div>
         <div style={{ padding: "0 7px" }}>
@@ -163,6 +164,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
                 backgroundColor: "#fff",
                 marginLeft: "-35px",
                 cursor: "pointer",
+                color: "#656565"
               }}
               onClick={onAddToCard}
               disabled={!state.quantity}
@@ -170,7 +172,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
               <span
                 style={{
                   padding: "9px 9px",
-                  backgroundColor: "#B6B7B6",
+                  backgroundColor: "#656565",
                   fontSize: "20px",
                   borderRadius: "4px",
                   display: "inline-flex",

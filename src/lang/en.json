@@ -1,0 +1,20 @@
+{
+  "APP.BANNER.MENU": "Menu",
+  "APP.BANNER.YOUR_ORDER": "Your Order",
+  "APP.BANNER.NO_ORDER": "No order",
+  "APP.NO_ORDER.TEXT-1": "It looks like you have not orderd.",
+  "APP.NO_ORDER.TEXT-2": "Click here to go to the main menu",
+  "APP.WAITER.ASK_FOR_BILL": "Ask for bill",
+  "APP.WAITER.YOUR_BILL_ON_HIS_WAY": "Your bill on his way",
+  "APP.WAITER.CALL_WAITER": "Call Waiter",
+  "APP.WAITER.YOUR_WAITER_ON_HIS_WAY": "Your waiter on his way",
+  "APP.NAVBER.MENU": "Menu",
+  "APP.NAVBER.YOUR_ORDER": "Your Order",
+  "APP.NAVBER.WAITER": "Waiter",
+  "APP.BUTTON.ORDER": "Order",
+  "APP.RECOMMENDATIONS": "Recommendations",
+  "APP.EXTRAS": "Extras",
+  "APP.OPTIONS": "Options",
+  "APP.SIZING": "Sizing",
+  "APP.NOTE": "Note"
+}

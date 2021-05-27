@@ -1,11 +1,12 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import { Banner } from "../Shared";
 
 const NoOrder = ({ general }) => {
   return (
     <div className="text-center">
-      <Banner text="No Order" />
+      <Banner text={<FormattedMessage id="APP.BANNER.NO_ORDER" />} />
       <h3
         style={{
           color: general?.defaultColor || "#656464",
@@ -15,7 +16,7 @@ const NoOrder = ({ general }) => {
           lineHeight: "1.5",
         }}
       >
-        It looks like you have not orderd.
+        <FormattedMessage id="APP.NO_ORDER.TEXT-1" />
         <br />
         <Link
           to="/menu"
@@ -23,7 +24,7 @@ const NoOrder = ({ general }) => {
             color: general?.defaultColor || "#656464",
           }}
         >
-          Click here to go to the main menu
+          <FormattedMessage id="APP.NO_ORDER.TEXT-2" />
         </Link>
       </h3>
       <i

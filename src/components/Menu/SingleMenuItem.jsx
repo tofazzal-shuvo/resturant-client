@@ -1,7 +1,7 @@
 import { InfoCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { getImage } from "../../util";
+import { getImage, getTranslation } from "../../util";
 import MenuItemInfoModal from "./MenuItemInfoModal";
 import MenuItemViewModal from "./MenuItemViewModal";
 
@@ -38,7 +38,7 @@ const SingleMenuItem = ({ item }) => {
       >
         <div className="d-flex align-items-center">
           <h3 style={{ fontSize: "20px", fontWeight: "900", color: itemColor }}>
-            {item.name}
+            {getTranslation(item)}
           </h3>
           <InfoCircleOutlined
             style={{ color: itemColor }}
