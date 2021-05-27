@@ -16,5 +16,8 @@
   "APP.EXTRAS": "অতিরিক্ত",
   "APP.OPTIONS": "বিকল্পগুলি",
   "APP.SIZING": "সাইজিং",
-  "APP.NOTE": "বিঃদ্রঃ"
+  "APP.NOTE": "বিঃদ্রঃ",
+  "APP.COMPLETE_ORDER.TEXT-1": "ধন্যবাদ!",
+  "APP.COMPLETE_ORDER.TEXT-2": "আপনার অর্ডার স্থাপন করা হয়েছে।",
+  "APP.COMPLETE_ORDER.BUTTON": "নতুন আদেশ"
 }

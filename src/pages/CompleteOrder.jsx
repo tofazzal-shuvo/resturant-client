@@ -1,5 +1,6 @@
 import { Button } from "antd";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Banner } from "../components/Shared";
@@ -38,15 +39,15 @@ const CallWAITER = () => {
               height: "auto",
             }}
           >
-            Thank you!
+            <FormattedMessage id="APP.COMPLETE_ORDER.TEXT-1" />
             <br />
-            Your order has been placed.
+            <FormattedMessage id="APP.COMPLETE_ORDER.TEXT-2" />
           </Button>
           <Button style={buttonStyle} onClick={redirectToOrder}>
-            New order
+            <FormattedMessage id="APP.COMPLETE_ORDER.BUTTON" />
           </Button>
           <Button style={buttonStyle} onClick={redirect}>
-            Call waiter
+            <FormattedMessage id="APP.WAITER.CALL_WAITER" />
           </Button>
         </div>
       </div>

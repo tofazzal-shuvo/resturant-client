@@ -11,7 +11,7 @@ const ExtraInput = ({ extras, selectExtras, setExtras }) => {
   const { Panel } = Collapse;
   const groupedExtras = groupExtrasItems(extras);
 
-  const onChangeQuantity = ({ extra, quantity, name, price }) => {
+  const onChangeQuantity = ({ extra, quantity, name, price, translation }) => {
     let data = selectExtras,
       isFound = false;
     if (quantity === 0) {
@@ -19,6 +19,7 @@ const ExtraInput = ({ extras, selectExtras, setExtras }) => {
       setExtras(data);
       return;
     }
+    
     data.map((item) => {
       if (item.extra === extra) {
         item.quantity = quantity;
@@ -26,7 +27,8 @@ const ExtraInput = ({ extras, selectExtras, setExtras }) => {
         isFound = true;
       }
     });
-    if (!isFound) data.push({ extra, quantity, name, price });
+
+    if (!isFound) data.push({ extra, quantity, name, price, translation });
     setExtras([...data]);
   };
   return (
@@ -71,12 +73,17 @@ const ExtraInput = ({ extras, selectExtras, setExtras }) => {
                           extra: _id,
                           quantity,
                           name: menuItem?.name || name,
+                          translation: menuItem
+                            ? menuItem.transition
+                            : translation,
                           price: menuItem?.price || price,
                         })
                       }
                     />
                     <p style={{ marginLeft: "10px" }}>
-                      {menuItem? getTranslation(menuItem) : getTranslation({name, translation})}
+                      {menuItem
+                        ? getTranslation(menuItem)
+                        : getTranslation({ name, translation })}
                     </p>
                   </div>
                   <p>${menuItem?.price || price || "0"}</p>

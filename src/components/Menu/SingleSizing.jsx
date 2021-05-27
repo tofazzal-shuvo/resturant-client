@@ -32,6 +32,7 @@ const SingleSizing = ({
         menuSizing,
         size: value,
         name: name,
+        translation,
         sizingItemName: selectedItem?.item?.name,
         price: selectedItem.price,
       });
@@ -46,6 +47,7 @@ const SingleSizing = ({
             menuSizing,
             size: _id,
             name,
+            translation,
             sizingItemName: item.name,
             price,
           };

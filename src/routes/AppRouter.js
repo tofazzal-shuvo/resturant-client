@@ -14,10 +14,9 @@ export const history = createBrowserHistory();
 
 const RouterConfig = () => {
   const { locale, onChangeLang } = useContext(LanguageContext);
-  const { background } = useSelector(
-    (state) => state?.info?.resTemplate?.general || {}
+  const background = useSelector(
+    (state) => state?.info?.resTemplate?.general.background
   );
-  // console.log({ background });
   const onChangeSelect = (e) => onChangeLang(e.target.value);
   return (
     <div
@@ -26,6 +25,7 @@ const RouterConfig = () => {
         background: background || "#fff",
         minHeight: "100vh",
         position: "relative",
+        overflow: "auto",
       }}
     >
       <div style={{ position: "absolute", top: 0, left: 0, zIndex: "200000" }}>

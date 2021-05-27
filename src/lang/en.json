@@ -16,5 +16,8 @@
   "APP.EXTRAS": "Extras",
   "APP.OPTIONS": "Options",
   "APP.SIZING": "Sizing",
-  "APP.NOTE": "Note"
+  "APP.NOTE": "Note",
+  "APP.COMPLETE_ORDER.TEXT-1": "Thank you!",
+  "APP.COMPLETE_ORDER.TEXT-2": "Your order has been placed.",
+  "APP.COMPLETE_ORDER.BUTTON": "New order"
 }

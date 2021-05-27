@@ -15,6 +15,10 @@ import { getImage, getTranslation } from "../../util";
 const MenuItemViewModal = ({ visible, onCancel, _id }) => {
   const dispatch = useDispatch();
   const lang = useSelector((state) => state?.info?.lang || undefined);
+  const background = useSelector(
+    (state) => state?.info?.resTemplate?.general.background
+  );
+
   // query
   const [fetchmenuItem, { data, loading }] = useLazyQuery(FETCH_MENU_ITEM, {
     variables: {
@@ -81,12 +85,21 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     if (visible === "view") fetchmenuItem();
   }, [visible]);
 
+  const modalBodyStyle = {
+    height: "100vh",
+    overflowY: "scroll",
+    padding: 0,
+    // background,
+  };
+
   return (
     <Modal
       visible={visible === "view"}
       onCancel={onCancel}
       footer={null}
       bodyStyle={{ padding: "0" }}
+      style={modalStyle}
+      bodyStyle={modalBodyStyle}
       className="custom-positioning-modal"
     >
       <Spin spinning={loading}>
@@ -164,7 +177,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
                 backgroundColor: "#fff",
                 marginLeft: "-35px",
                 cursor: "pointer",
-                color: "#656565"
+                color: "#656565",
               }}
               onClick={onAddToCard}
               disabled={!state.quantity}
@@ -193,3 +206,9 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
 };
 
 export default MenuItemViewModal;
+
+const modalStyle = {
+  paddingTop: 0,
+  paddingBottom: 0,
+  top: 0,
+};

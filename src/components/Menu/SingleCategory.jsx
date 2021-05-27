@@ -40,6 +40,7 @@ const SingleCategory = ({ category, resTemplate }) => {
       {show &&
         subcategory.map((item) => (
           <Button
+            key={item._id}
             onClick={redirectToMenuItems}
             style={{
               background: "transparent",

@@ -51,8 +51,8 @@ const Menu = () => {
   };
 
   return (
-    <Spin spinning={loading}>
-      <div className="welcome text-center">
+    <Spin spinning={loading} >
+      <div className="welcome text-center" style={{height:"100vh"}}>
         <Banner text={<FormattedMessage id="APP.BANNER.MENU"/>} />
         <Layout>
           {menu.map((item) => (

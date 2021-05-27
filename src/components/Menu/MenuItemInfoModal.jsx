@@ -1,5 +1,6 @@
 import { Modal } from "antd";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const MenuItemInfoModal = ({
   visible,
@@ -8,11 +9,23 @@ const MenuItemInfoModal = ({
   ingredient,
   name,
 }) => {
+  const background = useSelector(
+    (state) => state?.info?.resTemplate?.general.background
+  );
+  const modalBodyStyle = {
+    height: "100vh",
+    overflowY: "scroll",
+    padding: 0,
+    // background,
+  };
+  
   return (
     <Modal
       visible={visible === "info"}
       onCancel={onCancel}
       footer={null}
+      style={modalStyle}
+      bodyStyle={modalBodyStyle}
       className="custom-positioning-modal close-left"
     >
       <h3 style={{ color: "#000000", textAlign: "center", margin: "30px 0 0" }}>
@@ -40,4 +53,10 @@ const headerStyle = {
   color: "#787777",
   fontSize: "20px",
   margin: "20px 0 15px",
+};
+
+const modalStyle = {
+  paddingTop: 0,
+  paddingBottom: 0,
+  top: 0,
 };
