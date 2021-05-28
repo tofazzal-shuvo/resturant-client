@@ -7,19 +7,18 @@ const messages = {
   bn: frMessages,
 };
 export const LanguageContext = React.createContext();
-const savedLocale = localStorage.getItem("YELLOCART_LOCALE") || "en";
+const defaultLocale = localStorage.getItem("YELLOCART_LOCALE") || "en";
 export const LanguageProvider = ({ children }) => {
-  const [locale, setLocale] = useState(savedLocale);
+  const [locale, setLocale] = useState(defaultLocale);
   const onChangeLang = (lang) => {
     setLocale(lang);
-    localStorage.setItem("FLUID_LOCALE", lang);
+    localStorage.setItem("YELLOCART_LOCALE", lang);
   };
   return (
     <LanguageContext.Provider value={{ locale, onChangeLang }}>
       <IntlProvider
         messages={messages[locale]}
         locale={locale}
-        defaultLocale="en"
       >
         {children}
       </IntlProvider>

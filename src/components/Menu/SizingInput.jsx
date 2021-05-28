@@ -5,11 +5,12 @@ const SizingInput = ({
   selectSizing,
   setSizing,
   options,
+  defaultColor
 }) => {
   const defaultSelected = [];
   return (
     <>
-      <h2 style={{ fontSize: "18px", marginTop: "8px" }}>Sizing</h2>
+      <h2 style={{ fontSize: "18px", marginTop: "8px", color: defaultColor }}>Sizing</h2>
       {options.map((item) => (
         <SingleSizing
           {...item}
@@ -17,6 +18,7 @@ const SizingInput = ({
           key={item._id}
           selectSizing={selectSizing}
           setSizing={setSizing}
+          defaultColor={defaultColor}
         />
       ))}
     </>

@@ -15,8 +15,8 @@ import { getImage, getTranslation } from "../../util";
 const MenuItemViewModal = ({ visible, onCancel, _id }) => {
   const dispatch = useDispatch();
   const lang = useSelector((state) => state?.info?.lang || undefined);
-  const background = useSelector(
-    (state) => state?.info?.resTemplate?.general.background
+  const { background, defaultColor } = useSelector(
+    (state) => state?.info?.resTemplate?.general
   );
 
   // query
@@ -89,7 +89,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     height: "100vh",
     overflowY: "scroll",
     padding: 0,
-    // background,
+    background,
   };
 
   return (
@@ -115,6 +115,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
             style={{
               backgroundColor: "rgba(255, 255, 255, .6)",
               padding: "3px 7px",
+              color: defaultColor,
             }}
           >
             {getTranslation({ name, translation })}
@@ -127,6 +128,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
               fontSize: "18px",
               color: "#656464",
               marginTop: "25px",
+              color: defaultColor,
             }}
           >
             {desc}
@@ -143,13 +145,16 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
             setSizing={setSizing}
             totalPrice={totalPrice}
             setTotalPrice={setTotalPrice}
+            defaultColor={defaultColor}
           />
+          {/* {console.log(selectSizing)} */}
           <DropdownInput
             options={dropdowns}
             selectDropdown={selectDropdown}
             setDropdown={setDropdown}
             totalPrice={totalPrice}
             setTotalPrice={setTotalPrice}
+            defaultColor={defaultColor}
           />
           <ExtraInput
             extras={extras}
@@ -163,7 +168,11 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
             selectRecommendaton={selectRecommendaton}
             setRecommendaton={setRecommendaton}
           />
-          <h2 style={{ fontSize: "18px", marginTop: "8px" }}>Note</h2>
+          <h2
+            style={{ fontSize: "18px", marginTop: "8px", color: defaultColor }}
+          >
+            Note
+          </h2>
           <textarea
             rows="5"
             style={{ width: "100%" }}
@@ -174,7 +183,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
             <button
               style={{
                 border: "none",
-                backgroundColor: "#fff",
+                backgroundColor: "transparent",
                 marginLeft: "-35px",
                 cursor: "pointer",
                 color: "#656565",
@@ -189,15 +198,24 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
                   fontSize: "20px",
                   borderRadius: "4px",
                   display: "inline-flex",
-                  color: "#fff",
+                  color: defaultColor,
+                  // color: "",
                 }}
               >
                 <CheckOutlined />
               </span>
 
-              <p>ADD TO ORDER</p>
+              <p style={{ color: defaultColor }}>ADD TO ORDER</p>
             </button>
-            <p style={{ color: "#848383", fontSize: "22px" }}>${totalPrice}</p>
+            <p
+              style={{
+                color: "#848383",
+                fontSize: "22px",
+                color: defaultColor,
+              }}
+            >
+              ${totalPrice}
+            </p>
           </div>
         </div>
       </Spin>

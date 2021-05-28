@@ -10,9 +10,10 @@ const SingleSizing = ({
   _id: menuSizing,
   defaultSelected,
   translation,
+  defaultColor,
 }) => {
   const [value, setDefaultValue] = useState(null);
-  // console.log({ selectSizing });
+  console.log({ selectSizing });
   const handleChange = (value) => {
     setDefaultValue(value);
     let temp = selectSizing,
@@ -62,7 +63,13 @@ const SingleSizing = ({
   const { Option } = Select;
   return (
     <div>
-      <h3 style={{ margin: "10px 0px 5px", fontSize: "14px" }}>
+      <h3
+        style={{
+          margin: "10px 0px 5px",
+          fontSize: "14px",
+          color: defaultColor,
+        }}
+      >
         {getTranslation({ name, translation })}
       </h3>
       <Select

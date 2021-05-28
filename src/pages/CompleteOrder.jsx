@@ -28,7 +28,7 @@ const CallWAITER = () => {
 
   return (
     <>
-      <Banner text="Order placed" />
+      <Banner text={<FormattedMessage id="APP.BANNER.ORDER_PLACED" />} />
 
       <div className="text-center pl-2 pr-2">
         <div className="mt-5">

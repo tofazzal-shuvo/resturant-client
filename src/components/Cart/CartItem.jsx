@@ -49,7 +49,6 @@ const Items = (props) => {
     temp = temp * quantity;
     setTotalPrice(temp);
   }, [dropdowns, extras, sizing, quantity]);
-
   return (
     <div className="d-flex justify-content-between pl-2 pr-2 mt-5">
       <div style={{ width: "65%" }}>
@@ -80,15 +79,15 @@ const Items = (props) => {
           defaultColor={defaultColor}
         />
         {note && (
-          <p style={{ fontSize: "16px" }}>
+          <p style={{ fontSize: "16px", color: defaultColor }}>
             <span style={{ fontWeight: "bold", fontSize: "18px" }}>Note: </span>
             {note}
           </p>
         )}
-        <Recommendation {...recommendation} />
+        <Recommendation {...recommendation} defaultColor={defaultColor}/>
       </div>
       <div>
-        <p style={{ fontSize: "1rem" }}>
+        <p style={{ fontSize: "1rem", color: defaultColor }}>
           $ {Number(totalPrice || 0).toFixed(2)}
         </p>
         <IncDecBtn

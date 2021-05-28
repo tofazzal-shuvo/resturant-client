@@ -2,6 +2,7 @@
   "APP.BANNER.MENU": "তালিকা",
   "APP.BANNER.YOUR_ORDER": "তোমার আদেশ",
   "APP.BANNER.NO_ORDER": "কোন নির্দেশ নেই",
+  "APP.BANNER.ORDER_PLACED": "আদেশ স্থাপন",
   "APP.NO_ORDER.TEXT-1": "দেখে মনে হচ্ছে আপনি অর্ডার করেননি।",
   "APP.NO_ORDER.TEXT-2": "প্রধান মেনুতে যেতে এখানে ক্লিক করুন।",
   "APP.WAITER.ASK_FOR_BILL": "বিলের জন্য জিজ্ঞাসা করুন",

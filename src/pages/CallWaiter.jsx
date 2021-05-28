@@ -4,12 +4,29 @@ import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Banner } from "../components/Shared";
+import { showNotification } from "../util";
 
 const CallWAITER = () => {
   const history = useHistory();
   const defaultColor = useSelector(
     (state) => state?.info?.resTemplate?.general?.defaultColor || ""
   );
+  // const [createOrder, { loading }] = useMutation(CREATE_ORDER);
+  // const waiterCall = async () => {
+  //   try {
+  //     const {
+  //       data: { CreateOrder },
+  //     } = await createOrder({
+  //       variables: {
+  //         orderData,
+  //       },
+  //     });
+  //     showNotification();
+  //     if (CreateOrder.success) {
+  //       history.push("/ask-for-waiter");
+  //     }
+  //   } catch (err) {}
+  // };
   const waiterCall = () => history.push("/ask-for-waiter");
   const askFoBill = () => history.push("/ask-for-bill");
 

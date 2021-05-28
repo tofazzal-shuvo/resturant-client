@@ -245,3 +245,16 @@ body {
 button:disabled {
   cursor: not-allowed !important;
 }
+.language-selector {
+  position: absolute;
+  top: 3px;
+  left: -90px;
+  z-index: 200000;
+  display: flex;
+  align-items: center;
+  transition: all .4s;
+}
+.language-selector:hover {
+  left: 2px;
+  // top: ;
+}

@@ -8,6 +8,7 @@ import { Public } from "./Router";
 import Navber from "../components/Navber";
 import { useSelector } from "react-redux";
 import { LanguageContext } from "../context";
+import { Select } from "antd";
 
 // Components
 export const history = createBrowserHistory();
@@ -17,7 +18,6 @@ const RouterConfig = () => {
   const background = useSelector(
     (state) => state?.info?.resTemplate?.general.background
   );
-  const onChangeSelect = (e) => onChangeLang(e.target.value);
   return (
     <div
       style={{
@@ -28,11 +28,22 @@ const RouterConfig = () => {
         overflow: "auto",
       }}
     >
-      <div style={{ position: "absolute", top: 0, left: 0, zIndex: "200000" }}>
-        <select onChange={onChangeSelect} value={locale}>
-          <option value="en">English</option>
-          <option value="bn">Bangali</option>
-        </select>
+      <div className="language-selector">
+        <Select onChange={onChangeLang} value={locale}>
+          <Select.Option value="en">English</Select.Option>
+          <Select.Option value="bn">Bangali</Select.Option>
+        </Select>
+        <i
+          class="fa fa-language"
+          aria-hidden="true"
+          style={{
+            background: "#fff",
+            padding: "6.5px 4px",
+            fontSize: "18px",
+            borderRadius: "50%",
+            marginLeft: "5px",
+          }}
+        ></i>
       </div>
       <Router history={history}>
         <Switch>

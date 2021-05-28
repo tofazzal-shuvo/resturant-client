@@ -7,6 +7,7 @@ const SingleDropdown = ({
   dropdown,
   setDropdown,
   selectDropdown,
+  defaultColor,
   _id,
 }) => {
   const [value, setDefaultValue] = useState(null);
@@ -51,7 +52,13 @@ const SingleDropdown = ({
 
   return (
     <div>
-      <h3 style={{ margin: "10px 0px 5px", fontSize: "14px" }}>
+      <h3
+        style={{
+          margin: "10px 0px 5px",
+          fontSize: "14px",
+          color: defaultColor,
+        }}
+      >
         {getTranslation(dropdown)} {isFree && <Tag color="green">Free</Tag>}
       </h3>
       <Select

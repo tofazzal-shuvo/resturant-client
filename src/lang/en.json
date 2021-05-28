@@ -2,6 +2,7 @@
   "APP.BANNER.MENU": "Menu",
   "APP.BANNER.YOUR_ORDER": "Your Order",
   "APP.BANNER.NO_ORDER": "No order",
+  "APP.BANNER.ORDER_PLACED": "order placed",
   "APP.NO_ORDER.TEXT-1": "It looks like you have not orderd.",
   "APP.NO_ORDER.TEXT-2": "Click here to go to the main menu",
   "APP.WAITER.ASK_FOR_BILL": "Ask for bill",
