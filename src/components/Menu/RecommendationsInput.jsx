@@ -12,6 +12,8 @@ const RecommendationsInput = ({
   const onChange = (key) => setActiveKey(key);
   const { Panel } = Collapse;
   // console.log({ recommendations });
+  const defaultSelected = [];
+
   return (
     <Collapse
       accordion
@@ -28,6 +30,7 @@ const RecommendationsInput = ({
           <SingleRecommendation
             {...item}
             key={item._id}
+            // defaultSelected={defaultSelected}
             selectRecommendaton={selectRecommendaton}
             setRecommendaton={setRecommendaton}
           />

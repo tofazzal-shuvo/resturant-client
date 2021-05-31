@@ -18,7 +18,9 @@ const SingleRecommendation = ({
   selectRecommendaton,
   setRecommendaton,
   translation,
+  // defaultSelected
 }) => {
+  const [totalPrice, setTotalPrice] = useState(price);
   const [visible, setVisible] = useState("");
   const [selectSizing, setSizing] = useState([]);
   const [selectDropdown, setDropdown] = useState([]);
@@ -30,23 +32,51 @@ const SingleRecommendation = ({
       name,
       dropdowns: selectDropdown,
       sizing: selectSizing,
+      totalPrice,
     });
   };
   const onCancel = () => setVisible("");
   const onClickInfo = () => setVisible("info");
 
   useEffect(() => {
+    let temp = +price;
+    selectDropdown.map(({ price }) => (temp += +price));
+    selectSizing.map(({ price }) => (temp += +price));
     if (selectRecommendaton.item === _id) {
       setRecommendaton({
         item: _id,
         name,
         dropdowns: selectDropdown,
         sizing: selectSizing,
+        totalPrice: temp,
       });
     }
-  }, [selectSizing, selectDropdown]);
+    setTotalPrice(temp);
+  }, [selectDropdown, selectSizing]);
 
-  // console.log({ dropdowns, ingredient, sizings, allergens });
+  useEffect(() => {
+    const defaultSelected = [];
+    if (Array.isArray(sizings)) {
+      sizings.map(({ items }) => {
+        items.map(({ _id, default: isDefaultValue, item, price }) => {
+          if (isDefaultValue) {
+            let temp = {
+              // menuSizing,
+              size: _id,
+              name,
+              translation,
+              sizingItemName: item.name,
+              price,
+            };
+            console.log({ temp });
+            defaultSelected.push(temp);
+          }
+        });
+      });
+      setSizing(defaultSelected);
+    }
+  }, [sizings]);
+
   const { Panel } = Collapse;
   return (
     <>
@@ -67,7 +97,7 @@ const SingleRecommendation = ({
                 </StopPropagation>
               </div>
               <div>
-                ${price}
+                ${totalPrice}
                 <StopPropagation>
                   <Radio
                     className="ml-1"

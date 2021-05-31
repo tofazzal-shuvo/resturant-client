@@ -13,7 +13,7 @@ const SingleSizing = ({
   defaultColor,
 }) => {
   const [value, setDefaultValue] = useState(null);
-  console.log({ selectSizing });
+  // console.log({ selectSizing });
   const handleChange = (value) => {
     setDefaultValue(value);
     let temp = selectSizing,

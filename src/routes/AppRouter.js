@@ -34,7 +34,7 @@ const RouterConfig = () => {
           <Select.Option value="bn">Bangali</Select.Option>
         </Select>
         <i
-          class="fa fa-language"
+          className="fa fa-language"
           aria-hidden="true"
           style={{
             background: "#fff",

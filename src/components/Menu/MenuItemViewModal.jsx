@@ -58,14 +58,17 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     selectDropdown.map(({ price }) => (temp += +price));
     selectExtras.map(({ price, quantity }) => (temp += +price * +quantity));
     selectSizing.map(({ price }) => (temp += +price));
+    temp += selectRecommendaton.totalPrice || 0;
     setTotalPrice(temp);
-  }, [selectDropdown, selectExtras, selectSizing]);
+  }, [selectDropdown, selectExtras, selectSizing, selectRecommendaton]);
 
+  // console.log({selectRecommendaton});
   // useEffect(() => {
   //   dispatch({
   //     type: "CLEAR_ITEM",
   //   });
   // }, []);
+  
   const onAddToCard = () => {
     const addedItem = {
       item: _id,
