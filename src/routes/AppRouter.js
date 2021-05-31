@@ -16,7 +16,7 @@ export const history = createBrowserHistory();
 const RouterConfig = () => {
   const { locale, onChangeLang } = useContext(LanguageContext);
   const background = useSelector(
-    (state) => state?.info?.resTemplate?.general.background
+    (state) => state?.info?.resTemplate?.general?.background
   );
   return (
     <div
