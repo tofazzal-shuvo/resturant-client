@@ -63,14 +63,19 @@ const Navber = () => {
   return (
     <div className="d-flex justify-content-around menu" style={{ background }}>
       {menuItems.map((item, idx) => (
-        <div className="position-relative" key={item.path}>
-          {item.text === "YOUR ORDER" && (
-            <span style={spanStyle}>{addedItems.length}</span>
-          )}
+        <div key={item.path}>
           <Link to={item.path} className="text-center" key={item.path}>
-            <span className="d-block" style={{ color: iconColor }}>
-              {item.icon}
-            </span>
+            <div>
+              <span
+                className="d-inline-block position-relative"
+                style={{ color: iconColor }}
+              >
+                {item.path === "/cart" && (
+                  <span style={spanStyle}>{addedItems.length}</span>
+                )}
+                {item.icon}
+              </span>
+            </div>
             <Badge
               dot={showMark(item.path, idx)}
               style={{ background: badgeColor }}
@@ -92,6 +97,6 @@ const spanStyle = {
   position: "absolute",
   color: "red",
   top: "-3px",
-  right: "30px",
+  left: "122%",
   fontSize: "15px",
 };

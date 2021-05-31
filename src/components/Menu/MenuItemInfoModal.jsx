@@ -9,16 +9,16 @@ const MenuItemInfoModal = ({
   ingredient,
   name,
 }) => {
-  const background = useSelector(
-    (state) => state?.info?.resTemplate?.general.background
+  const { background, defaultColor } = useSelector(
+    (state) => state?.info?.resTemplate?.general
   );
   const modalBodyStyle = {
     height: "100vh",
     overflowY: "scroll",
-    padding: 0,
-    // background,
+    padding: '0, 0 0 5px',
+    background,
   };
-  
+
   return (
     <Modal
       visible={visible === "info"}
@@ -26,7 +26,7 @@ const MenuItemInfoModal = ({
       footer={null}
       style={modalStyle}
       bodyStyle={modalBodyStyle}
-      className="custom-positioning-modal close-left"
+      className="custom-positioning-modal "
     >
       <h3 style={{ color: "#000000", textAlign: "center", margin: "30px 0 0" }}>
         {name}
@@ -34,15 +34,16 @@ const MenuItemInfoModal = ({
 
       <h2 style={headerStyle}>Allergen Information</h2>
       <div style={{ marginLeft: "10px" }}>
-        <p>
+        <p style={{ color: defaultColor }}>
           {allergens?.map(
-            (item, idx) => `${item?.name}${idx + 1 === allergens.length ? "." : ", "}`
+            (item, idx) =>
+              `${item?.name}${idx + 1 === allergens.length ? "." : ", "}`
           )}
         </p>
       </div>
 
       <h2 style={headerStyle}>Ingredients</h2>
-      <p style={{ marginLeft: "10px" }}>{ingredient}</p>
+      <p style={{ marginLeft: "10px", color: defaultColor }}>{ingredient}</p>
     </Modal>
   );
 };
