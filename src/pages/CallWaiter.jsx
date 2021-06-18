@@ -1,9 +1,11 @@
-import { Button } from "antd";
+import { useMutation } from "@apollo/react-hooks";
+import { Button, Spin } from "antd";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Banner } from "../components/Shared";
+import { ASK_FOR_BILL, CALL_WEITER } from "../graphql/modules";
 import { showNotification } from "../util";
 
 const CallWAITER = () => {
@@ -11,24 +13,40 @@ const CallWAITER = () => {
   const defaultColor = useSelector(
     (state) => state?.info?.resTemplate?.general?.defaultColor || ""
   );
-  // const [createOrder, { loading }] = useMutation(CREATE_ORDER);
-  // const waiterCall = async () => {
-  //   try {
-  //     const {
-  //       data: { CreateOrder },
-  //     } = await createOrder({
-  //       variables: {
-  //         orderData,
-  //       },
-  //     });
-  //     showNotification();
-  //     if (CreateOrder.success) {
-  //       history.push("/ask-for-waiter");
-  //     }
-  //   } catch (err) {}
-  // };
-  const waiterCall = () => history.push("/ask-for-waiter");
-  const askFoBill = () => history.push("/ask-for-bill");
+  const orderId = useSelector((state) => state?.info?.tableId || "");
+
+  const [onCallWeiter, { loading: callLoader }] = useMutation(CALL_WEITER);
+  const waiterCall = async () => {
+    try {
+      const {
+        data: { CallWaiter },
+      } = await onCallWeiter({
+        variables: {
+          orderId,
+        },
+      });
+      showNotification(CallWaiter);
+      if (CallWaiter.success) {
+        history.push("/ask-for-waiter");
+      }
+    } catch (error) {}
+  };
+  const [onAskForBill, { loading: askLoader }] = useMutation(ASK_FOR_BILL);
+  const askFoBill = async () => {
+    try {
+      const {
+        data: { AskForBill },
+      } = await onAskForBill({
+        variables: {
+          orderId,
+        },
+      });
+      showNotification(AskForBill);
+      if (AskForBill.success) {
+        history.push("/ask-for-bill");
+      }
+    } catch (error) {}
+  };
 
   const btnStyle = {
     border: "none",
@@ -43,7 +61,7 @@ const CallWAITER = () => {
   };
 
   return (
-    <>
+    <Spin spinning={askLoader || callLoader} style={{minHeight:"100vh"}}>
       <Banner />
       <div className="text-center pl-2 pr-2">
         <div style={{ marginTop: "45%" }}>
@@ -58,7 +76,7 @@ const CallWAITER = () => {
           </Button>
         </div>
       </div>
-    </>
+    </Spin>
   );
 };
 export default CallWAITER;

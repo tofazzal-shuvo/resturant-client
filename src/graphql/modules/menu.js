@@ -43,16 +43,6 @@ export const FETCH_MENU_ITEM = gql`
   ${MENU_ITEM_FRAGMENT}
 `;
 
-export const CREATE_ORDER = gql`
-  mutation CreateOrder($orderData: OrderInput) {
-    CreateOrder(data: $orderData) {
-      code
-      success
-      message
-    }
-  }
-`;
-
 export const FETCH_LANGUAGES = gql`
   query FetchLanguagesByRestaurant($restaurant: ID!, $active: Boolean!) {
     FetchLanguagesByRestaurant(restaurant: $restaurant, active: $active) {

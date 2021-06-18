@@ -252,9 +252,13 @@ button:disabled {
   z-index: 200000;
   display: flex;
   align-items: center;
-  transition: all .4s;
+  transition: all 0.4s;
 }
 .language-selector:hover {
   left: 2px;
   // top: ;
+}
+
+.ant-spin-blur {
+  min-height: 100vh;
 }

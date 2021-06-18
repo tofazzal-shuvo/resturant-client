@@ -1,19 +1,37 @@
 import { ClockCircleOutlined } from "@ant-design/icons";
-import { Button } from "antd";
+import { useMutation } from "@apollo/react-hooks";
+import { Button, Spin } from "antd";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Banner } from "../components/Shared";
+import { ASK_FOR_BILL, CALL_WEITER } from "../graphql/modules";
+import { showNotification } from "../util";
 
 const AskForWaiter = () => {
   const history = useHistory();
   const defaultColor = useSelector(
     (state) => state?.info?.resTemplate?.general?.defaultColor || ""
   );
+  const orderId = useSelector((state) => state?.info?.tableId || "");
 
-  const redirect = () => history.push("/ask-for-bill");
-
+  const [onAskForBill, { loading }] = useMutation(ASK_FOR_BILL);
+  const askFoBill = async () => {
+    try {
+      const {
+        data: { AskForBill },
+      } = await onAskForBill({
+        variables: {
+          orderId,
+        },
+      });
+      showNotification(AskForBill);
+      if (AskForBill.success) {
+        history.push("/ask-for-bill");
+      }
+    } catch (error) {}
+  };
   const buttonStyle = {
     border: "none",
     color: defaultColor || "#4B4B4B",
@@ -27,7 +45,7 @@ const AskForWaiter = () => {
   };
 
   return (
-    <>
+    <Spin spinning={loading}>
       <Banner />
       <div className="pl-2 pr-2 text-center">
         <div style={{ marginTop: "40%" }}>
@@ -43,13 +61,13 @@ const AskForWaiter = () => {
               color: defaultColor || "#4B4B4B",
               textTransform: "uppercase",
             }}
-            onClick={redirect}
+            onClick={askFoBill}
           >
             <FormattedMessage id="APP.WAITER.ASK_FOR_BILL" />
           </Button>
         </div>
       </div>
-    </>
+    </Spin>
   );
 };
 export default AskForWaiter;
