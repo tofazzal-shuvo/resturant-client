@@ -21,9 +21,8 @@ export const CartReducer = (state = initialState, action) => {
       return { ...state };
 
     case DELETE_ITEM:
-      addedItems = state.addedItems.filter(({ item }) => item !== payload.item);
-      console.log(addedItems, payload);
-      return { ...state, addedItems };
+      state.addedItems.splice(payload.idx, 1);
+      return { ...state };
     case UPDATE_QUANTITY:
       state.addedItems[payload.idx].quantity = payload.quantity;
       // addedItems = state.addedItems.map((item) => {

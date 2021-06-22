@@ -14,7 +14,7 @@ const AskForBill = () => {
   const defaultColor = useSelector(
     (state) => state?.info?.resTemplate?.general?.defaultColor || ""
   );
-  const orderId = useSelector((state) => state?.info?.tableId || "");
+  const tableId = useSelector((state) => state?.info?.tableId || "");
 
   const [onCallWeiter, { loading }] = useMutation(CALL_WEITER);
   const waiterCall = async () => {
@@ -23,7 +23,7 @@ const AskForBill = () => {
         data: { CallWaiter },
       } = await onCallWeiter({
         variables: {
-          orderId,
+          tableId,
         },
       });
       showNotification(CallWaiter);

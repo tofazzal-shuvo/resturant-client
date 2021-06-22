@@ -16,6 +16,11 @@ const SingleMenuItem = ({ item }) => {
     color: defaultColor || "#9E9E9E",
     fontSize: "17px",
   };
+  // console.log(item);
+  const translation =
+    (Array.isArray(item.translation) && item.translation.length) > 0
+      ? item.translation[0]
+      : {};
   return (
     <div className="m-2 mt-4 mb-4">
       {item.image && (
@@ -38,7 +43,7 @@ const SingleMenuItem = ({ item }) => {
       >
         <div className="d-flex align-items-center">
           <h3 style={{ fontSize: "20px", fontWeight: "900", color: itemColor }}>
-            {getTranslation(item)}
+            {translation.name || item.name}
           </h3>
           <InfoCircleOutlined
             style={{ color: itemColor }}
@@ -46,7 +51,7 @@ const SingleMenuItem = ({ item }) => {
             onClick={() => setVisible("info")}
           />
         </div>
-        <p style={paraStyle}>{item.desc}</p>
+        <p style={paraStyle}>{translation.desc || item.desc}</p>
         <div className="d-flex justify-content-between align-items-center mt-2">
           <p style={paraStyle}>${item.price}</p>{" "}
           <PlusOutlined

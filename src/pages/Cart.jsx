@@ -4,7 +4,7 @@ import TextArea from "antd/lib/input/TextArea";
 import { useDispatch, useSelector } from "react-redux";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_ORDER } from "../graphql/modules";
-import { addInfo, clearCard } from "../store/modules";
+import { addInfo, clearCard, clearNote } from "../store/modules";
 import { useHistory } from "react-router-dom";
 import { CartItem, NoOrder } from "../components/Cart";
 import { Banner } from "../components/Shared";
@@ -38,7 +38,8 @@ const Cart = () => {
         },
       });
       if (CreateOrder.success) {
-        dispatch(clearCard());
+        // dispatch(clearCard());
+        // dispatch(clearNote());
         notification.success({
           message: CreateOrder.message,
           placement: "bottomRight",

@@ -12,17 +12,16 @@ const SingleSizing = ({
   translation,
   defaultColor,
 }) => {
+  console.log({name, translation, items})
   const [value, setDefaultValue] = useState(null);
-  // console.log({ selectSizing });
   const handleChange = (value) => {
     setDefaultValue(value);
     let temp = selectSizing,
       isFound = false;
     const selectedItem = items.find((item) => item._id === value);
-    // console.log(selectedItem);
     temp.map((item) => {
       if (item.menuSizing === menuSizing) {
-        item.size = value;
+        item.size = selectedItem?.item?._id;
         item.sizingItemName = selectedItem?.item?.name;
         item.price = selectedItem.price;
         isFound = true;
@@ -31,7 +30,7 @@ const SingleSizing = ({
     if (!isFound)
       temp.push({
         menuSizing,
-        size: value,
+        size: selectedItem?.item?._id,
         name: name,
         translation,
         sizingItemName: selectedItem?.item?.name,
@@ -46,7 +45,7 @@ const SingleSizing = ({
         if (isDefaultValue) {
           let temp = {
             menuSizing,
-            size: _id,
+            size: item._id,
             name,
             translation,
             sizingItemName: item.name,

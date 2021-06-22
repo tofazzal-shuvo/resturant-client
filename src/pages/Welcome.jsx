@@ -16,7 +16,6 @@ const Welcome = () => {
  
 
   useEffect(() => {
-    // redirect();
     if (tableId && restaurantId) {
       redirect();
     }
@@ -32,7 +31,6 @@ const Welcome = () => {
             <img
               src="/img/custom-scanner.png"
               className="img-fluid"
-              // onClick={redirect}
             />
           </div>
         </div>

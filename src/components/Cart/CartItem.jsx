@@ -31,7 +31,7 @@ const Items = (props) => {
       title: "By setting quantity zero, the cart item will be delete.",
       icon: <ExclamationCircleOutlined />,
       onOk() {
-        dispatch(deleteCardItem({ item }));
+        dispatch(deleteCardItem({ idx }));
       },
       okButtonProps: {
         style: {

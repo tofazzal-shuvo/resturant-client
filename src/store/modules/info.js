@@ -19,7 +19,7 @@ const initialState = {
 
 export const InfoReducer = (state = initialState, action) => {
   const { type, payload } = action;
-  console.log(payload)
+  // console.log(payload)
   switch (type) {
     case ADD_INFO:
       return { ...state, ...payload };

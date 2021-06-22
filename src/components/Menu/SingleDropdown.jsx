@@ -8,10 +8,11 @@ const SingleDropdown = ({
   setDropdown,
   selectDropdown,
   defaultColor,
+  translation,
   _id,
 }) => {
   const [value, setDefaultValue] = useState(null);
-  const { extras = [], name, translation } = dropdown || {};
+  const { extras = [], name } = dropdown || {};
   // console.log({ selectDropdown });
 
   const handleChange = (value) => {
@@ -19,13 +20,13 @@ const SingleDropdown = ({
     let temp = selectDropdown,
       isFound = false;
     if (!value) {
-      temp = temp.filter((item) => item.dropdown !== _id);
+      temp = temp.filter((item) => item.dropdown !== dropdown._id);
       setDropdown([...temp]);
       return;
     }
     const selectedExtra = extras.find((item) => item._id === value);
     temp.map((item) => {
-      if (item.dropdown === _id) {
+      if (item.dropdown === dropdown._id) {
         item.extra = value;
         item.translation = selectedExtra.translation;
         item.name = selectedExtra.name;
@@ -36,7 +37,7 @@ const SingleDropdown = ({
 
     if (!isFound)
       temp.push({
-        dropdown: _id,
+        dropdown: dropdown._id,
         extra: value,
         name: selectedExtra?.menuItem?.name || selectedExtra.name,
         translation:
@@ -59,7 +60,8 @@ const SingleDropdown = ({
           color: defaultColor,
         }}
       >
-        {getTranslation(dropdown)} {isFree && <Tag color="green">Free</Tag>}
+        {getTranslation({ name, translation })}{" "}
+        {isFree && <Tag color="green">Free</Tag>}
       </h3>
       <Select
         value={value}

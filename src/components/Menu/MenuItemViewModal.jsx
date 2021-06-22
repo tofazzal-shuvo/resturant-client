@@ -40,7 +40,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     translation,
   } = data?.FetchMenuItem?.item || {};
   // state
-  const [state, setState] = useState({ quantity: 1 });
+  const [state, setState] = useState({ quantity: 1, note: "" });
   const [totalPrice, setTotalPrice] = useState(price);
   const [selectExtras, setExtras] = useState([]);
   const [selectSizing, setSizing] = useState([]);
@@ -49,7 +49,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     dropdowns: [],
     sizing: [],
   });
-
+  // console.log(selectDropdown);
   const onChangeQuantity = (quantity) => setState({ ...state, quantity });
   const onChangeNote = (e) => setState({ ...state, note: e.target.value });
 
@@ -62,13 +62,6 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     setTotalPrice(temp);
   }, [selectDropdown, selectExtras, selectSizing, selectRecommendaton]);
 
-  // console.log({selectRecommendaton});
-  // useEffect(() => {
-  //   dispatch({
-  //     type: "CLEAR_ITEM",
-  //   });
-  // }, []);
-  
   const onAddToCard = () => {
     const addedItem = {
       item: _id,
@@ -86,6 +79,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
   useEffect(() => {
     setTotalPrice(0);
     if (visible === "view") fetchmenuItem();
+    setState({ quantity: 1, note: "" });
   }, [visible]);
 
   const modalBodyStyle = {
@@ -94,6 +88,11 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     padding: 0,
     background,
   };
+
+  const translationObj =
+    (Array.isArray(translation) && translation.length) > 0
+      ? translation[0]
+      : {};
 
   return (
     <Modal
@@ -134,7 +133,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
               color: defaultColor,
             }}
           >
-            {desc}
+            {translationObj.desc || desc}
             <span className="d-block text-right">${price}</span>
           </p>
           <div
@@ -178,6 +177,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
           </h2>
           <textarea
             rows="5"
+            value={state.note}
             style={{ width: "100%" }}
             onChange={onChangeNote}
           />
@@ -202,7 +202,6 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
                   borderRadius: "4px",
                   display: "inline-flex",
                   color: defaultColor,
-                  // color: "",
                 }}
               >
                 <CheckOutlined />

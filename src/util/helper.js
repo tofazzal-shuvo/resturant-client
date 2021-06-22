@@ -21,8 +21,8 @@ export const showNotification = (data) => {
   }
 };
 
-export const getTranslation = (data = {}) => {
-  const { translation, name } = data;
+export const getTranslation = (data) => {
+  const { translation, name } = data || {};
   if (Array.isArray(translation) && translation.length > 0)
     return translation[0].name;
   else return name;

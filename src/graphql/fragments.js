@@ -65,7 +65,11 @@ export const SIZING_ITEM_FRAGMENT = gql`
     active
     position
     sizing
+    translation {
+      ...TranslationType
+    }
   }
+  ${TRANSLATION_FRAGMENT}
 `;
 export const MENU_SIZING_ITEM_FRAGMENT = gql`
   fragment MenuSizingItemType on MenuSizingItemType {
@@ -86,8 +90,12 @@ export const MENU_SIZING_FRAGMENT = gql`
     items {
       ...MenuSizingItemType
     }
+    translation {
+      ...TranslationType
+    }
   }
   ${MENU_SIZING_ITEM_FRAGMENT}
+  ${TRANSLATION_FRAGMENT}
 `;
 export const DROPDOWN_FRAGMENT = gql`
   fragment DropdownType on Dropdown {
@@ -111,8 +119,12 @@ export const MENU_DROPDOWN_FRAGMENT = gql`
     dropdown {
       ...DropdownType
     }
+    translation {
+      ...TranslationType
+    }
   }
   ${DROPDOWN_FRAGMENT}
+  ${TRANSLATION_FRAGMENT}
 `;
 export const ALLERGENS_FRAGMENT = gql`
   fragment AllergenType on AllergenType {
