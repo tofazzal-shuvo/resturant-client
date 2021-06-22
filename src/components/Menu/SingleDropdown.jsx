@@ -14,7 +14,7 @@ const SingleDropdown = ({
   const [value, setDefaultValue] = useState(null);
   const { extras = [], name } = dropdown || {};
   // console.log({ selectDropdown });
-  console.log('')
+  // console.log('')
 
   const handleChange = (value) => {
     setDefaultValue(value ? value : null);
