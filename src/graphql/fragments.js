@@ -45,6 +45,9 @@ export const MENU_EXTRAS_FRAGMENT = gql`
     price
     active
     position
+    translation {
+      ...TranslationType
+    }
     category {
       _id
       name
