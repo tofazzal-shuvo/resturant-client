@@ -89,7 +89,7 @@ const SingleRecommendation = ({
                 <h2 style={{ display: "inline-block", fontSize: "16px" }}>
                   {getTranslation({ name, translation })}
                 </h2>
-                <StopPropagation>
+                <StopPropagation style={{ marginTop: "-5px" }}>
                   <InfoCircleOutlined
                     style={{ marginLeft: "5px", fontSize: "13px" }}
                     onClick={onClickInfo}

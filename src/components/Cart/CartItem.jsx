@@ -49,6 +49,7 @@ const Items = (props) => {
     temp = temp * quantity;
     setTotalPrice(temp);
   }, [dropdowns, extras, sizing, quantity]);
+  
   return (
     <div className="d-flex justify-content-between pl-2 pr-2 mt-5">
       <div style={{ width: "65%" }}>
