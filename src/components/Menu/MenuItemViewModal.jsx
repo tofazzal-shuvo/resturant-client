@@ -66,6 +66,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     const addedItem = {
       item: _id,
       name,
+      translation,
       price,
       ...state,
       extras: selectExtras,
