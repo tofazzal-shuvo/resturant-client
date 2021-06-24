@@ -21,13 +21,13 @@ const SingleDropdown = ({
     let temp = selectDropdown,
       isFound = false;
     if (!value) {
-      temp = temp.filter((item) => item.dropdown !== dropdown._id);
+      temp = temp.filter((item) => item.dropdown !== _id);
       setDropdown([...temp]);
       return;
     }
     const selectedExtra = extras.find((item) => item._id === value);
     temp.map((item) => {
-      if (item.dropdown === dropdown._id) {
+      if (item.dropdown === _id) {
         item.extra = value;
         item.translation = selectedExtra.translation;
         item.name = selectedExtra.name;
@@ -38,7 +38,7 @@ const SingleDropdown = ({
 
     if (!isFound)
       temp.push({
-        dropdown: dropdown._id,
+        dropdown: _id,
         extra: value,
         name: selectedExtra?.menuItem?.name || selectedExtra.name,
         translation:
