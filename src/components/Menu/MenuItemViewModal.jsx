@@ -38,7 +38,9 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     image,
     desc,
     translation,
+    fixedPrice,
   } = data?.FetchMenuItem?.item || {};
+
   // state
   const [state, setState] = useState({ quantity: 1, note: "" });
   const [totalPrice, setTotalPrice] = useState(price);
@@ -49,18 +51,24 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     dropdowns: [],
     sizing: [],
   });
-  // console.log(selectDropdown);
+
   const onChangeQuantity = (quantity) => setState({ ...state, quantity });
   const onChangeNote = (e) => setState({ ...state, note: e.target.value });
 
   useEffect(() => {
-    let temp = +price;
+    let temp = fixedPrice ? +price : 0;
     selectDropdown.map(({ price }) => (temp += +price));
     selectExtras.map(({ price, quantity }) => (temp += +price * +quantity));
     selectSizing.map(({ price }) => (temp += +price));
     temp += selectRecommendaton.totalPrice || 0;
     setTotalPrice(temp);
-  }, [selectDropdown, selectExtras, selectSizing, selectRecommendaton]);
+  }, [
+    selectDropdown,
+    selectExtras,
+    selectSizing,
+    selectRecommendaton,
+    fixedPrice,
+  ]);
 
   const onAddToCard = () => {
     const addedItem = {
@@ -142,15 +150,16 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
               borderBottom: "1px solid #D8D8D8",
             }}
           ></div>
-          <SizingInput
-            options={sizings}
-            selectSizing={selectSizing}
-            setSizing={setSizing}
-            totalPrice={totalPrice}
-            setTotalPrice={setTotalPrice}
-            defaultColor={defaultColor}
-          />
-          {/* {console.log(selectSizing)} */}
+          {!fixedPrice && (
+            <SizingInput
+              options={sizings}
+              selectSizing={selectSizing}
+              setSizing={setSizing}
+              totalPrice={totalPrice}
+              setTotalPrice={setTotalPrice}
+              defaultColor={defaultColor}
+            />
+          )}
           <DropdownInput
             options={dropdowns}
             selectDropdown={selectDropdown}

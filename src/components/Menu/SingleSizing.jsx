@@ -12,7 +12,6 @@ const SingleSizing = ({
   translation,
   defaultColor,
 }) => {
-  console.log({ name, translation, items });
   const [value, setDefaultValue] = useState(null);
   const handleChange = (value) => {
     setDefaultValue(value);

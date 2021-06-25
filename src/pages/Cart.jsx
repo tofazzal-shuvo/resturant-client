@@ -15,7 +15,7 @@ const Cart = () => {
 
   const { addedItems } = useSelector((state) => state.cart);
   const { tableId, note, resTemplate } = useSelector((state) => state.info);
-
+// console.log(addedItems)
   const onChangeNote = (e) => {
     dispatch(addInfo({ note: e.target.value }));
   };

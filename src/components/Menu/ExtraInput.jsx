@@ -6,11 +6,9 @@ import { IncDecBtn } from "../Shared";
 
 const ExtraInput = ({ extras, selectExtras, setExtras }) => {
   const [activeKey, setActiveKey] = useState("");
-  // console.log(selectExtras);
   const onChange = (key) => setActiveKey(key);
   const { Panel } = Collapse;
   const groupedExtras = groupExtrasItems(extras);
-  console.log({groupedExtras})
 
   const onChangeQuantity = ({ extra, quantity, name, price, translation }) => {
     let data = selectExtras,
