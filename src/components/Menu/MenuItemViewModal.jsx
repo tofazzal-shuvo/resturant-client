@@ -76,6 +76,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
       name,
       translation,
       price,
+      fixedPrice,
       ...state,
       extras: selectExtras,
       dropdowns: selectDropdown,

@@ -18,9 +18,9 @@ const Items = (props) => {
     note,
     recommendation,
     quantity,
-    item,
     idx,
     defaultColor,
+    fixedPrice,
   } = props;
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -42,14 +42,14 @@ const Items = (props) => {
   };
 
   useEffect(() => {
-    let temp = +price;
+    let temp = fixedPrice ? +price : 0;
     dropdowns.map(({ price }) => (temp += +price));
     extras.map(({ price, quantity }) => (temp += +price * +quantity));
     sizing.map(({ price }) => (temp += +price));
     temp = temp * quantity;
     setTotalPrice(temp);
   }, [dropdowns, extras, sizing, quantity]);
-  
+
   return (
     <div className="d-flex justify-content-between pl-2 pr-2 mt-5">
       <div style={{ width: "65%" }}>
@@ -85,7 +85,7 @@ const Items = (props) => {
             {note}
           </p>
         )}
-        <Recommendation {...recommendation} defaultColor={defaultColor}/>
+        <Recommendation {...recommendation} defaultColor={defaultColor} />
       </div>
       <div>
         <p style={{ fontSize: "1rem", color: defaultColor }}>
