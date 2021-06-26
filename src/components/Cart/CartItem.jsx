@@ -8,10 +8,9 @@ import { IncDecBtn } from "../Shared";
 import InnerItemOfMenuItem from "./InnerItemOfMenuItem";
 import Recommendation from "./Recommendation";
 
-const Items = (props) => {
+const CartItem = (props) => {
   const dispatch = useDispatch();
   const {
-    price,
     dropdowns,
     sizing,
     extras,
@@ -19,13 +18,15 @@ const Items = (props) => {
     recommendation,
     quantity,
     idx,
+    itemTotal,
     defaultColor,
-    fixedPrice,
   } = props;
-  const [totalPrice, setTotalPrice] = useState(0);
+  // const [totalPrice, setTotalPrice] = useState(itemTotal);
 
-  const onChangeQnt = (quantity) =>
+  const onChangeQnt = (quantity) => {
+    // setTotalPrice(+quantity * +itemTotal);
     dispatch(updateCardItemQnt({ idx, quantity }));
+  };
   const beforSetZero = () => {
     Modal.confirm({
       title: "By setting quantity zero, the cart item will be delete.",
@@ -41,14 +42,17 @@ const Items = (props) => {
     });
   };
 
-  useEffect(() => {
-    let temp = fixedPrice ? +price : 0;
-    dropdowns.map(({ price }) => (temp += +price));
-    extras.map(({ price, quantity }) => (temp += +price * +quantity));
-    sizing.map(({ price }) => (temp += +price));
-    temp = temp * quantity;
-    setTotalPrice(temp);
-  }, [dropdowns, extras, sizing, quantity]);
+  // useEffect(() => {
+  //   setTotalPrice(totalPrice * quantity);
+  // }, [quantity]);
+  // useEffect(() => {
+  //   let temp = fixedPrice ? +price : 0;
+  //   dropdowns.map(({ price }) => (temp += +price));
+  //   extras.map(({ price, quantity }) => (temp += +price * +quantity));
+  //   sizing.map(({ price }) => (temp += +price));
+  //   temp = temp * quantity;
+  //   setTotalPrice(temp);
+  // }, [dropdowns, extras, sizing, quantity]);
 
   return (
     <div className="d-flex justify-content-between pl-2 pr-2 mt-5">
@@ -89,7 +93,7 @@ const Items = (props) => {
       </div>
       <div>
         <p style={{ fontSize: "1rem", color: defaultColor }}>
-          $ {Number(totalPrice || 0).toFixed(2)}
+          $ {Number((itemTotal || 0) * quantity || 1).toFixed(2)}
         </p>
         <IncDecBtn
           onChange={onChangeQnt}
@@ -100,6 +104,6 @@ const Items = (props) => {
     </div>
   );
 };
-export default Items;
+export default CartItem;
 
 const initialStyle = { color: "#6d9d62", fontSize: "1.3rem" };

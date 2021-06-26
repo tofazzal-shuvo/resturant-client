@@ -42,7 +42,7 @@ const SingleRecommendation = ({
   useEffect(() => {
     let temp = fixedPrice ? +price : 0;
     selectDropdown.map(({ price }) => (temp += +price));
-    selectSizing.map(({ price }) => (temp += +price));
+    if (!fixedPrice) selectSizing.map(({ price }) => (temp += +price));
     if (selectRecommendaton.item === _id) {
       setRecommendaton({
         item: _id,

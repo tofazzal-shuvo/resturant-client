@@ -15,7 +15,7 @@ const Cart = () => {
 
   const { addedItems } = useSelector((state) => state.cart);
   const { tableId, note, resTemplate } = useSelector((state) => state.info);
-// console.log(addedItems)
+  // console.log(addedItems)
   const onChangeNote = (e) => {
     dispatch(addInfo({ note: e.target.value }));
   };
@@ -108,8 +108,8 @@ const getFormatedData = (addedItems) => {
       extra,
       dropdown,
     }));
-    const sizing = data?.sizing?.map(({ size, menuSizing }) => ({
-      size,
+    const sizing = data?.sizing?.map(({ menuSizingItem, menuSizing }) => ({
+      menuSizingItem,
       menuSizing,
     }));
     const recommendation = { item: data.recommendation.item };
@@ -117,7 +117,7 @@ const getFormatedData = (addedItems) => {
       ({ extra, dropdown }) => ({ extra, dropdown })
     );
     recommendation.sizing = data.recommendation?.sizing?.map(
-      ({ size, menuSizing }) => ({ size, menuSizing })
+      ({ menuSizingItem, menuSizing }) => ({ menuSizingItem, menuSizing })
     );
 
     const temp = {

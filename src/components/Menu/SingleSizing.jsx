@@ -13,14 +13,14 @@ const SingleSizing = ({
   defaultColor,
 }) => {
   const [value, setDefaultValue] = useState(null);
-  const handleChange = (value) => {
+  const handleChange = (value, { item: selectedItem }) => {
     setDefaultValue(value);
     let temp = selectSizing,
       isFound = false;
-    const selectedItem = items.find((item) => item._id === value);
+    console.log(selectedItem);
     temp.map((item) => {
       if (item.menuSizing === menuSizing) {
-        item.size = selectedItem?.item?._id;
+        item.menuSizingItem = selectedItem?._id;
         item.name = selectedItem?.item?.name;
         item.translation = selectedItem?.item.translation;
         item.price = selectedItem.price;
@@ -30,7 +30,7 @@ const SingleSizing = ({
     if (!isFound)
       temp.push({
         menuSizing,
-        size: selectedItem?.item?._id,
+        menuSizingItem: selectedItem?._id,
         sizingName: name,
         sizingTranslation: translation,
         name: selectedItem?.item?.name,
@@ -46,7 +46,7 @@ const SingleSizing = ({
         if (isDefaultValue) {
           let temp = {
             menuSizing,
-            size: item._id,
+            menuSizingItem: _id,
             sizingName: name,
             sizingTranslation: translation,
             name: item.name,
@@ -79,9 +79,9 @@ const SingleSizing = ({
         style={{ width: "100%" }}
         onChange={handleChange}
       >
-        {items?.map(({ _id, item, price }) => (
-          <Option value={_id} key={_id} key={_id}>
-            {`${getTranslation(item)} - $${price}`}
+        {items?.map((item) => (
+          <Option value={item._id} key={item._id} item={item}>
+            {`${getTranslation(item.item)} - $${item.price}`}
           </Option>
         ))}
       </Select>

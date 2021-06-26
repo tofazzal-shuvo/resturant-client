@@ -11,8 +11,8 @@ mutation CreateOrder($orderData: OrderInput) {
 `;
 
 export const CALL_WEITER = gql`
-  mutation CallWaiter($orderId: ID!) {
-    CallWaiter(orderId: $orderId) {
+  mutation CallWaiter($tableId: ID!) {
+    CallWaiter(tableId: $tableId) {
       code
       message
       success
@@ -21,8 +21,8 @@ export const CALL_WEITER = gql`
 `;
 
 export const ASK_FOR_BILL = gql`
-  mutation AskForBill($orderId: ID!) {
-    AskForBill(orderId: $orderId) {
+  mutation AskForBill($tableId: ID!) {
+    AskForBill(tableId: $tableId) {
       code
       message
       success

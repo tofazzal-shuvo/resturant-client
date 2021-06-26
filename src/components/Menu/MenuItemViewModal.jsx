@@ -44,13 +44,16 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
 
   // state
   const [state, setState] = useState({ quantity: 1, note: "" });
-  const [totalPrice, setTotalPrice] = useState(price);
+  const [totalPrice, setTotalPrice] = useState(0);
   const [selectExtras, setExtras] = useState([]);
   const [selectSizing, setSizing] = useState([]);
   const [selectDropdown, setDropdown] = useState([]);
   const [selectRecommendaton, setRecommendaton] = useState(defaultRecom);
 
-  const onChangeQuantity = (quantity) => setState({ ...state, quantity });
+  const onChangeQuantity = (quantity) => {
+    // setTotalPrice(+quantity * +totalPrice);
+    setState({ ...state, quantity });
+  };
   const onChangeNote = (e) => setState({ ...state, note: e.target.value });
   const onModalClose = () => {
     onCancel();
@@ -64,7 +67,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     let temp = fixedPrice ? +price : 0;
     selectDropdown.map(({ price }) => (temp += +price));
     selectExtras.map(({ price, quantity }) => (temp += +price * +quantity));
-    selectSizing.map(({ price }) => (temp += +price));
+    if (!fixedPrice) selectSizing.map(({ price }) => (temp += +price));
     temp += selectRecommendaton.totalPrice || 0;
     setTotalPrice(temp);
   }, [
@@ -80,8 +83,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
       item: _id,
       name,
       translation,
-      price,
-      fixedPrice,
+      itemTotal: totalPrice,
       ...state,
       extras: selectExtras,
       dropdowns: selectDropdown,
@@ -231,7 +233,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
                 color: defaultColor,
               }}
             >
-              ${totalPrice}
+              ${totalPrice * state.quantity}
             </p>
           </div>
         </div>
