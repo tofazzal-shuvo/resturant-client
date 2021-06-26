@@ -15,6 +15,7 @@ const SingleRecommendation = ({
   ingredient,
   sizings,
   allergens,
+  fixedPrice,
   selectRecommendaton,
   setRecommendaton,
   translation,
@@ -39,7 +40,7 @@ const SingleRecommendation = ({
   const onClickInfo = () => setVisible("info");
 
   useEffect(() => {
-    let temp = +price;
+    let temp = fixedPrice ? +price : 0;
     selectDropdown.map(({ price }) => (temp += +price));
     selectSizing.map(({ price }) => (temp += +price));
     if (selectRecommendaton.item === _id) {
@@ -68,7 +69,6 @@ const SingleRecommendation = ({
               sizingItemName: item.name,
               price,
             };
-            console.log({ temp });
             defaultSelected.push(temp);
           }
         });
@@ -110,11 +110,13 @@ const SingleRecommendation = ({
           }
           key={"key"}
         >
-          <SizingInput
-            selectSizing={selectSizing}
-            setSizing={setSizing}
-            options={sizings}
-          />
+          {!fixedPrice && (
+            <SizingInput
+              selectSizing={selectSizing}
+              setSizing={setSizing}
+              options={sizings}
+            />
+          )}
           <DropdownInput
             setDropdown={setDropdown}
             selectDropdown={selectDropdown}

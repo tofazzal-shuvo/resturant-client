@@ -11,6 +11,7 @@ import { addCart } from "../../store/modules";
 import { FETCH_MENU_ITEM } from "../../graphql/modules";
 import { useLazyQuery, useQuery } from "@apollo/react-hooks";
 import { getImage, getTranslation } from "../../util";
+import { useRef } from "react";
 
 const MenuItemViewModal = ({ visible, onCancel, _id }) => {
   const dispatch = useDispatch();
@@ -47,14 +48,18 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
   const [selectExtras, setExtras] = useState([]);
   const [selectSizing, setSizing] = useState([]);
   const [selectDropdown, setDropdown] = useState([]);
-  const [selectRecommendaton, setRecommendaton] = useState({
-    dropdowns: [],
-    sizing: [],
-  });
+  const [selectRecommendaton, setRecommendaton] = useState(defaultRecom);
 
   const onChangeQuantity = (quantity) => setState({ ...state, quantity });
   const onChangeNote = (e) => setState({ ...state, note: e.target.value });
-
+  const onModalClose = () => {
+    onCancel();
+    setTotalPrice(0);
+    setSizing([]);
+    setExtras([]);
+    setDropdown([]);
+    setRecommendaton(defaultRecom);
+  };
   useEffect(() => {
     let temp = fixedPrice ? +price : 0;
     selectDropdown.map(({ price }) => (temp += +price));
@@ -103,11 +108,10 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     (Array.isArray(translation) && translation.length) > 0
       ? translation[0]
       : {};
-
   return (
     <Modal
       visible={visible === "view"}
-      onCancel={onCancel}
+      onCancel={onModalClose}
       footer={null}
       bodyStyle={{ padding: "0" }}
       style={modalStyle}
@@ -242,4 +246,9 @@ const modalStyle = {
   paddingTop: 0,
   paddingBottom: 0,
   top: 0,
+};
+
+const defaultRecom = {
+  dropdowns: [],
+  sizing: [],
 };

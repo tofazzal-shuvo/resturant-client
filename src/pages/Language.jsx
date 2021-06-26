@@ -32,7 +32,7 @@ const Language = () => {
     },
   });
   const lenguages = data?.FetchLanguagesByRestaurant?.result || [];
-  console.log({ defaultColor: defaultColor });
+  // console.log({ defaultColor: defaultColor });
 
   const { data: resData, loading: resLoading } = useQuery(FETCH_RESTAURANT, {
     variables: {
@@ -40,7 +40,7 @@ const Language = () => {
     },
   });
   const restaurant = resData?.FetchRestaurant?.restaurant || {};
-  console.log({ restaurant });
+  // console.log({ restaurant });
   useEffect(() => {
     if (restaurant) {
       const { template, ...resInfo } = restaurant;
