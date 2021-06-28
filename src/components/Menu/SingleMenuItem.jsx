@@ -8,22 +8,24 @@ import MenuItemViewModal from "./MenuItemViewModal";
 const SingleMenuItem = ({ item }) => {
   const [visible, setVisible] = useState("");
   const onCancel = () => setVisible("");
-  const { defaultColor, itemColor } = useSelector(
-    (state) => state?.info?.resTemplate?.general || {}
+  const { general, itemImage } = useSelector(
+    (state) => state?.info?.resTemplate || {}
   );
-  // console.log(item.image);
+  const { defaultColor, itemColor } = general || {};
+
   const paraStyle = {
     color: defaultColor || "#9E9E9E",
     fontSize: "17px",
   };
-  // console.log(item);
+
   const translation =
     (Array.isArray(item.translation) && item.translation.length) > 0
       ? item.translation[0]
       : {};
+
   return (
     <div className="m-2 mt-4 mb-4">
-      {item.image && (
+      {itemImage && item.image && (
         <div
           style={{
             width: "100%",
