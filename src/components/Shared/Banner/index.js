@@ -59,6 +59,12 @@ const Banner = ({ text, menuImageLink }) => {
       <div style={barStyle}></div>
     </>
   );
+  const imgStyle = {
+    width: "60%",
+    display: "inline-block",
+    margin: "auto",
+    objectFit: "contain",
+  };
   return (
     <div
       className="d-flex justify-content-center align-items-center"
@@ -67,7 +73,7 @@ const Banner = ({ text, menuImageLink }) => {
       {text ? (
         textPortion
       ) : headerSelected === "logo" ? (
-        <img src={logo} alt="restaurants logo" />
+        <img src={logo} alt="restaurants logo" style={imgStyle} />
       ) : (
         textPortion
       )}
