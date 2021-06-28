@@ -5,11 +5,23 @@ import MenuCategory from "./MenuCategory";
 import SingleMenuItem from "./SingleMenuItem";
 
 const MenuItems = () => {
-  const info = useSelector((state) => state?.info || {});
-  const { category, menuItems, isMenuItem, menuName } = info;
+  const {
+    category,
+    menuItems,
+    isMenuItem,
+    menuName,
+    resTemplate,
+    menuImageLink,
+  } = useSelector((state) => state?.info || {});
+
+  const bannerProps = {
+    text: menuName,
+    menuImageLink: resTemplate?.menuImage ? menuImageLink : null,
+  };
+  
   return (
     <div>
-      <Banner text={menuName} />
+      <Banner {...bannerProps} />
       {!isMenuItem ? (
         <MenuCategory {...category} />
       ) : (

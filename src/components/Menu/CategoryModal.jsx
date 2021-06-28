@@ -15,6 +15,11 @@ const CategoryModal = ({ visible, onClose, menu, resTemplate }) => {
     padding: 0,
     background,
   };
+  // console.log(menu);
+  const bannerProps = {
+    text: getTranslation(menu),
+    menuImageLink: resTemplate?.menuImage ? menu?.image : null,
+  };
   return (
     <Modal
       visible={visible}
@@ -22,9 +27,9 @@ const CategoryModal = ({ visible, onClose, menu, resTemplate }) => {
       footer={null}
       style={modalStyle}
       bodyStyle={modalBodyStyle}
-      className="custom-positioning-modal welcome close-btn-right"
+      className="custom-positioning-modal welcome"
     >
-      <Banner text={getTranslation(menu)} />
+      <Banner {...bannerProps} />
       <Layout>
         {menu?.category?.map((category) => (
           <SingleCategory

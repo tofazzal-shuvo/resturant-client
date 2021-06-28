@@ -39,31 +39,41 @@ const Menu = () => {
         addInfo({
           menuItems: data.items,
           menuName: getTranslation(data),
+          menuImageLink: data.image,
           isMenuItem: true,
         })
       );
       history.push("/menu/items");
     } else {
-      dispatch(addInfo({ menuName: getTranslation(data) }));
+      dispatch(
+        addInfo({ menuName: getTranslation(data), menuImageLink: data.image })
+      );
       setSelectedMenu(data);
       setVisible(true);
     }
   };
 
+  const menuStyle = {
+    background: resTemplate?.menuTextBackground?.enabled
+      ? resTemplate?.menuTextBackground?.backgroundColor
+      : "transparent",
+    color: resTemplate?.general?.menuColor,
+    minWidth:"60%",
+    lineHeight:"0",
+    padding:"25px"
+  };
+
   return (
-    <Spin spinning={loading} >
-      <div className="welcome text-center" style={{height:"100vh"}}>
-        <Banner text={<FormattedMessage id="APP.BANNER.MENU"/>} />
+    <Spin spinning={loading}>
+      <div className="welcome text-center" style={{ height: "100vh" }}>
+        <Banner text={<FormattedMessage id="APP.BANNER.MENU" />} />
         <Layout>
           {menu.map((item) => (
             <Button
               className="mb-2"
               key={item._id}
               onClick={() => redirectToMenuitemPage(item)}
-              style={{
-                background: "transparent",
-                color: resTemplate?.general?.menuColor,
-              }}
+              style={menuStyle}
             >
               {getTranslation(item)}
             </Button>

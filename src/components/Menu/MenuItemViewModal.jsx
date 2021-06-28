@@ -9,17 +9,13 @@ import { CheckOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart } from "../../store/modules";
 import { FETCH_MENU_ITEM } from "../../graphql/modules";
-import { useLazyQuery, useQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/react-hooks";
 import { getImage, getTranslation } from "../../util";
-import { useRef } from "react";
 
 const MenuItemViewModal = ({ visible, onCancel, _id }) => {
   const dispatch = useDispatch();
-  const lang = useSelector((state) => state?.info?.lang || undefined);
-  const { background, defaultColor } = useSelector(
-    (state) => state?.info?.resTemplate?.general
-  );
-
+  const { resTemplate, lang } = useSelector((state) => state?.info);
+  const { background, defaultColor } = resTemplate?.general || {};
   // query
   const [fetchmenuItem, { data, loading }] = useLazyQuery(FETCH_MENU_ITEM, {
     variables: {
@@ -51,7 +47,6 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
   const [selectRecommendaton, setRecommendaton] = useState(defaultRecom);
 
   const onChangeQuantity = (quantity) => {
-    // setTotalPrice(+quantity * +totalPrice);
     setState({ ...state, quantity });
   };
   const onChangeNote = (e) => setState({ ...state, note: e.target.value });
@@ -110,6 +105,15 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     (Array.isArray(translation) && translation.length) > 0
       ? translation[0]
       : {};
+
+  const backgroundStyle = !resTemplate?.lightboxItemImage
+    ? { marginTop: "50px" }
+    : {
+        paddingTop: "20vh",
+        backgroundImage: `url(${getImage(image)})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      };
   return (
     <Modal
       visible={visible === "view"}
@@ -121,14 +125,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
       className="custom-positioning-modal"
     >
       <Spin spinning={loading}>
-        <div
-          style={{
-            paddingTop: "20vh",
-            backgroundImage: `url(${getImage(image)})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
+        <div style={backgroundStyle}>
           <h2
             style={{
               backgroundColor: "rgba(255, 255, 255, .6)",
