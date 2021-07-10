@@ -26,13 +26,11 @@ const Navber = () => {
   const menuItems = [
     {
       text: <FormattedMessage id="APP.NAVBER.MENU" />,
-      // "MENU",
       path: `/menu`,
       icon: <i className="fas fa-utensils"></i>,
     },
     {
       text: <FormattedMessage id="APP.NAVBER.YOUR_ORDER" />,
-      // "YOUR ORDER",
       path: `/cart`,
       icon: <i className="fas fa-check-square"></i>,
     },

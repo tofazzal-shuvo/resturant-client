@@ -10,7 +10,7 @@ const MenuItemInfoModal = ({
   name,
 }) => {
   const { background, defaultColor } = useSelector(
-    (state) => state?.info?.resTemplate?.general
+    (state) => state?.info?.resTemplate?.general || {}
   );
   const modalBodyStyle = {
     height: "100vh",

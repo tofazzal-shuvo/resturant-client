@@ -4,8 +4,8 @@ import { getTranslation } from "../../util";
 import SingleMenuItem from "./SingleMenuItem";
 
 const MenuCategory = ({ items, subcategory, ...rest }) => {
-  const { defaultColor, subcategoryColor, categoryColor } = useSelector(
-    (state) => state?.info?.resTemplate?.general
+  const { subcategoryColor, categoryColor } = useSelector(
+    (state) => state?.info?.resTemplate?.general || {}
   );
 
   const subcategoryStyle = {

@@ -32,7 +32,6 @@ const Language = () => {
     },
   });
   const lenguages = data?.FetchLanguagesByRestaurant?.result || [];
-  // console.log({ defaultColor: defaultColor });
 
   const { data: resData, loading: resLoading } = useQuery(FETCH_RESTAURANT, {
     variables: {

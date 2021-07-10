@@ -60,10 +60,11 @@ const Banner = ({ text, menuImageLink }) => {
     </>
   );
   const imgStyle = {
-    width: "60%",
+    maxWidth: "60%",
     display: "inline-block",
     margin: "auto",
     objectFit: "contain",
+    maxHeight: "13vh",
   };
   return (
     <div
@@ -73,7 +74,11 @@ const Banner = ({ text, menuImageLink }) => {
       {text ? (
         textPortion
       ) : headerSelected === "logo" ? (
-        <img src={logo} alt="restaurants logo" style={imgStyle} />
+        <img
+          src={getImage(logo)}
+          alt="restaurants logo"
+          style={imgStyle}
+        />
       ) : (
         textPortion
       )}
