@@ -230,7 +230,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
                 color: defaultColor,
               }}
             >
-              ${totalPrice * state.quantity}
+              ${Number(totalPrice * state.quantity).toFixed(2)}
             </p>
           </div>
         </div>
