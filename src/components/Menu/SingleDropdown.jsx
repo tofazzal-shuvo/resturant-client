@@ -1,5 +1,6 @@
 import { Select, Tag } from "antd";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { getTranslation } from "../../util";
 
 const SingleDropdown = ({
@@ -11,6 +12,9 @@ const SingleDropdown = ({
   translation,
   _id,
 }) => {
+  const currency = useSelector(
+    (state) => state?.info?.resInfo?.currency || "$"
+  );
   const [value, setDefaultValue] = useState(null);
   const { extras = [], name } = dropdown || {};
   // console.log({ selectDropdown });
@@ -79,7 +83,10 @@ const SingleDropdown = ({
             {menuItem
               ? getTranslation(menuItem)
               : getTranslation({ name, translation })}{" "}
-            {!isFree && `- $${menuItem?.price || price}`}
+            {!isFree &&
+              `- ${currency}${Number(menuItem?.price || price || 0).toFixed(
+                2
+              )}`}
           </Option>
         ))}
       </Select>

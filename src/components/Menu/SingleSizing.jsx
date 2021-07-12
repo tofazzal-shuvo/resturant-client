@@ -1,5 +1,6 @@
 import { Select } from "antd";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { getTranslation } from "../../util";
 
 const SingleSizing = ({
@@ -12,6 +13,9 @@ const SingleSizing = ({
   translation,
   defaultColor,
 }) => {
+  const currency = useSelector(
+    (state) => state?.info?.resInfo?.currency || "$"
+  );
   const [value, setDefaultValue] = useState(null);
   const handleChange = (value, { item: selectedItem }) => {
     setDefaultValue(value);
@@ -81,7 +85,9 @@ const SingleSizing = ({
       >
         {items?.map((item) => (
           <Option value={item._id} key={item._id} item={item}>
-            {`${getTranslation(item.item)} - $${item.price}`}
+            {`${getTranslation(item.item)} - ${currency}${Number(
+              item.price || 0
+            ).toFixed(2)}`}
           </Option>
         ))}
       </Select>

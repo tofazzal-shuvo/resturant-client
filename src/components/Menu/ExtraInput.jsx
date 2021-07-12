@@ -3,13 +3,16 @@ import { Collapse } from "antd";
 import { getTranslation, groupExtrasItems } from "../../util";
 import { RightCircleOutlined } from "@ant-design/icons";
 import { IncDecBtn } from "../Shared";
+import { useSelector } from "react-redux";
 
 const ExtraInput = ({ extras, selectExtras, setExtras }) => {
   const [activeKey, setActiveKey] = useState("");
   const onChange = (key) => setActiveKey(key);
   const { Panel } = Collapse;
   const groupedExtras = groupExtrasItems(extras);
-
+  const currency = useSelector(
+    (state) => state?.info?.resInfo?.currency || "$"
+  );
   const onChangeQuantity = ({ extra, quantity, name, price, translation }) => {
     let data = selectExtras,
       isFound = false;
@@ -18,7 +21,7 @@ const ExtraInput = ({ extras, selectExtras, setExtras }) => {
       setExtras(data);
       return;
     }
-    
+
     data.map((item) => {
       if (item.extra === extra) {
         item.quantity = quantity;
@@ -65,7 +68,7 @@ const ExtraInput = ({ extras, selectExtras, setExtras }) => {
                   className="d-flex justify-content-between align-items-center mt-1"
                   key={_id}
                 >
-                  <div className="d-flex">
+                  <div className="d-flex align-items-center">
                     <IncDecBtn
                       onChange={(quantity) =>
                         onChangeQuantity({
@@ -85,7 +88,10 @@ const ExtraInput = ({ extras, selectExtras, setExtras }) => {
                         : getTranslation({ name, translation })}
                     </p>
                   </div>
-                  <p>${menuItem?.price || price || "0"}</p>
+                  <p>
+                    {currency}
+                    {Number(menuItem?.price || price || 0).toFixed()}
+                  </p>
                 </div>
               ))}
             </Panel>

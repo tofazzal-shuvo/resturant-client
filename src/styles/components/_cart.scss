@@ -18,3 +18,8 @@
     padding: 5px 25px;
   }
 }
+
+.custom-positioning-modal .ant-spin-nested-loading,
+.custom-positioning-modal .ant-spin-container {
+  height: 100%;
+}

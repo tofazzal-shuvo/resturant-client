@@ -15,6 +15,9 @@ import { getImage, getTranslation } from "../../util";
 const MenuItemViewModal = ({ visible, onCancel, _id }) => {
   const dispatch = useDispatch();
   const { resTemplate, lang } = useSelector((state) => state?.info);
+  const currency = useSelector(
+    (state) => state?.info?.resInfo?.currency || "$"
+  );
   const { background, defaultColor } = resTemplate?.general || {};
   // query
   const [fetchmenuItem, { data, loading }] = useLazyQuery(FETCH_MENU_ITEM, {
@@ -114,6 +117,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
         backgroundSize: "cover",
         backgroundPosition: "center",
       };
+
   return (
     <Modal
       visible={visible === "view"}
@@ -136,66 +140,91 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
             {getTranslation({ name, translation })}
           </h2>
         </div>
-        <div style={{ padding: "0 7px" }}>
-          <p
-            className="desc"
-            style={{
-              fontSize: "18px",
-              color: "#656464",
-              marginTop: "25px",
-              color: defaultColor,
-            }}
-          >
-            {translationObj.desc || desc}
-            <span className="d-block text-right">${price}</span>
-          </p>
-          <div
-            style={{
-              borderBottom: "1px solid #D8D8D8",
-            }}
-          ></div>
-          {!fixedPrice && (
-            <SizingInput
-              options={sizings}
-              selectSizing={selectSizing}
-              setSizing={setSizing}
-              totalPrice={totalPrice}
-              setTotalPrice={setTotalPrice}
-              defaultColor={defaultColor}
+        <div
+          style={{
+            padding: "0 7px",
+            position: "relative",
+            minHeight: "52vh",
+            marginBottom: "90px",
+          }}
+        >
+          <div>
+            <p
+              className="desc"
+              style={{
+                fontSize: "18px",
+                color: "#656464",
+                marginTop: "25px",
+                color: defaultColor,
+              }}
+            >
+              {translationObj.desc || desc}
+              <span className="d-block text-right">
+                {currency}
+                {Number(price || 0).toFixed(2)}
+              </span>
+            </p>
+            <div
+              style={{
+                borderBottom: "1px solid #D8D8D8",
+              }}
+            ></div>
+            {!fixedPrice && sizings?.length !== 0 && (
+              <SizingInput
+                options={sizings}
+                selectSizing={selectSizing}
+                setSizing={setSizing}
+                totalPrice={totalPrice}
+                setTotalPrice={setTotalPrice}
+                defaultColor={defaultColor}
+              />
+            )}
+            {dropdowns?.length !== 0 && (
+              <DropdownInput
+                options={dropdowns}
+                selectDropdown={selectDropdown}
+                setDropdown={setDropdown}
+                totalPrice={totalPrice}
+                setTotalPrice={setTotalPrice}
+                defaultColor={defaultColor}
+              />
+            )}
+            {extras?.length !== 0 && (
+              <ExtraInput
+                extras={extras}
+                selectExtras={selectExtras}
+                setExtras={setExtras}
+                totalPrice={totalPrice}
+                setTotalPrice={setTotalPrice}
+              />
+            )}
+            {recommendations?.length !== 0 && (
+              <RecommendationsInput
+                recommendations={recommendations}
+                selectRecommendaton={selectRecommendaton}
+                setRecommendaton={setRecommendaton}
+              />
+            )}
+            <h2
+              style={{
+                fontSize: "18px",
+                marginTop: "8px",
+                color: defaultColor,
+              }}
+            >
+              Note
+            </h2>
+            <textarea
+              rows="5"
+              value={state.note}
+              style={{ width: "100%" }}
+              onChange={onChangeNote}
             />
-          )}
-          <DropdownInput
-            options={dropdowns}
-            selectDropdown={selectDropdown}
-            setDropdown={setDropdown}
-            totalPrice={totalPrice}
-            setTotalPrice={setTotalPrice}
-            defaultColor={defaultColor}
-          />
-          <ExtraInput
-            extras={extras}
-            selectExtras={selectExtras}
-            setExtras={setExtras}
-            totalPrice={totalPrice}
-            setTotalPrice={setTotalPrice}
-          />
-          <RecommendationsInput
-            recommendations={recommendations}
-            selectRecommendaton={selectRecommendaton}
-            setRecommendaton={setRecommendaton}
-          />
-          <h2
-            style={{ fontSize: "18px", marginTop: "8px", color: defaultColor }}
+          </div>
+          <div
+            className="d-flex align-items-center justify-content-between pb-3 position-absolute"
+            style={{ width: "96%", bottom: "-105px" }}
           >
-            Note
-          </h2>
-          <textarea
-            rows="5"
-            value={state.note}
-            style={{ width: "100%" }}
-            onChange={onChangeNote}
-          />
-          <div className="d-flex align-items-center justify-content-between pb-3 mt-3">
             <IncDecBtn value={1} onChange={onChangeQuantity} />
             <button
               style={{
@@ -230,7 +259,8 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
                 color: defaultColor,
               }}
             >
-              ${Number(totalPrice * state.quantity).toFixed(2)}
+              {currency}
+              {Number(totalPrice * state.quantity).toFixed(2)}
             </p>
           </div>
         </div>

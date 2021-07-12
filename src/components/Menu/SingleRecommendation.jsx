@@ -6,6 +6,7 @@ import MenuItemInfoModal from "./MenuItemInfoModal";
 import SizingInput from "./SizingInput";
 import DropdownInput from "./DropdownInput";
 import { getTranslation } from "../../util";
+import { useSelector } from "react-redux";
 
 const SingleRecommendation = ({
   name,
@@ -25,7 +26,9 @@ const SingleRecommendation = ({
   const [visible, setVisible] = useState("");
   const [selectSizing, setSizing] = useState([]);
   const [selectDropdown, setDropdown] = useState([]);
-
+  const currency = useSelector(
+    (state) => state?.info?.resInfo?.currency || "$"
+  );
   // console.log( selectRecommendaton );
   const onChangeRadio = (e) => {
     setRecommendaton({
@@ -97,7 +100,8 @@ const SingleRecommendation = ({
                 </StopPropagation>
               </div>
               <div>
-                ${totalPrice}
+                {currency}
+                {Number(totalPrice || 0).toFixed(2)}
                 <StopPropagation>
                   <Radio
                     className="ml-1"

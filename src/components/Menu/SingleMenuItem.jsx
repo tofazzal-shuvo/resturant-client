@@ -8,6 +8,9 @@ import MenuItemViewModal from "./MenuItemViewModal";
 const SingleMenuItem = ({ item }) => {
   const [visible, setVisible] = useState("");
   const onCancel = () => setVisible("");
+  const currency = useSelector(
+    (state) => state?.info?.resInfo?.currency || "$"
+  );
   const { general, itemImage } = useSelector(
     (state) => state?.info?.resTemplate || {}
   );
@@ -55,7 +58,10 @@ const SingleMenuItem = ({ item }) => {
         </div>
         <p style={paraStyle}>{translation.desc || item.desc}</p>
         <div className="d-flex justify-content-between align-items-center mt-2">
-          <p style={paraStyle}>${item.price}</p>{" "}
+          <p style={paraStyle}>
+            {currency}
+            {Number(item.price).toFixed(2)}
+          </p>
           <PlusOutlined
             style={{ fontSize: "25px", color: defaultColor }}
             onClick={() => setVisible("view")}
