@@ -62,7 +62,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     setDropdown([]);
     setRecommendaton(defaultRecom);
   };
-  const [itemPrice, setItemPrice] = useState(fixedPrice ? +price : 0);
+  const [sizingPrice, setSizingPrice] = useState(0);
   useEffect(() => {
     let temp = fixedPrice ? +price : 0;
     selectDropdown.map(({ price }) => (temp += +price));
@@ -73,7 +73,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
         temp += +price;
         data += +price;
       });
-      setItemPrice(data);
+      setSizingPrice(data);
     }
     temp += selectRecommendaton.totalPrice || 0;
     setTotalPrice(temp);
@@ -170,7 +170,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
               {translationObj.desc || desc}
               <span className="d-block text-right">
                 {currency}
-                {Number(itemPrice || 0).toFixed(2)}
+                {Number(fixedPrice ? price : sizingPrice || 0).toFixed(2)}
               </span>
             </p>
             <div
