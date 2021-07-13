@@ -189,6 +189,7 @@ export const MENU_ITEM_FRAGMENT = gql`
     fixedPrice
     subcategory
     category
+    enableNote
     menu
     allergens {
       ...AllergenType

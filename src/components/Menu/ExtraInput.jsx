@@ -5,7 +5,7 @@ import { RightCircleOutlined } from "@ant-design/icons";
 import { IncDecBtn } from "../Shared";
 import { useSelector } from "react-redux";
 
-const ExtraInput = ({ extras, selectExtras, setExtras }) => {
+const ExtraInput = ({ extras, selectExtras, setExtras, defaultColor }) => {
   const [activeKey, setActiveKey] = useState("");
   const onChange = (key) => setActiveKey(key);
   const { Panel } = Collapse;
@@ -35,7 +35,9 @@ const ExtraInput = ({ extras, selectExtras, setExtras }) => {
   };
   return (
     <>
-      <h2 style={{ fontSize: "18px", marginTop: "8px" }}>Extras</h2>
+      <h2 style={{ fontSize: "18px", marginTop: "8px", color: defaultColor }}>
+        Extras
+      </h2>
       <Collapse accordion activeKey={activeKey} onChange={onChange}>
         {Object.keys(groupedExtras).map((key) => {
           const data = groupedExtras[key];

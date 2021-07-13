@@ -31,6 +31,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
   const {
     name,
     price,
+    enableNote,
     recommendations = [],
     sizings = [],
     extras = [],
@@ -61,11 +62,19 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     setDropdown([]);
     setRecommendaton(defaultRecom);
   };
+  const [itemPrice, setItemPrice] = useState(fixedPrice ? +price : 0);
   useEffect(() => {
     let temp = fixedPrice ? +price : 0;
     selectDropdown.map(({ price }) => (temp += +price));
     selectExtras.map(({ price, quantity }) => (temp += +price * +quantity));
-    if (!fixedPrice) selectSizing.map(({ price }) => (temp += +price));
+    if (!fixedPrice) {
+      let data = 0;
+      selectSizing.map(({ price }) => {
+        temp += +price;
+        data += +price;
+      });
+      setItemPrice(data);
+    }
     temp += selectRecommendaton.totalPrice || 0;
     setTotalPrice(temp);
   }, [
@@ -161,7 +170,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
               {translationObj.desc || desc}
               <span className="d-block text-right">
                 {currency}
-                {Number(price || 0).toFixed(2)}
+                {Number(itemPrice || 0).toFixed(2)}
               </span>
             </p>
             <div
@@ -174,8 +183,6 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
                 options={sizings}
                 selectSizing={selectSizing}
                 setSizing={setSizing}
-                totalPrice={totalPrice}
-                setTotalPrice={setTotalPrice}
                 defaultColor={defaultColor}
               />
             )}
@@ -184,8 +191,6 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
                 options={dropdowns}
                 selectDropdown={selectDropdown}
                 setDropdown={setDropdown}
-                totalPrice={totalPrice}
-                setTotalPrice={setTotalPrice}
                 defaultColor={defaultColor}
               />
             )}
@@ -194,8 +199,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
                 extras={extras}
                 selectExtras={selectExtras}
                 setExtras={setExtras}
-                totalPrice={totalPrice}
-                setTotalPrice={setTotalPrice}
+                defaultColor={defaultColor}
               />
             )}
             {recommendations?.length !== 0 && (
@@ -203,23 +207,28 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
                 recommendations={recommendations}
                 selectRecommendaton={selectRecommendaton}
                 setRecommendaton={setRecommendaton}
+                defaultColor={defaultColor}
               />
             )}
-            <h2
-              style={{
-                fontSize: "18px",
-                marginTop: "8px",
-                color: defaultColor,
-              }}
-            >
-              Note
-            </h2>
-            <textarea
-              rows="5"
-              value={state.note}
-              style={{ width: "100%" }}
-              onChange={onChangeNote}
-            />
+            {enableNote && (
+              <>
+                <h2
+                  style={{
+                    fontSize: "18px",
+                    marginTop: "8px",
+                    color: defaultColor,
+                  }}
+                >
+                  Note
+                </h2>
+                <textarea
+                  rows="5"
+                  value={state.note}
+                  style={{ width: "100%" }}
+                  onChange={onChangeNote}
+                />
+              </>
+            )}
           </div>
           <div
             className="d-flex align-items-center justify-content-between pb-3 position-absolute"

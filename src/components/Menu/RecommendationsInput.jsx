@@ -7,6 +7,7 @@ const RecommendationsInput = ({
   recommendations,
   selectRecommendaton,
   setRecommendaton,
+  defaultColor,
 }) => {
   const [activeKey, setActiveKey] = useState("");
   const onChange = (key) => setActiveKey(key);
@@ -23,7 +24,9 @@ const RecommendationsInput = ({
     >
       <Panel
         showArrow={false}
-        header={<CollapseHeader activeKey={activeKey} />}
+        header={
+          <CollapseHeader activeKey={activeKey} defaultColor={defaultColor} />
+        }
         key={"key"}
       >
         {recommendations.map((item) => (
@@ -42,9 +45,11 @@ const RecommendationsInput = ({
 
 export default RecommendationsInput;
 
-const CollapseHeader = ({ activeKey }) => (
+const CollapseHeader = ({ activeKey, defaultColor }) => (
   <div className="d-flex align-items-center">
-    <h2 style={{ minWidth: "max-content", fontSize: "18px" }}>
+    <h2
+      style={{ minWidth: "max-content", fontSize: "18px", color: defaultColor }}
+    >
       Recommendations
     </h2>
     <RightCircleOutlined
