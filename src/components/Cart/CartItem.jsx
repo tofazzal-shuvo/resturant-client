@@ -24,9 +24,7 @@ const CartItem = (props) => {
   const currency = useSelector(
     (state) => state?.info?.resInfo?.currency || "$"
   );
-  console.log(currency);
   const onChangeQnt = (quantity) => {
-    // setTotalPrice(+quantity * +itemTotal);
     dispatch(updateCardItemQnt({ idx, quantity }));
   };
   const beforSetZero = () => {

@@ -40,10 +40,6 @@ const Cart = () => {
       if (CreateOrder.success) {
         dispatch(clearCard());
         dispatch(clearNote());
-        // notification.success({
-        //   message: CreateOrder.message,
-        //   placement: "bottomRight",
-        // });
         history.push(`/complete-order`);
       } else {
         notification.warn({
