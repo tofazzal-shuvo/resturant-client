@@ -25,7 +25,7 @@ const SingleMenuItem = ({ item }) => {
     (Array.isArray(item.translation) && item.translation.length) > 0
       ? item.translation[0]
       : {};
-
+  console.log(item);
   return (
     <div className="m-2 mt-4 mb-4">
       {itemImage && item.image && (
@@ -50,11 +50,13 @@ const SingleMenuItem = ({ item }) => {
           <h3 style={{ fontSize: "20px", fontWeight: "900", color: itemColor }}>
             {translation.name || item.name}
           </h3>
-          <InfoCircleOutlined
-            style={{ color: itemColor }}
-            className="ml-2 mt-1"
-            onClick={() => setVisible("info")}
-          />
+          {(item?.allergens?.length || item?.ingredient) && (
+            <InfoCircleOutlined
+              style={{ color: itemColor }}
+              className="ml-2 mt-1"
+              onClick={() => setVisible("info")}
+            />
+          )}
         </div>
         <p style={paraStyle}>{translation.desc || item.desc}</p>
         <div className="d-flex justify-content-between align-items-center mt-2">

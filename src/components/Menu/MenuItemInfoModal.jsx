@@ -1,3 +1,4 @@
+import { CloseCircleOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -15,7 +16,7 @@ const MenuItemInfoModal = ({
   const modalBodyStyle = {
     height: "100vh",
     overflowY: "scroll",
-    padding: '0, 0 0 5px',
+    padding: "0, 0 0 5px",
     background,
   };
 
@@ -27,12 +28,19 @@ const MenuItemInfoModal = ({
       style={modalStyle}
       bodyStyle={modalBodyStyle}
       className="custom-positioning-modal "
+      closeIcon={
+        <CloseCircleOutlined
+          style={{ color: defaultColor || "#000", fontSize: "28px" }}
+        />
+      }
     >
       <h3 style={{ color: "#000000", textAlign: "center", margin: "30px 0 0" }}>
         {name}
       </h3>
 
-      <h2 style={headerStyle}>Allergen Information</h2>
+      {allergens?.length !== 0 && (
+        <h2 style={headerStyle}>Allergen Information</h2>
+      )}
       <div style={{ marginLeft: "10px" }}>
         <p style={{ color: defaultColor }}>
           {allergens?.map(
@@ -42,7 +50,7 @@ const MenuItemInfoModal = ({
         </p>
       </div>
 
-      <h2 style={headerStyle}>Ingredients</h2>
+      {ingredient && <h2 style={headerStyle}>Ingredients</h2>}
       <p style={{ marginLeft: "10px", color: defaultColor }}>{ingredient}</p>
     </Modal>
   );
