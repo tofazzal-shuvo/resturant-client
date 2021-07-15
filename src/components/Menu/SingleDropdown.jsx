@@ -55,7 +55,7 @@ const SingleDropdown = ({
   };
 
   const { Option } = Select;
-
+  if (!dropdown) return null;
   return (
     <div>
       <h3
