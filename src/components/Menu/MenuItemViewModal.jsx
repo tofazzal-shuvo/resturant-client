@@ -40,7 +40,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     desc,
     translation,
     fixedPrice,
-  } = data?.FetchMenuItem?.item || {};
+  } = data?.FetchMenuItemByCustomer?.item || {};
 
   // state
   const [state, setState] = useState({ quantity: 1, note: "" });

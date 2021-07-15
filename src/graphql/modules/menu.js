@@ -31,8 +31,8 @@ export const FETCH_MENU_BY_RESTAURANT = gql`
 `;
 
 export const FETCH_MENU_ITEM = gql`
-  query FetchMenuItem($id: ID!, $lang: String) {
-    FetchMenuItem(id: $id, lang: $lang) {
+  query FetchMenuItemByCustomer($id: ID!, $lang: String) {
+    FetchMenuItemByCustomer(id: $id, lang: $lang) {
       message
       success
       item {
