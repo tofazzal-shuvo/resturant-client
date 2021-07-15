@@ -68,7 +68,7 @@ const Navber = () => {
                 className="d-inline-block position-relative"
                 style={{ color: iconColor }}
               >
-                {item.path === "/cart" && (
+                {item.path === "/cart" && addedItems?.length !== 0 && (
                   <span style={spanStyle}>{addedItems.length}</span>
                 )}
                 {item.icon}
