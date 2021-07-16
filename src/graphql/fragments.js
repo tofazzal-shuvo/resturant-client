@@ -79,6 +79,7 @@ export const MENU_SIZING_ITEM_FRAGMENT = gql`
     price
     default
     price
+    active
     item {
       ...SizingItemType
     }
