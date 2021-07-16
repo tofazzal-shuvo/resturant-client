@@ -65,7 +65,6 @@ export const SIZING_ITEM_FRAGMENT = gql`
   fragment SizingItemType on SizingItem {
     _id
     name
-    active
     position
     sizing
     translation {
@@ -90,6 +89,7 @@ export const MENU_SIZING_FRAGMENT = gql`
   fragment MenuSizingType on MenuSizingType {
     _id
     name
+    active
     items {
       ...MenuSizingItemType
     }
