@@ -66,6 +66,7 @@ const SingleSizing = ({
   }, [items]);
 
   const { Option } = Select;
+  if (!items?.length) return null;
   return (
     <div>
       <h3
