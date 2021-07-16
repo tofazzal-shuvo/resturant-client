@@ -5,14 +5,20 @@ import { RightCircleOutlined } from "@ant-design/icons";
 import { IncDecBtn } from "../Shared";
 import { useSelector } from "react-redux";
 
-const ExtraInput = ({ extras, selectExtras, setExtras, defaultColor }) => {
+const ExtraInput = ({
+  extras: defaultExtras,
+  selectExtras,
+  setExtras,
+  defaultColor,
+}) => {
   const [activeKey, setActiveKey] = useState("");
   const onChange = (key) => setActiveKey(key);
   const { Panel } = Collapse;
-  const groupedExtras = groupExtrasItems(extras);
   const currency = useSelector(
     (state) => state?.info?.resInfo?.currency || "$"
   );
+  const extras = defaultExtras?.filter((item) => item.category) || [];
+  const groupedExtras = groupExtrasItems(extras);
   const onChangeQuantity = ({ extra, quantity, name, price, translation }) => {
     let data = selectExtras,
       isFound = false;
@@ -33,6 +39,7 @@ const ExtraInput = ({ extras, selectExtras, setExtras, defaultColor }) => {
     if (!isFound) data.push({ extra, quantity, name, price, translation });
     setExtras([...data]);
   };
+  if (!extras.length) return null;
   return (
     <>
       <h2 style={{ fontSize: "18px", marginTop: "8px", color: defaultColor }}>
