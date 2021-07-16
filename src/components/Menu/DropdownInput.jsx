@@ -9,7 +9,9 @@ const DropdownInput = ({
   selectDropdown,
   defaultColor,
 }) => {
-  const shouldRender = options.find((data) => !!data?.dropdown);
+  const shouldRender = options.find(
+    (data) => !!(data?.dropdown && data?.dropdown?.extras?.length)
+  );
   if (!shouldRender) return null;
   return (
     <>
