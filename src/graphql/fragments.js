@@ -90,7 +90,6 @@ export const MENU_SIZING_FRAGMENT = gql`
   fragment MenuSizingType on MenuSizingType {
     _id
     name
-    active
     items {
       ...MenuSizingItemType
     }
