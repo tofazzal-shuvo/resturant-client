@@ -14,7 +14,7 @@ const DropdownInput = ({
   useEffect(() => {
     let data = false;
     options.map((item) => {
-      if (item?.dropdown && item?.dropdown?.extras?.length !== 0) data = true;
+      if (item?.dropdown) data = true;
     });
     setShow(data);
   }, [options]);
