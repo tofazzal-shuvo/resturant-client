@@ -9,16 +9,8 @@ const DropdownInput = ({
   selectDropdown,
   defaultColor,
 }) => {
-  // console.log({ options });
-  const [show, setShow] = useState(true);
-  useEffect(() => {
-    let data = false;
-    options.map((item) => {
-      if (item?.dropdown) data = true;
-    });
-    setShow(data);
-  }, [options]);
-  if (!show) return null;
+  const shouldRender = options.find((data) => !!data?.dropdown);
+  if (!shouldRender) return null;
   return (
     <>
       <h2 style={{ fontSize: "18px", marginTop: "8px", color: defaultColor }}>
