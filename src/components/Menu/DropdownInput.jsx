@@ -14,11 +14,11 @@ const DropdownInput = ({
   useEffect(() => {
     let data = false;
     options.map((item) => {
-      if (item?.dropdown) data = true;
+      if (item?.dropdown && item?.dropdown?.extra?.length) data = true;
     });
     setShow(data);
   }, [options]);
-  if (!show) return false;
+  if (!show) return null;
   return (
     <>
       <h2 style={{ fontSize: "18px", marginTop: "8px", color: defaultColor }}>
