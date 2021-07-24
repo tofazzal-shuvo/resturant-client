@@ -16,11 +16,11 @@ const Language = () => {
   const { locale, onChangeLang } = useContext(LanguageContext);
 
   const query = new URLSearchParams(location.search);
-  const restaurantId = query.get("restaurant") || "6043515b45cbda7b7d23d625";
+  const restaurantId = query.get("restaurant") || "60e9e589304bea001a6a3a95";
   const tableId =
     query.get("table") ||
     // "6073463037f157001ad3d0cd";
-    "606d56ab45cbda7b7d23d704";
+    "60e9e734304bea001a6a3a99";
   const defaultColor = useSelector(
     (state) => state?.info?.resTemplate?.general?.defaultColor
   );
