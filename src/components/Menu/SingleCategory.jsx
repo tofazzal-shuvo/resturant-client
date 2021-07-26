@@ -5,14 +5,14 @@ import { useDispatch } from "react-redux";
 import { addInfo } from "../../store/modules";
 import { getTranslation } from "../../util";
 
-const SingleCategory = ({ category, resTemplate }) => {
+const SingleCategory = ({ category, resTemplate, allCategory }) => {
   const [show, setShow] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
   const { items, subcategory, name } = category;
 
   const redirectToMenuItems = () => {
-    dispatch(addInfo({ category, isMenuItem: false }));
+    dispatch(addInfo({ category: allCategory, isMenuItem: false }));
     history.push("/menu/items");
   };
 

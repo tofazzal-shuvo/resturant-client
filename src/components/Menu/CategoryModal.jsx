@@ -36,6 +36,7 @@ const CategoryModal = ({ visible, onClose, menu, resTemplate }) => {
             category={category}
             resTemplate={resTemplate}
             key={category._id}
+            allCategory={menu?.category || []}
           />
         ))}
       </Layout>

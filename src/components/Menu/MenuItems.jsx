@@ -18,17 +18,17 @@ const MenuItems = () => {
     text: menuName,
     menuImageLink: resTemplate?.menuImage ? menuImageLink : null,
   };
-  
+
   return (
     <div>
       <Banner {...bannerProps} />
-      {!isMenuItem ? (
-        <MenuCategory {...category} />
-      ) : (
-        Array.isArray(menuItems) &&
-        menuItems.length > 0 &&
-        menuItems.map((item) => <SingleMenuItem item={item} key={item._id} />)
-      )}
+      {!isMenuItem
+        ? category.map((item) => <MenuCategory {...item} />)
+        : Array.isArray(menuItems) &&
+          menuItems.length > 0 &&
+          menuItems.map((item) => (
+            <SingleMenuItem item={item} key={item._id} />
+          ))}
     </div>
   );
 };

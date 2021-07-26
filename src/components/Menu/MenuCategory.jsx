@@ -20,13 +20,13 @@ const MenuCategory = ({ items, subcategory, ...rest }) => {
   const categoryStyle = {
     textAlign: "center",
     fontSize: "30px",
-    margin: "25px 0 15px",
+    // margin: "25px 0 15px",
     fontWeight: "800",
     color: categoryColor,
   };
 
   return (
-    <div className="p-2">
+    <div className="pt-4 pl-2 pr-2 pb-0">
       <h2 style={categoryStyle}>{getTranslation(rest)}</h2>
       {Array.isArray(items) &&
         items.length > 0 &&

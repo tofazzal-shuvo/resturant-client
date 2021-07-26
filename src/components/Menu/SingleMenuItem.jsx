@@ -25,14 +25,14 @@ const SingleMenuItem = ({ item }) => {
     (Array.isArray(item.translation) && item.translation.length) > 0
       ? item.translation[0]
       : {};
-  console.log(item);
+      
   return (
-    <div className="m-2 mt-4 mb-4">
+    <div className="ml-2 mr-2 mt-3 mb-0">
       {itemImage && item.image && (
         <div
           style={{
             width: "100%",
-            height: " 50vw",
+            height: "50vw",
             backgroundImage: `url(${getImage(item.image)})`,
             backgroundPosition: "center",
             backgroundSize: "cover",
