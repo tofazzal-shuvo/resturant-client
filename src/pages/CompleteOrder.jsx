@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Banner } from "../components/Shared";
 import { CALL_WEITER } from "../graphql/modules";
-import { showNotification } from "../util";
+import { showNotification, warnNotify } from "../util";
 
 const CallWAITER = () => {
   const history = useHistory();
@@ -25,9 +25,10 @@ const CallWAITER = () => {
           tableId,
         },
       });
-      showNotification(CallWaiter);
       if (CallWaiter.success) {
         history.push("/ask-for-waiter");
+      }else {
+        warnNotify(CallWaiter.message);
       }
     } catch (error) {}
   };

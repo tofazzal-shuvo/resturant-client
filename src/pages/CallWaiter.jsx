@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Banner } from "../components/Shared";
 import { ASK_FOR_BILL, CALL_WEITER } from "../graphql/modules";
-import { showNotification } from "../util";
+import { warnNotify } from "../util";
 
 const CallWAITER = () => {
   const history = useHistory();
@@ -25,9 +25,10 @@ const CallWAITER = () => {
           tableId,
         },
       });
-      showNotification(CallWaiter);
       if (CallWaiter.success) {
         history.push("/ask-for-waiter");
+      } else {
+        warnNotify(CallWaiter.message);
       }
     } catch (error) {}
   };
@@ -41,9 +42,10 @@ const CallWAITER = () => {
           tableId,
         },
       });
-      showNotification(AskForBill);
       if (AskForBill.success) {
         history.push("/ask-for-bill");
+      } else {
+        warnNotify(AskForBill.message);
       }
     } catch (error) {}
   };
@@ -61,7 +63,7 @@ const CallWAITER = () => {
   };
 
   return (
-    <Spin spinning={askLoader || callLoader} style={{minHeight:"100vh"}}>
+    <Spin spinning={askLoader || callLoader} style={{ minHeight: "100vh" }}>
       <Banner />
       <div className="text-center pl-2 pr-2">
         <div style={{ marginTop: "45%" }}>

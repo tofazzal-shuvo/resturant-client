@@ -6,8 +6,8 @@ import { FormattedMessage } from "react-intl";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Banner } from "../components/Shared";
-import { ASK_FOR_BILL, CALL_WEITER } from "../graphql/modules";
-import { showNotification } from "../util";
+import { ASK_FOR_BILL } from "../graphql/modules";
+import { warnNotify } from "../util";
 
 const AskForWaiter = () => {
   const history = useHistory();
@@ -26,9 +26,10 @@ const AskForWaiter = () => {
           tableId,
         },
       });
-      showNotification(AskForBill);
       if (AskForBill.success) {
         history.push("/ask-for-bill");
+      } else {
+        warnNotify(AskForBill.message);
       }
     } catch (error) {}
   };
