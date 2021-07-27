@@ -83,10 +83,10 @@ const SingleDropdown = ({
             {menuItem
               ? getTranslation(menuItem)
               : getTranslation({ name, translation })}{" "}
-            {!isFree &&
+            {/* {!isFree &&
               `- ${currency}${Number(menuItem?.price || price || 0).toFixed(
                 2
-              )}`}
+              )}`} */}
           </Option>
         ))}
       </Select>

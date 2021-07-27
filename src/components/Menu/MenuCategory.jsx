@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getTranslation } from "../../util";
 import SingleMenuItem from "./SingleMenuItem";
+import { animateScroll } from "react-scroll";
 
 const MenuCategory = ({ items, subcategory, ...rest }) => {
   const { subcategoryColor, categoryColor } = useSelector(
     (state) => state?.info?.resTemplate?.general || {}
   );
+  const targetId = useSelector((state) => state?.info?.targetId);
 
   const subcategoryStyle = {
     border: "1px solid #000000",
@@ -20,13 +22,19 @@ const MenuCategory = ({ items, subcategory, ...rest }) => {
   const categoryStyle = {
     textAlign: "center",
     fontSize: "30px",
-    // margin: "25px 0 15px",
     fontWeight: "800",
     color: categoryColor,
   };
 
+  useEffect(() => {
+    if (targetId && animateScroll) {
+      const offsetTop = document.getElementById(targetId)?.offsetTop;
+      animateScroll.scrollTo(offsetTop - document.body.scrollTop);
+    }
+  }, []);
+
   return (
-    <div className="pt-4 pl-2 pr-2 pb-0">
+    <div className="pt-4 pl-2 pr-2 pb-0" id={rest._id}>
       <h2 style={categoryStyle}>{getTranslation(rest)}</h2>
       {Array.isArray(items) &&
         items.length > 0 &&
@@ -34,13 +42,15 @@ const MenuCategory = ({ items, subcategory, ...rest }) => {
       {Array.isArray(subcategory) &&
         subcategory.length > 0 &&
         subcategory.map(({ items, _id, ...rest }) => (
-          <div className="mt-3 mb-3 d-inline-block w-100" key={_id}>
-            <h2 style={subcategoryStyle}>{getTranslation(rest)}</h2>
-            {Array.isArray(items) &&
-              items.length > 0 &&
-              items.map((item) => (
-                <SingleMenuItem item={item} key={item._id} />
-              ))}
+          <div id={_id} key={_id}>
+            <div className="mt-3 mb-3 d-inline-block w-100" key={_id}>
+              <h2 style={subcategoryStyle}>{getTranslation(rest)}</h2>
+              {Array.isArray(items) &&
+                items.length > 0 &&
+                items.map((item) => (
+                  <SingleMenuItem item={item} key={item._id} />
+                ))}
+            </div>
           </div>
         ))}
     </div>

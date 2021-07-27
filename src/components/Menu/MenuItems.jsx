@@ -23,7 +23,7 @@ const MenuItems = () => {
     <div>
       <Banner {...bannerProps} />
       {!isMenuItem
-        ? category.map((item) => <MenuCategory {...item} />)
+        ? category.map((item) => <MenuCategory {...item} key={item._id} />)
         : Array.isArray(menuItems) &&
           menuItems.length > 0 &&
           menuItems.map((item) => (

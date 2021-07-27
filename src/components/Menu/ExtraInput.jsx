@@ -99,7 +99,7 @@ const ExtraInput = ({
                   </div>
                   <p>
                     {currency}
-                    {Number(menuItem?.price || price || 0).toFixed()}
+                    {Number(menuItem?.price || price || 0).toFixed(2)}
                   </p>
                 </div>
               ))}

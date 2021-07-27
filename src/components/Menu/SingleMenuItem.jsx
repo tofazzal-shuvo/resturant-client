@@ -1,7 +1,7 @@
 import { InfoCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { getImage, getTranslation } from "../../util";
+import { getImage } from "../../util";
 import MenuItemInfoModal from "./MenuItemInfoModal";
 import MenuItemViewModal from "./MenuItemViewModal";
 
@@ -25,7 +25,6 @@ const SingleMenuItem = ({ item }) => {
     (Array.isArray(item.translation) && item.translation.length) > 0
       ? item.translation[0]
       : {};
-      
   return (
     <div className="ml-2 mr-2 mt-3 mb-0">
       {itemImage && item.image && (

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { Button } from "antd";
 import { useDispatch } from "react-redux";
+import { Link } from "react-scroll";
 import { addInfo } from "../../store/modules";
 import { getTranslation } from "../../util";
 
@@ -9,16 +10,16 @@ const SingleCategory = ({ category, resTemplate, allCategory }) => {
   const [show, setShow] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
-  const { items, subcategory, name } = category;
+  const { items, subcategory } = category;
 
-  const redirectToMenuItems = () => {
-    dispatch(addInfo({ category: allCategory, isMenuItem: false }));
+  const redirectToMenuItems = (targetId) => {
+    dispatch(addInfo({ category: allCategory, isMenuItem: false, targetId }));
     history.push("/menu/items");
   };
 
   const onClickCategory = () => {
     if (Array.isArray(items) && items.length > 0) {
-      redirectToMenuItems();
+      redirectToMenuItems(category._id);
     } else {
       setShow(true);
     }
@@ -41,7 +42,7 @@ const SingleCategory = ({ category, resTemplate, allCategory }) => {
         subcategory.map((item) => (
           <Button
             key={item._id}
-            onClick={redirectToMenuItems}
+            onClick={() => redirectToMenuItems(item._id)}
             style={{
               background: "transparent",
               color: resTemplate?.general?.subcategoryColor,
