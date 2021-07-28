@@ -118,14 +118,15 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
       ? translation[0]
       : {};
 
-  const backgroundStyle = !resTemplate?.lightboxItemImage
-    ? { marginTop: "50px" }
-    : {
-        paddingTop: "20vh",
-        backgroundImage: `url(${getImage(image)})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      };
+  const backgroundStyle =
+    !resTemplate?.lightboxItemImage || !image
+      ? { marginTop: "50px" }
+      : {
+          paddingTop: "20vh",
+          backgroundImage: `url(${getImage(image)})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        };
 
   return (
     <Modal
