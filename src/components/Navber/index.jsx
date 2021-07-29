@@ -58,6 +58,13 @@ const Navber = () => {
 
     return currentPath === pathname;
   };
+  const spanStyle = {
+    position: "absolute",
+    top: "-3px",
+    left: "122%",
+    fontSize: "15px",
+    color: badgeColor,
+  };
   return (
     <div className="d-flex justify-content-around menu" style={{ background }}>
       {menuItems.map((item, idx) => (
@@ -90,11 +97,3 @@ const Navber = () => {
 };
 
 export default Navber;
-
-const spanStyle = {
-  position: "absolute",
-  color: "red",
-  top: "-3px",
-  left: "122%",
-  fontSize: "15px",
-};
