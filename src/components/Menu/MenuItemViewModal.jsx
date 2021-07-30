@@ -5,7 +5,7 @@ import DropdownInput from "./DropdownInput";
 import ExtraInput from "./ExtraInput";
 import RecommendationsInput from "./RecommendationsInput";
 import { IncDecBtn } from "../Shared";
-import { CheckOutlined } from "@ant-design/icons";
+import { CheckOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart } from "../../store/modules";
 import { FETCH_MENU_ITEM } from "../../graphql/modules";
@@ -137,6 +137,11 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
       style={modalStyle}
       bodyStyle={modalBodyStyle}
       className="custom-positioning-modal"
+      closeIcon={
+        <CloseCircleOutlined
+          style={{ color: defaultColor || "#000", fontSize: "28px" }}
+        />
+      }
     >
       <Spin spinning={loading}>
         <div style={backgroundStyle}>
