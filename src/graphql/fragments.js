@@ -324,6 +324,12 @@ export const MENU_FRAGMENT = gql`
       translation {
         ...TranslationType
       }
+      sizings {
+        items {
+          price
+          default
+        }
+      }
     }
     category {
       ...CategoryType

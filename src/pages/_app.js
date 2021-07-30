@@ -30,14 +30,16 @@ try {
   // Do nothing if the browser doesn't support this API.
 }
 
-const CustomApp = () => (
-  <ApolloProvider client={apollo}>
-    <Provider store={store}>
-      <LanguageProvider>
-        <AppRouter />
-      </LanguageProvider>
-    </Provider>
-  </ApolloProvider>
-);
+const CustomApp = () => {
+  return (
+    <ApolloProvider client={apollo}>
+      <Provider store={store}>
+        <LanguageProvider>
+          <AppRouter />
+        </LanguageProvider>
+      </Provider>
+    </ApolloProvider>
+  );
+};
 
 export default CustomApp;

@@ -1,8 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { getImage } from "../../../util";
 
-const Banner = ({ text, menuImageLink }) => {
+const Banner = ({ text, menuImageLink, showBookIcon = false }) => {
   const {
     title,
     headerSelected,
@@ -15,7 +16,8 @@ const Banner = ({ text, menuImageLink }) => {
   } = useSelector((state) => state?.info?.resTemplate?.header || {});
   const logo =
     useSelector((state) => state?.info?.resInfo?.logo) || "/img/logo.png";
-
+  const history = useHistory();
+  const onClickMenuIcon = () => history.push("/menu");
   const barStyle = {
     width: "-webkit-fill-available",
     minWidth: "10px",
@@ -69,16 +71,25 @@ const Banner = ({ text, menuImageLink }) => {
   return (
     <div
       className="d-flex justify-content-center align-items-center"
-      style={wrapperStyle}
+      style={{ ...wrapperStyle, position: "relative" }}
     >
+      {showBookIcon && (
+        <i
+          onClick={onClickMenuIcon}
+          className="fas fa-book-open"
+          style={{
+            position: "absolute",
+            top: "10px",
+            left: "45px",
+            fontSize: "20px",
+            color,
+          }}
+        ></i>
+      )}
       {text ? (
         textPortion
       ) : headerSelected === "logo" ? (
-        <img
-          src={getImage(logo)}
-          alt="restaurants logo"
-          style={imgStyle}
-        />
+        <img src={getImage(logo)} alt="restaurants logo" style={imgStyle} />
       ) : (
         textPortion
       )}

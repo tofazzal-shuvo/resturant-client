@@ -1,5 +1,6 @@
 import { InfoCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getImage } from "../../util";
 import MenuItemInfoModal from "./MenuItemInfoModal";
@@ -7,6 +8,7 @@ import MenuItemViewModal from "./MenuItemViewModal";
 
 const SingleMenuItem = ({ item }) => {
   const [visible, setVisible] = useState("");
+  const [sizingPrice, setSizingPrice] = useState(0);
   const onCancel = () => setVisible("");
   const currency = useSelector(
     (state) => state?.info?.resInfo?.currency || "$"
@@ -25,6 +27,19 @@ const SingleMenuItem = ({ item }) => {
     (Array.isArray(item.translation) && item.translation.length) > 0
       ? item.translation[0]
       : {};
+
+  useEffect(() => {
+    const sizings = item?.sizings || [];
+    let total = 0;
+    sizings.map((sizingItem) => {
+      if (Array.isArray(sizingItem?.items))
+        sizingItem.items.map((data) => {
+          if (data.default) total += data?.price || 0;
+        });
+    });
+    setSizingPrice(total);
+  });
+  const { price, fixedPrice } = item;
   return (
     <div className="ml-2 mr-2 mt-3 mb-0">
       {itemImage && item.image && (
@@ -61,7 +76,7 @@ const SingleMenuItem = ({ item }) => {
         <div className="d-flex justify-content-between align-items-center mt-2">
           <p style={paraStyle}>
             {currency}
-            {Number(item.price).toFixed(2)}
+            {Number((fixedPrice ? price : sizingPrice) || 0).toFixed(2)}
           </p>
           <PlusOutlined
             style={{ fontSize: "25px", color: defaultColor }}

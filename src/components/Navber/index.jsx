@@ -12,7 +12,7 @@ const Navber = () => {
   );
 
   const show =
-    pathname === "/menu" ||
+    // pathname === "/menu" ||
     pathname === "/menu/items" ||
     pathname === "/cart" ||
     pathname === "/complete-order" ||
@@ -26,7 +26,7 @@ const Navber = () => {
   const menuItems = [
     {
       text: <FormattedMessage id="APP.NAVBER.MENU" />,
-      path: `/menu`,
+      path: `/menu/items`,
       icon: <i className="fas fa-utensils"></i>,
     },
     {

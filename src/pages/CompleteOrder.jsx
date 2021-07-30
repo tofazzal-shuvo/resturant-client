@@ -27,7 +27,7 @@ const CallWAITER = () => {
       });
       if (CallWaiter.success) {
         history.push("/ask-for-waiter");
-      }else {
+      } else {
         warnNotify(CallWaiter.message);
       }
     } catch (error) {}
@@ -49,7 +49,10 @@ const CallWAITER = () => {
 
   return (
     <Spin spinning={callLoader}>
-      <Banner text={<FormattedMessage id="APP.BANNER.ORDER_PLACED" />} />
+      <Banner
+        text={<FormattedMessage id="APP.BANNER.ORDER_PLACED" />}
+        showBookIcon={true}
+      />
 
       <div className="text-center pl-2 pr-2">
         <div className="mt-5">

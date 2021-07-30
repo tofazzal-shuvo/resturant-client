@@ -6,7 +6,10 @@ import { Banner } from "../Shared";
 const NoOrder = ({ general }) => {
   return (
     <div className="text-center">
-      <Banner text={<FormattedMessage id="APP.BANNER.NO_ORDER" />} />
+      <Banner
+        text={<FormattedMessage id="APP.BANNER.NO_ORDER" />}
+        showBookIcon={true}
+      />
       <h3
         style={{
           color: general?.defaultColor || "#656464",

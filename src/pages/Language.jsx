@@ -33,21 +33,21 @@ const Language = () => {
   });
   const lenguages = data?.FetchLanguagesByRestaurant?.result || [];
 
-  const { data: resData, loading: resLoading } = useQuery(FETCH_RESTAURANT, {
-    variables: {
-      restaurantId,
-    },
-  });
-  const restaurant = resData?.FetchRestaurant?.restaurant || {};
-  // console.log({ restaurant });
-  useEffect(() => {
-    if (restaurant) {
-      const { template, ...resInfo } = restaurant;
-      dispatch(
-        addInfo({ tableId, restaurantId, resTemplate: template, resInfo })
-      );
-    }
-  }, [restaurant]);
+  // const { data: resData, loading: resLoading } = useQuery(FETCH_RESTAURANT, {
+  //   variables: {
+  //     restaurantId,
+  //   },
+  // });
+  // const restaurant = resData?.FetchRestaurant?.restaurant || {};
+  // // console.log({ restaurant });
+  // useEffect(() => {
+  //   if (restaurant) {
+  //     const { template, ...resInfo } = restaurant;
+  //     dispatch(
+  //       addInfo({ tableId, restaurantId, resTemplate: template, resInfo })
+  //     );
+  //   }
+  // }, [restaurant]);
 
   const onSelectLanguage = (lang) => {
     dispatch(addInfo({ lang }));
@@ -57,7 +57,7 @@ const Language = () => {
   };
 
   return (
-    <Spin spinning={loading || resLoading}>
+    <Spin spinning={loading}>
       <div className="welcome text-center">
         <Banner />
         <Layout>

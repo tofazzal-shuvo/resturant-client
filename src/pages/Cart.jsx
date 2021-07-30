@@ -8,6 +8,7 @@ import { addInfo, clearCard, clearNote } from "../store/modules";
 import { useHistory } from "react-router-dom";
 import { CartItem, NoOrder } from "../components/Cart";
 import { Banner } from "../components/Shared";
+import { FormattedMessage } from "react-intl";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -54,7 +55,10 @@ const Cart = () => {
   const defaultColor = resTemplate?.general?.defaultColor;
   return (
     <div className="cart">
-      <Banner text="Your Order" />
+      <Banner
+        showBookIcon={true}
+        text={<FormattedMessage id="APP.NAVBER.YOUR_ORDER" />}
+      />
       {addedItems.map((item, idx) => (
         <CartItem {...item} key={idx} idx={idx} defaultColor={defaultColor} />
       ))}

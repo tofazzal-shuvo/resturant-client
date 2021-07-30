@@ -21,7 +21,7 @@ const MenuItems = () => {
 
   return (
     <div>
-      <Banner {...bannerProps} />
+      <Banner {...bannerProps} showBookIcon={true} />
       {!isMenuItem
         ? category.map((item) => <MenuCategory {...item} key={item._id} />)
         : Array.isArray(menuItems) &&

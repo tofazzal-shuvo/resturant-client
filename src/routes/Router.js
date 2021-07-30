@@ -12,7 +12,7 @@ import {
 
 // Public Routes
 export const Public = [
-  // { path: "/", exact: true, component: Welcome },
+  // { path: "/welcome", exact: true, component: Welcome },
   { path: "/", exact: true, component: Language },
   { path: "/menu", exact: false, component: Menu },
 
