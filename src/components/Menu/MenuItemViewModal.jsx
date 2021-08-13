@@ -150,6 +150,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
               backgroundColor: "rgba(255, 255, 255, .6)",
               padding: "3px 7px",
               color: defaultColor,
+              textShadow: " 2px 2px 2px rgba(0, 0, 0, 0.4)",
             }}
           >
             {getTranslation({ name, translation })}
@@ -158,85 +159,143 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
         <div
           style={{
             padding: "0 7px",
-            position: "relative",
-            minHeight: "52vh",
-            marginBottom: "90px",
+            paddingBottom: "90px",
           }}
         >
-          <div>
-            <p
-              className="desc"
-              style={{
-                fontSize: "18px",
-                color: "#656464",
-                marginTop: "25px",
-                color: defaultColor,
-              }}
-            >
-              {translationObj.desc || desc}
-              <span className="d-block text-right">
-                {currency}
-                {Number(fixedPrice ? price : sizingPrice || 0).toFixed(2)}
-              </span>
-            </p>
-            <div
-              style={{
-                borderBottom: "1px solid #D8D8D8",
-              }}
-            ></div>
-            {!fixedPrice && sizings?.length !== 0 && (
-              <SizingInput
-                options={sizings}
-                selectSizing={selectSizing}
-                setSizing={setSizing}
-                defaultColor={defaultColor}
-              />
-            )}
-            {dropdowns?.length !== 0 && (
-              <DropdownInput
-                options={dropdowns}
-                selectDropdown={selectDropdown}
-                setDropdown={setDropdown}
-                defaultColor={defaultColor}
-              />
-            )}
-            {extras?.length !== 0 && (
-              <ExtraInput
-                extras={extras}
-                selectExtras={selectExtras}
-                setExtras={setExtras}
-                defaultColor={defaultColor}
-              />
-            )}
-            {recommendations?.length !== 0 && (
-              <RecommendationsInput
-                recommendations={recommendations}
-                selectRecommendaton={selectRecommendaton}
-                setRecommendaton={setRecommendaton}
-                defaultColor={defaultColor}
-              />
-            )}
-            {enableNote && (
-              <>
-                <h2
-                  style={{
-                    fontSize: "18px",
-                    marginTop: "8px",
-                    color: defaultColor,
-                  }}
-                >
-                  Note
-                </h2>
-                <textarea
-                  rows="5"
-                  value={state.note}
-                  style={{ width: "100%" }}
-                  onChange={onChangeNote}
-                />
-              </>
-            )}
-          </div>
+          <p
+            className="desc"
+            style={{
+              fontSize: "18px",
+              color: "#656464",
+              marginTop: "25px",
+              color: defaultColor,
+            }}
+          >
+            {translationObj.desc || desc}
+            <span className="d-block text-right">
+              {currency}
+              {Number(fixedPrice ? price : sizingPrice || 0).toFixed(2)}
+            </span>
+          </p>
           <div
+            style={{
+              borderBottom: "1px solid #D8D8D8",
+            }}
+          ></div>
+          {!fixedPrice && sizings?.length !== 0 && (
+            <SizingInput
+              options={sizings}
+              selectSizing={selectSizing}
+              setSizing={setSizing}
+              defaultColor={defaultColor}
+            />
+          )}
+          {dropdowns?.length !== 0 && (
+            <DropdownInput
+              options={dropdowns}
+              selectDropdown={selectDropdown}
+              setDropdown={setDropdown}
+              defaultColor={defaultColor}
+            />
+          )}
+          {extras?.length !== 0 && (
+            <ExtraInput
+              extras={extras}
+              selectExtras={selectExtras}
+              setExtras={setExtras}
+              defaultColor={defaultColor}
+            />
+          )}
+          {recommendations?.length !== 0 && (
+            <RecommendationsInput
+              recommendations={recommendations}
+              selectRecommendaton={selectRecommendaton}
+              setRecommendaton={setRecommendaton}
+              defaultColor={defaultColor}
+            />
+          )}
+          {enableNote && (
+            <>
+              <h2
+                style={{
+                  fontSize: "18px",
+                  marginTop: "8px",
+                  color: defaultColor,
+                }}
+              >
+                Note
+              </h2>
+              <textarea
+                rows="5"
+                value={state.note}
+                style={{ width: "100%" }}
+                onChange={onChangeNote}
+              />
+            </>
+          )}
+        </div>
+      </Spin>
+
+      <div
+        className="d-flex align-items-center justify-content-between p-2 w-100 position-fixed"
+        style={{ bottom: "-1px", backgroundColor: background || "#fff" }}
+      >
+        <IncDecBtn value={1} onChange={onChangeQuantity} />
+        <button
+          style={{
+            border: "none",
+            backgroundColor: "transparent",
+            marginLeft: "-35px",
+            cursor: "pointer",
+            color: "#656565",
+          }}
+          onClick={onAddToCard}
+          disabled={!state.quantity || loading}
+        >
+          <span
+            style={{
+              padding: "9px 9px",
+              backgroundColor: "#656565",
+              fontSize: "20px",
+              borderRadius: "4px",
+              display: "inline-flex",
+              color: defaultColor,
+            }}
+          >
+            <CheckOutlined />
+          </span>
+
+          <p style={{ color: defaultColor }}>ADD TO ORDER</p>
+        </button>
+        <p
+          style={{
+            color: "#848383",
+            fontSize: "22px",
+            color: defaultColor,
+          }}
+        >
+          {currency}
+          {Number(totalPrice * state.quantity).toFixed(2)}
+        </p>
+      </div>
+    </Modal>
+  );
+};
+
+export default MenuItemViewModal;
+
+const modalStyle = {
+  paddingTop: 0,
+  paddingBottom: 0,
+  top: 0,
+};
+
+const defaultRecom = {
+  dropdowns: [],
+  sizing: [],
+};
+
+/* <div
             className="d-flex align-items-center justify-content-between pb-3 position-absolute"
             style={{ width: "96%", bottom: "-105px" }}
           >
@@ -277,22 +336,4 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
               {currency}
               {Number(totalPrice * state.quantity).toFixed(2)}
             </p>
-          </div>
-        </div>
-      </Spin>
-    </Modal>
-  );
-};
-
-export default MenuItemViewModal;
-
-const modalStyle = {
-  paddingTop: 0,
-  paddingBottom: 0,
-  top: 0,
-};
-
-const defaultRecom = {
-  dropdowns: [],
-  sizing: [],
-};
+          </div> */
