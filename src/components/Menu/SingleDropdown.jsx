@@ -75,9 +75,9 @@ const SingleDropdown = ({
         onChange={handleChange}
         allowClear
       >
-        <Option value={null} disabled>
+        {/* <Option value={null} disabled>
           Select
-        </Option>
+        </Option> */}
         {extras?.map(({ _id, menuItem, name, price, translation }) => (
           <Option value={_id} key={_id} key={_id}>
             {menuItem
