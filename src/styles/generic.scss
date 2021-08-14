@@ -262,3 +262,9 @@ button:disabled {
 .ant-spin-blur {
   min-height: 100vh;
 }
+
+.expended-icon {
+  svg {
+    transition: all 0.2s;
+  }
+}

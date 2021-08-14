@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { InfoCircleOutlined } from "@ant-design/icons";
+import { CaretRightOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import { Collapse, Radio } from "antd";
-import { StopPropagation } from "../Shared";
+import { ExpandedIcon, StopPropagation } from "../Shared";
 import MenuItemInfoModal from "./MenuItemInfoModal";
 import SizingInput from "./SizingInput";
 import DropdownInput from "./DropdownInput";
@@ -26,6 +26,7 @@ const SingleRecommendation = ({
   const [visible, setVisible] = useState("");
   const [selectSizing, setSizing] = useState([]);
   const [selectDropdown, setDropdown] = useState([]);
+  const [activeCollapse, setActiveCollapse] = useState(null);
   const currency = useSelector(
     (state) => state?.info?.resInfo?.currency || "$"
   );
@@ -96,12 +97,15 @@ const SingleRecommendation = ({
         accordion
         style={{ marginTop: "15px" }}
         collapsible={shouldCollapsible()}
+        onChange={(id) => setActiveCollapse(id)}
+        activeKey={activeCollapse}
       >
         <Panel
           showArrow={false}
           header={
             <div className="d-flex justify-content-between align-items-center">
               <div className="d-flex align-items-center">
+                <ExpandedIcon isActive={activeCollapse}/>
                 <h2 style={{ display: "inline-block", fontSize: "16px" }}>
                   {getTranslation({ name, translation })}
                 </h2>
