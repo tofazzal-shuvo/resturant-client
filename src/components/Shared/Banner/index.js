@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getImage } from "../../../util";
 
-const Banner = ({ text, menuImageLink, showBookIcon = false }) => {
+const Banner = ({ text, menuImageLink, showBookIcon = false, type }) => {
   const {
     title,
     headerSelected,
@@ -25,10 +25,25 @@ const Banner = ({ text, menuImageLink, showBookIcon = false }) => {
     background: color || "#fff",
     margin: "0 3%",
   };
+
+  useEffect(() => {
+    window.WebFont.load({
+      google: { families: [fontFamily] },
+      loading: function () {
+        console.log("loading");
+      },
+      active: function () {
+        console.log("active");
+      },
+      fontinactive: function (_, data) {
+        console.log(data);
+      },
+    });
+  }, [fontFamily]);
   const textStyle = {
     fontSize: fontSize || "1.8rem",
     color: color || "#fff",
-    fontFamily: fontFamily || "inherit",
+    fontFamily: type === "lan" ? fontFamily : "inherit",
     letterSpacing: "3px",
     textTransform: "uppercase",
     fontWeight: "400",

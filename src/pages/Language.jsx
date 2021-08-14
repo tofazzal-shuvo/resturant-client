@@ -59,7 +59,7 @@ const Language = () => {
   return (
     <Spin spinning={loading}>
       <div className="welcome text-center">
-        <Banner />
+        <Banner type="lan" />
         <Layout>
           <Button
             className="mb-2"
