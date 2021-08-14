@@ -48,7 +48,7 @@ export default RecommendationsInput;
 const CollapseHeader = ({ activeKey, defaultColor }) => (
   <div className="d-flex align-items-center">
     <h2
-      style={{ minWidth: "max-content", fontSize: "18px", color: defaultColor }}
+      style={{ minWidth: "max-content", fontSize: "18px" }}
     >
       Recommendations
     </h2>

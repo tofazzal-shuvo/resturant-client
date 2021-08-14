@@ -81,9 +81,22 @@ const SingleRecommendation = ({
   }, [sizings]);
 
   const { Panel } = Collapse;
+
+  const shouldCollapsible = () => {
+    const shouldRender = dropdowns.find(
+      (data) => !!(data?.dropdown && data?.dropdown?.extras?.length)
+    );
+    const shouldRender1 = sizings.find((data) => !!data?.items?.length);
+    if (!shouldRender && !shouldRender1) return "disabled";
+    else return "header";
+  };
   return (
     <>
-      <Collapse accordion style={{ marginTop: "15px" }}>
+      <Collapse
+        accordion
+        style={{ marginTop: "15px" }}
+        collapsible={shouldCollapsible()}
+      >
         <Panel
           showArrow={false}
           header={
@@ -99,7 +112,7 @@ const SingleRecommendation = ({
                   />
                 </StopPropagation>
               </div>
-              <div>
+              <div style={{ color: "rgba(0,0,0,.85)" }}>
                 {currency}
                 {Number(totalPrice || 0).toFixed(2)}
                 <StopPropagation>
