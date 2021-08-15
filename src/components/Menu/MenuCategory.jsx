@@ -55,18 +55,21 @@ const MenuCategory = ({ items, subcategory, ...rest }) => {
         items.map((item) => <SingleMenuItem item={item} key={item._id} />)}
       {Array.isArray(subcategory) &&
         subcategory.length > 0 &&
-        subcategory.map(({ items, _id, ...rest }) => (
-          <div id={_id} key={_id}>
-            <div className="mt-3 mb-3 d-inline-block w-100" key={_id}>
-              <h2 style={subcategoryStyle}>{getTranslation(rest)}</h2>
-              {Array.isArray(items) &&
-                items.length > 0 &&
-                items.map((item) => (
-                  <SingleMenuItem item={item} key={item._id} />
-                ))}
+        subcategory.map(({ items, _id, ...rest }) => {
+          if (Array.isArray(items) && items.length === 0) return null;
+          return (
+            <div id={_id} key={_id}>
+              <div className="mt-3 mb-3 d-inline-block w-100" key={_id}>
+                <h2 style={subcategoryStyle}>{getTranslation(rest)}</h2>
+                {Array.isArray(items) &&
+                  items.length > 0 &&
+                  items.map((item) => (
+                    <SingleMenuItem item={item} key={item._id} />
+                  ))}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
     </div>
   );
 };
