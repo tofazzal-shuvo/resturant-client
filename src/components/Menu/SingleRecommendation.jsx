@@ -105,7 +105,9 @@ const SingleRecommendation = ({
           header={
             <div className="d-flex justify-content-between align-items-center">
               <div className="d-flex align-items-center">
-                <ExpandedIcon isActive={activeCollapse}/>
+                {shouldCollapsible() !== "disabled" && (
+                  <ExpandedIcon isActive={activeCollapse} />
+                )}
                 <h2 style={{ display: "inline-block", fontSize: "16px" }}>
                   {getTranslation({ name, translation })}
                 </h2>
