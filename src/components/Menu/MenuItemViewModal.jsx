@@ -15,6 +15,11 @@ import { getImage, getTranslation } from "../../util";
 const MenuItemViewModal = ({ visible, onCancel, _id }) => {
   const dispatch = useDispatch();
   const { resTemplate, lang } = useSelector((state) => state?.info);
+  const {
+    background: btmNavBc,
+    iconColor,
+    textColor,
+  } = useSelector((state) => state?.info?.resTemplate?.bottomNavigation || {});
   const currency = useSelector(
     (state) => state?.info?.resInfo?.currency || "$"
   );
@@ -254,18 +259,17 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
         >
           <span
             style={{
-              padding: "9px 9px",
-              backgroundColor: "#656565",
-              fontSize: "20px",
+              fontSize: "28px",
               borderRadius: "4px",
               display: "inline-flex",
-              color: defaultColor,
+              color: iconColor,
             }}
           >
-            <CheckOutlined />
+            {/* <CheckOutlined /> */}
+            <i className="fas fa-check-square"></i>
           </span>
 
-          <p style={{ color: defaultColor }}>ADD TO ORDER</p>
+          <p style={{ color: textColor }}>ADD TO ORDER</p>
         </button>
         <p
           style={{
@@ -294,46 +298,3 @@ const defaultRecom = {
   dropdowns: [],
   sizing: [],
 };
-
-/* <div
-            className="d-flex align-items-center justify-content-between pb-3 position-absolute"
-            style={{ width: "96%", bottom: "-105px" }}
-          >
-            <IncDecBtn value={1} onChange={onChangeQuantity} />
-            <button
-              style={{
-                border: "none",
-                backgroundColor: "transparent",
-                marginLeft: "-35px",
-                cursor: "pointer",
-                color: "#656565",
-              }}
-              onClick={onAddToCard}
-              disabled={!state.quantity}
-            >
-              <span
-                style={{
-                  padding: "9px 9px",
-                  backgroundColor: "#656565",
-                  fontSize: "20px",
-                  borderRadius: "4px",
-                  display: "inline-flex",
-                  color: defaultColor,
-                }}
-              >
-                <CheckOutlined />
-              </span>
-
-              <p style={{ color: defaultColor }}>ADD TO ORDER</p>
-            </button>
-            <p
-              style={{
-                color: "#848383",
-                fontSize: "22px",
-                color: defaultColor,
-              }}
-            >
-              {currency}
-              {Number(totalPrice * state.quantity).toFixed(2)}
-            </p>
-          </div> */
