@@ -33,6 +33,20 @@ const MenuCategory = ({ items, subcategory, ...rest }) => {
     }
   }, []);
 
+  const shouldRender = () => {
+    if (Array.isArray(items) && items.length !== 0) return true;
+    if (!Array.isArray(subcategory)) return false;
+    let flag = false;
+    subcategory.map((item) => {
+      const { items } = item || {};
+      if (Array.isArray(items) && items.length !== 0) flag = true;
+      else flag = false;
+    });
+
+    return flag;
+  };
+
+  if (!shouldRender()) return null;
   return (
     <div className="pt-4 pl-2 pr-2 pb-0" id={rest._id}>
       <h2 style={categoryStyle}>{getTranslation(rest)}</h2>

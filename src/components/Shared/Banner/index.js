@@ -29,15 +29,6 @@ const Banner = ({ text, menuImageLink, showBookIcon = false, type }) => {
   useEffect(() => {
     window.WebFont.load({
       google: { families: [fontFamily] },
-      loading: function () {
-        console.log("loading");
-      },
-      active: function () {
-        console.log("active");
-      },
-      fontinactive: function (_, data) {
-        console.log(data);
-      },
     });
   }, [fontFamily]);
   const textStyle = {

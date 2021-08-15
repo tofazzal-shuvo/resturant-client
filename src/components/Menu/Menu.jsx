@@ -69,13 +69,27 @@ const Menu = () => {
     padding: "0",
     margin: "0 auto !important",
   };
-
+  const shouldRender = ({ category }) => {
+    if (!Array.isArray(category)) return false;
+    let flag = false;
+    category.map((item) => {
+      const { items, subcategory } = item || {};
+      if (Array.isArray(items) && items.length !== 0) flag = true;
+      if (!Array.isArray(subcategory)) return;
+      subcategory.map((item) => {
+        const { items } = item || {};
+        if (Array.isArray(items) && items.length !== 0) flag = true;
+      });
+    });
+    return flag;
+  };
   return (
     <Spin spinning={loading}>
       <div className="welcome text-center" style={{ height: "100vh" }}>
         <Banner text={<FormattedMessage id="APP.BANNER.MENU" />} />
         <Layout>
           {menu.map(({ schedule, ...item }) => {
+            if (!shouldRender(item)) return null;
             const { disabled, text } = getScheduleTime(schedule || []);
             return (
               <div key={item._id}>
