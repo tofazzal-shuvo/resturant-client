@@ -14,12 +14,12 @@ import { getImage, getTranslation } from "../../util";
 
 const MenuItemViewModal = ({ visible, onCancel, _id }) => {
   const dispatch = useDispatch();
-  const { resTemplate, lang } = useSelector((state) => state?.info);
-  const {
-    background: btmNavBc,
-    iconColor,
-    textColor,
-  } = useSelector((state) => state?.info?.resTemplate?.bottomNavigation || {});
+  const { resTemplate, lang, isMenuDisabled } = useSelector(
+    (state) => state?.info
+  );
+  const { iconColor, textColor } = useSelector(
+    (state) => state?.info?.resTemplate?.bottomNavigation || {}
+  );
   const currency = useSelector(
     (state) => state?.info?.resInfo?.currency || "$"
   );
@@ -245,7 +245,11 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
         className="d-flex align-items-center justify-content-between p-2 w-100 position-fixed"
         style={{ bottom: "-1px", backgroundColor: background || "#fff" }}
       >
-        <IncDecBtn value={1} onChange={onChangeQuantity} />
+        <IncDecBtn
+          value={1}
+          onChange={onChangeQuantity}
+          disabled={isMenuDisabled}
+        />
         <button
           style={{
             border: "none",
@@ -255,7 +259,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
             color: "#656565",
           }}
           onClick={onAddToCard}
-          disabled={!state.quantity || loading}
+          disabled={!state.quantity || loading || isMenuDisabled}
         >
           <span
             style={{

@@ -7,8 +7,9 @@ import CategoryModal from "./CategoryModal";
 import { Banner, Layout } from "../Shared";
 import { useHistory } from "react-router";
 import { addInfo } from "../../store/modules";
-import { getTranslation } from "../../util";
+import { getScheduleTime, getTranslation } from "../../util";
 import { FormattedMessage } from "react-intl";
+import { Fragment } from "react";
 
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState();
@@ -41,12 +42,17 @@ const Menu = () => {
           menuName: getTranslation(data),
           menuImageLink: data.image,
           isMenuItem: true,
+          isMenuDisabled: data.disabled,
         })
       );
       history.push("/menu/items");
     } else {
       dispatch(
-        addInfo({ menuName: getTranslation(data), menuImageLink: data.image })
+        addInfo({
+          menuName: getTranslation(data),
+          menuImageLink: data.image,
+          isMenuDisabled: data.disabled,
+        })
       );
       setSelectedMenu(data);
       setVisible(true);
@@ -58,9 +64,10 @@ const Menu = () => {
       ? resTemplate?.menuTextBackground?.backgroundColor
       : "transparent",
     color: resTemplate?.general?.menuColor,
-    minWidth:"60%",
-    lineHeight:"0",
-    padding:"25px"
+    minWidth: "60%",
+    lineHeight: "0",
+    padding: "0",
+    margin: "0 auto !important",
   };
 
   return (
@@ -68,16 +75,29 @@ const Menu = () => {
       <div className="welcome text-center" style={{ height: "100vh" }}>
         <Banner text={<FormattedMessage id="APP.BANNER.MENU" />} />
         <Layout>
-          {menu.map((item) => (
-            <Button
-              className="mb-2"
-              key={item._id}
-              onClick={() => redirectToMenuitemPage(item)}
-              style={menuStyle}
-            >
-              {getTranslation(item)}
-            </Button>
-          ))}
+          {menu.map(({ schedule, ...item }) => {
+            const { disabled, text } = getScheduleTime(schedule || []);
+            return (
+              <div key={item._id}>
+                <Button
+                  className="mt-3"
+                  onClick={() => redirectToMenuitemPage({ disabled, ...item })}
+                  style={menuStyle}
+                >
+                  {getTranslation(item)}
+                </Button>
+                {item.activeSchedule && (
+                  <span
+                    style={{
+                      color: resTemplate?.general?.menuColor,
+                    }}
+                  >
+                    {text}
+                  </span>
+                )}
+              </div>
+            );
+          })}
         </Layout>
         {/* Category modal */}
         <CategoryModal

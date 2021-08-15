@@ -334,6 +334,7 @@ export const MENU_FRAGMENT = gql`
     category {
       ...CategoryType
     }
+    activeSchedule
     schedule {
       ...MenuScheduleType
     }

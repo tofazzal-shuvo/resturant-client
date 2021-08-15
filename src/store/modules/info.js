@@ -11,6 +11,7 @@ const initialState = {
   lang: "",
   note: "",
   isMenuItem: false,
+  isMenuDisabled: false,
   category: [],
   menuItems: [],
   resTemplate: {},

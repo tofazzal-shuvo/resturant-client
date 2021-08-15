@@ -27,3 +27,35 @@ export const getTranslation = (data) => {
     return translation[0].name;
   else return name;
 };
+
+export const getScheduleTime = (schedule) => {
+  const days = [
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+  ];
+  const cntDay = days[new Date().getDay()];
+  const { from, to, active } = schedule.find((item) => item?.day == cntDay);
+
+  if (!active) {
+    return { disabled: true, text: "Not suplyed today." };
+  }
+
+  const cntDate = new Date();
+  const startDate = new Date().setHours(
+    from.split(":")[0],
+    from.split(":")[1],
+    0
+  );
+  const endDate = new Date().setHours(to.split(":")[0], to.split(":")[1], 0);
+
+  if (cntDate >= startDate && cntDate < endDate) {
+    return { disabled: false, text: `${from} - ${to}` };
+  } else {
+    return { disabled: true, text: `${from} - ${to}` };
+  }
+};

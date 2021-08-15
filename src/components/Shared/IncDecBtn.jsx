@@ -3,7 +3,13 @@ import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Input } from "antd";
 import ButtonGroup from "antd/lib/button/button-group";
 
-const IncDecBtn = ({ style, onChange, value, beforSetZero }) => {
+const IncDecBtn = ({
+  style,
+  onChange,
+  value,
+  beforSetZero,
+  disabled = false,
+}) => {
   const [quantity, setQuantity] = useState(value || 0);
   const setData = (data) => {
     if (typeof beforSetZero === "function" && data === 0) {
@@ -33,6 +39,7 @@ const IncDecBtn = ({ style, onChange, value, beforSetZero }) => {
     <div>
       <ButtonGroup style={style} className="inc-desc-btn">
         <Button
+          disabled={disabled}
           onClick={decrease}
           style={{
             borderRight: "none",
@@ -43,6 +50,7 @@ const IncDecBtn = ({ style, onChange, value, beforSetZero }) => {
           <i className="fas fa-minus"></i>
         </Button>
         <Input
+          disabled={disabled}
           value={quantity}
           onChange={onValueChange}
           type="number"
@@ -53,6 +61,7 @@ const IncDecBtn = ({ style, onChange, value, beforSetZero }) => {
           }}
         />
         <Button
+          disabled={disabled}
           onClick={increase}
           style={{
             borderLeft: "none",

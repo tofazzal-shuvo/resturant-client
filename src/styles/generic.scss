@@ -268,3 +268,8 @@ button:disabled {
     transition: all 0.2s;
   }
 }
+
+.disable-div {
+  pointer-events: none;
+  opacity: 0.4;
+}
