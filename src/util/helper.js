@@ -42,7 +42,7 @@ export const getScheduleTime = (schedule) => {
   const { from, to, active } = schedule.find((item) => item?.day == cntDay);
 
   if (!active) {
-    return { disabled: true, text: "Not suplyed today." };
+    return { disabled: true, text: "(Off today)" };
   }
 
   const cntDate = new Date();
@@ -54,8 +54,8 @@ export const getScheduleTime = (schedule) => {
   const endDate = new Date().setHours(to.split(":")[0], to.split(":")[1], 0);
 
   if (cntDate >= startDate && cntDate < endDate) {
-    return { disabled: false, text: `${from} - ${to}` };
+    return { disabled: false, text: `(open ${from} - ${to})` };
   } else {
-    return { disabled: true, text: `${from} - ${to}` };
+    return { disabled: true, text: `(closed ${from} - ${to})` };
   }
 };

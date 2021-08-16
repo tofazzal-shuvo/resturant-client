@@ -16,6 +16,9 @@ const Cart = () => {
 
   const { addedItems } = useSelector((state) => state.cart);
   const { tableId, note, resTemplate } = useSelector((state) => state.info);
+  const currency = useSelector(
+    (state) => state?.info?.resInfo?.currency || "$"
+  );
   // console.log(addedItems)
   const onChangeNote = (e) => {
     dispatch(addInfo({ note: e.target.value }));
@@ -53,6 +56,9 @@ const Cart = () => {
 
   if (!addedItems.length) return <NoOrder {...resTemplate} />;
   const defaultColor = resTemplate?.general?.defaultColor;
+  let total = 0;
+  addedItems.map(({ itemTotal, quantity }) => (total += itemTotal * quantity));
+
   return (
     <div className="cart">
       <Banner
@@ -60,8 +66,21 @@ const Cart = () => {
         text={<FormattedMessage id="APP.NAVBER.YOUR_ORDER" />}
       />
       {addedItems.map((item, idx) => (
-        <CartItem {...item} key={idx} idx={idx} defaultColor={defaultColor} />
+        <CartItem
+          {...item}
+          key={idx}
+          idx={idx}
+          defaultColor={defaultColor}
+          currency={currency}
+        />
       ))}
+      <p
+        className="text-right mr-2 mt-3"
+        style={{ color: defaultColor, fontSize: "16px" }}
+      >
+        <strong style={{ fontSize: "19px", marginRight:"5px" }}>Total: </strong>
+        {currency} {total}
+      </p>
       <div className="p-2 mt-4">
         <h3
           style={{

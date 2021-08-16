@@ -242,49 +242,51 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
       </Spin>
 
       <div
-        className="d-flex align-items-center justify-content-between p-2 w-100 position-fixed"
         style={{ bottom: "-1px", backgroundColor: background || "#fff" }}
+        className=" position-fixed w-100"
       >
-        <IncDecBtn
-          value={1}
-          onChange={onChangeQuantity}
-          disabled={isMenuDisabled}
-        />
-        <button
-          style={{
-            border: "none",
-            backgroundColor: "transparent",
-            marginLeft: "-35px",
-            cursor: "pointer",
-            color: "#656565",
-          }}
-          onClick={onAddToCard}
-          disabled={!state.quantity || loading || isMenuDisabled}
+        <div
+          className={`d-flex align-items-center justify-content-between p-2 ${
+            isMenuDisabled && "disable-div"
+          }`}
         >
-          <span
+          <IncDecBtn value={1} onChange={onChangeQuantity} />
+          <button
             style={{
-              fontSize: "28px",
-              borderRadius: "4px",
-              display: "inline-flex",
-              color: iconColor,
+              border: "none",
+              backgroundColor: "transparent",
+              marginLeft: "-35px",
+              cursor: "pointer",
+              color: "#656565",
+            }}
+            onClick={onAddToCard}
+            disabled={!state.quantity || loading}
+          >
+            <span
+              style={{
+                fontSize: "28px",
+                borderRadius: "4px",
+                display: "inline-flex",
+                color: iconColor,
+              }}
+            >
+              {/* <CheckOutlined /> */}
+              <i className="fas fa-check-square"></i>
+            </span>
+
+            <p style={{ color: textColor }}>ADD TO ORDER</p>
+          </button>
+          <p
+            style={{
+              color: "#848383",
+              fontSize: "22px",
+              color: defaultColor,
             }}
           >
-            {/* <CheckOutlined /> */}
-            <i className="fas fa-check-square"></i>
-          </span>
-
-          <p style={{ color: textColor }}>ADD TO ORDER</p>
-        </button>
-        <p
-          style={{
-            color: "#848383",
-            fontSize: "22px",
-            color: defaultColor,
-          }}
-        >
-          {currency}
-          {Number(totalPrice * state.quantity).toFixed(2)}
-        </p>
+            {currency}
+            {Number(totalPrice * state.quantity).toFixed(2)}
+          </p>
+        </div>
       </div>
     </Modal>
   );
