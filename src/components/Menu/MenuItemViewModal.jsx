@@ -247,7 +247,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
       >
         <div
           className={`d-flex align-items-center justify-content-between p-2 ${
-            isMenuDisabled && "disable-div"
+            (isMenuDisabled || loading) && "disable-div"
           }`}
         >
           <IncDecBtn value={1} onChange={onChangeQuantity} />
