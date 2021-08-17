@@ -28,7 +28,9 @@ export const getTranslation = (data) => {
   else return name;
 };
 
-export const getScheduleTime = (schedule) => {
+export const getScheduleTime = (schedule, activeSchedule) => {
+  if (!activeSchedule) return { disabled: false, text: "" };
+
   const days = [
     "sunday",
     "monday",
@@ -40,7 +42,6 @@ export const getScheduleTime = (schedule) => {
   ];
   const cntDay = days[new Date().getDay()];
   const { from, to, active } = schedule.find((item) => item?.day == cntDay);
-
   if (!active) {
     return { disabled: true, text: "(Off today)" };
   }

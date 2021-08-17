@@ -90,7 +90,7 @@ const Menu = () => {
         <Layout>
           {menu.map(({ schedule, ...item }) => {
             if (!shouldRender(item)) return null;
-            const { disabled, text } = getScheduleTime(schedule || []);
+            const { disabled, text } = getScheduleTime(schedule || [], item.activeSchedule);
             return (
               <div key={item._id}>
                 <Button
