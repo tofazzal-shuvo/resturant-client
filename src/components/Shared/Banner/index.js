@@ -27,9 +27,12 @@ const Banner = ({ text, menuImageLink, showBookIcon = false, type }) => {
   };
 
   useEffect(() => {
-    window.WebFont.load({
-      google: { families: [fontFamily] },
-    });
+    // console.log({ fontFamily });
+    if (fontFamily) {
+      window.WebFont.load({
+        google: { families: [fontFamily] },
+      });
+    }
   }, [fontFamily]);
   const textStyle = {
     fontSize: fontSize || "1.8rem",
