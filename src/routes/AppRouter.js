@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-undef */
-import React, { useContext, useEffect } from "react";
-import { createBrowserHistory } from "history";
+import React, { useContext, useEffect } from 'react';
+import { createBrowserHistory } from 'history';
 import {
   Router,
   Switch,
@@ -8,18 +8,18 @@ import {
   useHistory,
   useLocation,
   Redirect,
-} from "react-router-dom";
+} from 'react-router-dom';
 
 // Index Routes
-import { Public } from "./Router";
-import Navber from "../components/Navber";
-import { useDispatch, useSelector } from "react-redux";
-import { LanguageContext } from "../context";
-import { Select } from "antd";
-import { useLazyQuery, useQuery } from "@apollo/react-hooks";
-import { FETCH_RESTAURANT } from "../graphql/modules";
-import { addInfo } from "../store/modules";
-import { Welcome } from "../pages";
+import { Public } from './Router';
+import Navber from '../components/Navber';
+import { useDispatch, useSelector } from 'react-redux';
+import { LanguageContext } from '../context';
+import { Select } from 'antd';
+import { useLazyQuery, useQuery } from '@apollo/react-hooks';
+import { FETCH_RESTAURANT } from '../graphql/modules';
+import { addInfo } from '../store/modules';
+import { Welcome } from '../pages';
 
 // Components
 export const history = createBrowserHistory();
@@ -30,10 +30,9 @@ const RouterConfig = () => {
   const { tableId: tabId, restaurantId: resId } = info;
 
   const query = new URLSearchParams(history?.location?.search);
-  const restaurantId = query.get("restaurant") || resId; // || "60e9e589304bea001a6a3a95";
-  const tableId = query.get("table") || tabId; // || "60e9e734304bea001a6a3a99";
-
-  if (!restaurantId || !tableId) return <Welcome />;
+  const restaurantId = query.get('restaurant') || resId; // || "60e9e589304bea001a6a3a95";
+  const tableId = query.get('table') || tabId; // || "60e9e734304bea001a6a3a99";
+  if (!restaurantId || !tableId) return <Welcome history={history} />;
   else return <CustomRouter restaurantId={restaurantId} tableId={tableId} />;
 };
 
@@ -65,11 +64,11 @@ const CustomRouter = ({ restaurantId, tableId }) => {
   return (
     <div
       style={{
-        paddingBottom: "91px",
-        background: background || "#fff",
-        minHeight: "100vh",
-        position: "relative",
-        overflow: "auto",
+        paddingBottom: '91px',
+        background: background || '#fff',
+        minHeight: '100vh',
+        position: 'relative',
+        overflow: 'auto',
       }}
     >
       <div className="language-selector">
@@ -81,11 +80,11 @@ const CustomRouter = ({ restaurantId, tableId }) => {
           className="fa fa-language"
           aria-hidden="true"
           style={{
-            background: "#fff",
-            padding: "6.5px 4px",
-            fontSize: "18px",
-            borderRadius: "50%",
-            marginLeft: "5px",
+            background: '#fff',
+            padding: '6.5px 4px',
+            fontSize: '18px',
+            borderRadius: '50%',
+            marginLeft: '5px',
           }}
         ></i>
       </div>

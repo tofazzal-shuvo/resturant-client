@@ -1,10 +1,10 @@
-import React from "react";
-import { useState } from "react";
-import QrReader from "react-qr-reader";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import { useState } from 'react';
+import QrReader from 'react-qr-reader';
+import { useHistory } from 'react-router-dom';
 
-const Welcome = () => {
-  const history = useHistory();
+const Welcome = ({ history }) => {
+  // const history = useHistory();
   const [show, setShow] = useState(false);
   // const query = new URLSearchParams(history.location.search);
   // const restaurantId = query.get("restaurant");
@@ -20,9 +20,11 @@ const Welcome = () => {
   //   }
   // }, [tableId, restaurantId]);
 
-  const handleScan = (data) => {
-    if (data) {
-      history.push(data);
+  const handleScan = (data = '') => {
+    console.log(data);
+    let pathname = data?.replace('https://res-client.herokuapp.com', '');
+    if (pathname) {
+      history.push(pathname);
     }
   };
   const onclickScanner = () => setShow(true);
@@ -42,7 +44,7 @@ const Welcome = () => {
             <QrReader
               delay={300}
               onScan={handleScan}
-              style={{ width: "100%" }}
+              style={{ width: '100%' }}
             />
           )}
         </div>

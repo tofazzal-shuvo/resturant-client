@@ -54,9 +54,11 @@ export const getScheduleTime = (schedule, activeSchedule) => {
   );
   const endDate = new Date().setHours(to.split(":")[0], to.split(":")[1], 0);
 
-  if (cntDate >= startDate && cntDate < endDate) {
-    return { disabled: false, text: `(open ${from} - ${to})` };
+  if(from === '00:00' && to=== '23:59') {
+    return { disabled: false, text: `` }; // Open
+  }else if (cntDate >= startDate && cntDate < endDate) {
+    return { disabled: false, text: `(${from} - ${to})` }; // Open
   } else {
-    return { disabled: true, text: `(closed ${from} - ${to})` };
+    return { disabled: true, text: `(${from} - ${to})` }; // Closed
   }
 };
