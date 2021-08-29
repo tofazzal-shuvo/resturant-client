@@ -44,9 +44,9 @@ const Cart = () => {
         },
       });
       if (CreateOrder.success) {
-        // dispatch(clearCard());
-        // dispatch(clearNote());
-        // history.push(`/complete-order`);
+        dispatch(clearCard());
+        dispatch(clearNote());
+        history.push(`/complete-order`);
       } else {
         notification.warn({
           message: CreateOrder.message,
