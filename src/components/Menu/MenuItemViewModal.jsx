@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Modal, Spin } from "antd";
-import SizingInput from "./SizingInput";
-import DropdownInput from "./DropdownInput";
-import ExtraInput from "./ExtraInput";
-import RecommendationsInput from "./RecommendationsInput";
-import { IncDecBtn } from "../Shared";
-import { CheckOutlined, CloseCircleOutlined } from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
-import { addCart } from "../../store/modules";
-import { FETCH_MENU_ITEM } from "../../graphql/modules";
-import { useLazyQuery } from "@apollo/react-hooks";
-import { getImage, getTranslation } from "../../util";
+import React, { useEffect, useState } from 'react';
+import { Modal, Spin } from 'antd';
+import SizingInput from './SizingInput';
+import DropdownInput from './DropdownInput';
+import ExtraInput from './ExtraInput';
+import RecommendationsInput from './RecommendationsInput';
+import { IncDecBtn } from '../Shared';
+import { CheckOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCart } from '../../store/modules';
+import { FETCH_MENU_ITEM } from '../../graphql/modules';
+import { useLazyQuery } from '@apollo/react-hooks';
+import { getImage, getTranslation } from '../../util';
 
 const MenuItemViewModal = ({ visible, onCancel, _id }) => {
   const dispatch = useDispatch();
@@ -21,16 +21,17 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
     (state) => state?.info?.resTemplate?.bottomNavigation || {}
   );
   const currency = useSelector(
-    (state) => state?.info?.resInfo?.currency || "$"
+    (state) => state?.info?.resInfo?.currency || '$'
   );
   const { background, defaultColor } = resTemplate?.general || {};
+  const bottomNavigationBackground = resTemplate?.bottomNavigation?.background
   // query
   const [fetchmenuItem, { data, loading }] = useLazyQuery(FETCH_MENU_ITEM, {
     variables: {
       id: _id,
       lang,
     },
-    fetchPolicy: "no-cache",
+    fetchPolicy: 'no-cache',
   });
 
   const {
@@ -48,7 +49,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
   } = data?.FetchMenuItemByCustomer?.item || {};
 
   // state
-  const [state, setState] = useState({ quantity: 1, note: "" });
+  const [state, setState] = useState({ quantity: 1, note: '' });
   const [totalPrice, setTotalPrice] = useState(0);
   const [selectExtras, setExtras] = useState([]);
   const [selectSizing, setSizing] = useState([]);
@@ -107,13 +108,13 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
   };
   useEffect(() => {
     setTotalPrice(0);
-    if (visible === "view") fetchmenuItem();
-    setState({ quantity: 1, note: "" });
+    if (visible === 'view') fetchmenuItem();
+    setState({ quantity: 1, note: '' });
   }, [visible]);
 
   const modalBodyStyle = {
-    height: "100vh",
-    overflowY: "scroll",
+    height: '100vh',
+    overflowY: 'scroll',
     padding: 0,
     background,
   };
@@ -125,26 +126,26 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
 
   const backgroundStyle =
     !resTemplate?.lightboxItemImage || !image
-      ? { marginTop: "50px" }
+      ? { marginTop: '50px' }
       : {
-          paddingTop: "20vh",
+          paddingTop: '20vh',
           backgroundImage: `url(${getImage(image)})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         };
 
-  return (
+        return (
     <Modal
-      visible={visible === "view"}
+      visible={visible === 'view'}
       onCancel={onModalClose}
       footer={null}
-      bodyStyle={{ padding: "0" }}
+      bodyStyle={{ padding: '0' }}
       style={modalStyle}
       bodyStyle={modalBodyStyle}
       className="custom-positioning-modal"
       closeIcon={
         <CloseCircleOutlined
-          style={{ color: defaultColor || "#000", fontSize: "28px" }}
+          style={{ color: defaultColor || '#000', fontSize: '28px' }}
         />
       }
     >
@@ -152,10 +153,10 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
         <div style={backgroundStyle}>
           <h2
             style={{
-              backgroundColor: "rgba(255, 255, 255, .6)",
-              padding: "3px 7px",
+              backgroundColor: 'rgba(255, 255, 255, .6)',
+              padding: '3px 7px',
               color: defaultColor,
-              textShadow: " 2px 2px 2px rgba(0, 0, 0, 0.4)",
+              textShadow: ' 2px 2px 2px rgba(0, 0, 0, 0.4)',
             }}
           >
             {getTranslation({ name, translation })}
@@ -163,16 +164,16 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
         </div>
         <div
           style={{
-            padding: "0 7px",
-            paddingBottom: "90px",
+            padding: '0 7px',
+            paddingBottom: '90px',
           }}
         >
           <p
             className="desc"
             style={{
-              fontSize: "18px",
-              color: "#656464",
-              marginTop: "25px",
+              fontSize: '18px',
+              color: '#656464',
+              marginTop: '25px',
               color: defaultColor,
             }}
           >
@@ -184,7 +185,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
           </p>
           <div
             style={{
-              borderBottom: "1px solid #D8D8D8",
+              borderBottom: '1px solid #D8D8D8',
             }}
           ></div>
           {!fixedPrice && sizings?.length !== 0 && (
@@ -223,8 +224,8 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
             <>
               <h2
                 style={{
-                  fontSize: "18px",
-                  marginTop: "8px",
+                  fontSize: '18px',
+                  marginTop: '8px',
                   color: defaultColor,
                 }}
               >
@@ -233,7 +234,7 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
               <textarea
                 rows="5"
                 value={state.note}
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
                 onChange={onChangeNote}
               />
             </>
@@ -242,31 +243,34 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
       </Spin>
 
       <div
-        style={{ bottom: "-1px", backgroundColor: background || "#fff" }}
+        style={{
+          bottom: '-1px',
+          backgroundColor: bottomNavigationBackground || '#fff',
+        }}
         className=" position-fixed w-100"
       >
         <div
           className={`d-flex align-items-center justify-content-between p-2 ${
-            (isMenuDisabled || loading) && "disable-div"
+            (isMenuDisabled || loading) && 'disable-div'
           }`}
         >
           <IncDecBtn value={1} onChange={onChangeQuantity} />
           <button
             style={{
-              border: "none",
-              backgroundColor: "transparent",
-              marginLeft: "-35px",
-              cursor: "pointer",
-              color: "#656565",
+              border: 'none',
+              backgroundColor: 'transparent',
+              marginLeft: '-35px',
+              cursor: 'pointer',
+              color: '#656565',
             }}
             onClick={onAddToCard}
             disabled={!state.quantity || loading}
           >
             <span
               style={{
-                fontSize: "28px",
-                borderRadius: "4px",
-                display: "inline-flex",
+                fontSize: '28px',
+                borderRadius: '4px',
+                display: 'inline-flex',
                 color: iconColor,
               }}
             >
@@ -278,8 +282,8 @@ const MenuItemViewModal = ({ visible, onCancel, _id }) => {
           </button>
           <p
             style={{
-              color: "#848383",
-              fontSize: "22px",
+              color: '#848383',
+              fontSize: '22px',
               color: defaultColor,
             }}
           >

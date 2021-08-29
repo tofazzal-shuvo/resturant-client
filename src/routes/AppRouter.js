@@ -32,6 +32,7 @@ const RouterConfig = () => {
   const query = new URLSearchParams(history?.location?.search);
   const restaurantId = query.get('restaurant') || resId; // || "60e9e589304bea001a6a3a95";
   const tableId = query.get('table') || tabId; // || "60e9e734304bea001a6a3a99";
+  console.log(query)
   if (!restaurantId || !tableId) return <Welcome history={history} />;
   else return <CustomRouter restaurantId={restaurantId} tableId={tableId} />;
 };
@@ -61,16 +62,12 @@ const CustomRouter = ({ restaurantId, tableId }) => {
     }
   }, [restaurant]);
 
+  useEffect(() => {
+    document.body.style.backgroundColor = background;
+  });
+
   return (
-    <div
-      style={{
-        paddingBottom: '91px',
-        background: background || '#fff',
-        minHeight: '100vh',
-        position: 'relative',
-        overflow: 'auto',
-      }}
-    >
+    <div>
       <div className="language-selector">
         <Select onChange={onChangeLang} value={locale}>
           <Select.Option value="en">English</Select.Option>
@@ -91,11 +88,28 @@ const CustomRouter = ({ restaurantId, tableId }) => {
       <Router history={history}>
         <Switch>
           {Public.map((R, k) => {
-            return <Route key={k} {...R} />;
+            return <CustomRoute key={k} {...R} />;
           })}
         </Switch>
         <Navber />
       </Router>
     </div>
+  );
+};
+
+// auth component
+export const CustomRoute = ({ hasNavbar, ...rest }) => {
+  return hasNavbar ? (
+    <div
+      style={{
+        height: 'calc(100vh - 77px)',
+        position: 'relative',
+        overflow: 'auto',
+      }}
+    >
+      <Route {...rest} />
+    </div>
+  ) : (
+    <Route {...rest} />
   );
 };

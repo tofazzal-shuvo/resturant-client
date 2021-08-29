@@ -1,15 +1,10 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
-import { Menu, MenuItems } from "../components/Menu";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { Menu, MenuItems } from '../components/Menu';
 
-const MenuPage = ({ location, match }) => {
+const MenuPage = (props) => {
   // console.log({match})
-  return (
-    <Switch location={location}>
-      <Route path={`${match.path}/`} exact={true} component={Menu} />
-      <Route path={`${match.path}/items`} exact={true} component={MenuItems} />
-    </Switch>
-  );
+  return <Menu {...props} />;
 };
 
 export default MenuPage;

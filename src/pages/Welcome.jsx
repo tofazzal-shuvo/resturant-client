@@ -1,11 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
 import QrReader from 'react-qr-reader';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { addInfo } from '../store/modules';
 
 const Welcome = ({ history }) => {
   // const history = useHistory();
   const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
   // const query = new URLSearchParams(history.location.search);
   // const restaurantId = query.get("restaurant");
   // const tableId = query.get("table");
@@ -21,12 +24,21 @@ const Welcome = ({ history }) => {
   // }, [tableId, restaurantId]);
 
   const handleScan = (data = '') => {
-    console.log(data);
-    let pathname = data?.replace('https://res-client.herokuapp.com', '');
-    if (pathname) {
-      history.push(pathname);
+    if (data) {
+      let pathname = data?.replace('https://res-client.herokuapp.com/?', '');
+      if (pathname) {
+        const query = new URLSearchParams(pathname);
+        const restaurantId = query.get('restaurant');
+        const tableId = query.get('table');
+        if (restaurantId && tableId) {
+          dispatch(addInfo({ tableId, restaurantId }));
+        }
+      }
     }
   };
+
+  console.log(history);
+
   const onclickScanner = () => setShow(true);
   return (
     <div className="container qrCode">

@@ -1,14 +1,14 @@
-import React from "react";
-import { notification, Button } from "antd";
-import TextArea from "antd/lib/input/TextArea";
-import { useDispatch, useSelector } from "react-redux";
-import { useMutation } from "@apollo/react-hooks";
-import { CREATE_ORDER } from "../graphql/modules";
-import { addInfo, clearCard, clearNote } from "../store/modules";
-import { useHistory } from "react-router-dom";
-import { CartItem, NoOrder } from "../components/Cart";
-import { Banner } from "../components/Shared";
-import { FormattedMessage } from "react-intl";
+import React from 'react';
+import { notification, Button } from 'antd';
+import TextArea from 'antd/lib/input/TextArea';
+import { useDispatch, useSelector } from 'react-redux';
+import { useMutation } from '@apollo/react-hooks';
+import { CREATE_ORDER } from '../graphql/modules';
+import { addInfo, clearCard, clearNote } from '../store/modules';
+import { useHistory } from 'react-router-dom';
+import { CartItem, NoOrder } from '../components/Cart';
+import { Banner } from '../components/Shared';
+import { FormattedMessage } from 'react-intl';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -17,8 +17,10 @@ const Cart = () => {
   const { addedItems } = useSelector((state) => state.cart);
   const { tableId, note, resTemplate } = useSelector((state) => state.info);
   const currency = useSelector(
-    (state) => state?.info?.resInfo?.currency || "$"
+    (state) => state?.info?.resInfo?.currency || '$'
   );
+
+  const background = resTemplate?.bottomNavigation?.background;
   // console.log(addedItems)
   const onChangeNote = (e) => {
     dispatch(addInfo({ note: e.target.value }));
@@ -30,7 +32,7 @@ const Cart = () => {
     const orderData = {
       items,
       tableId,
-      paymentMethod: "cash",
+      paymentMethod: 'cash',
       note,
     };
     try {
@@ -42,13 +44,13 @@ const Cart = () => {
         },
       });
       if (CreateOrder.success) {
-        dispatch(clearCard());
-        dispatch(clearNote());
-        history.push(`/complete-order`);
+        // dispatch(clearCard());
+        // dispatch(clearNote());
+        // history.push(`/complete-order`);
       } else {
         notification.warn({
           message: CreateOrder.message,
-          placement: "bottomRight",
+          placement: 'bottomRight',
         });
       }
     } catch (err) {}
@@ -61,49 +63,67 @@ const Cart = () => {
 
   return (
     <div className="cart">
-      <Banner
-        showBookIcon={true}
-        text={<FormattedMessage id="APP.NAVBER.YOUR_ORDER" />}
-      />
-      {addedItems.map((item, idx) => (
-        <CartItem
-          {...item}
-          key={idx}
-          idx={idx}
-          defaultColor={defaultColor}
-          currency={currency}
-        />
-      ))}
-      <p
-        className="text-right mr-2 mt-3"
-        style={{ color: defaultColor, fontSize: "16px" }}
+      <div
+        className="cart-section"
+        style={{
+          height: 'calc(100vh - 129px)',
+          overflowY: 'scroll',
+        }}
       >
-        <strong style={{ fontSize: "19px", marginRight:"5px" }}>Total: </strong>
-        {currency} {total}
-      </p>
-      <div className="p-2 mt-4">
-        <h3
-          style={{
-            color: defaultColor || "black",
-            textTransform: "capitalize",
-            fontWeight: "700",
-            fontSize: "28px",
-          }}
-        >
-          Add note
-        </h3>
-        <TextArea
-          className="mt-2 mb-2"
-          rows="5"
-          value={note}
-          onChange={onChangeNote}
+        <Banner
+          showBookIcon={true}
+          text={<FormattedMessage id="APP.NAVBER.YOUR_ORDER" />}
         />
+        {addedItems.map((item, idx) => (
+          <CartItem
+            {...item}
+            key={idx}
+            idx={idx}
+            defaultColor={defaultColor}
+            currency={currency}
+          />
+        ))}
+        <p
+          className="text-right mr-2 mt-3"
+          style={{ color: defaultColor, fontSize: '16px' }}
+        >
+          <strong style={{ fontSize: '19px', marginRight: '5px' }}>
+            Total:{' '}
+          </strong>
+          {currency} {total}
+        </p>
+        <div className="p-2 mt-4">
+          <h3
+            style={{
+              color: defaultColor || 'black',
+              textTransform: 'capitalize',
+              fontWeight: '700',
+              fontSize: '28px',
+            }}
+          >
+            Add note
+          </h3>
+          <TextArea
+            className="mt-2 mb-2"
+            rows="5"
+            value={note}
+            onChange={onChangeNote}
+          />
+        </div>
       </div>
       {addedItems?.length !== 0 && (
-        <div className="text-center">
+        <div
+          className="cart-action text-center"
+          style={{
+            background: background,
+            display: 'block',
+            padding: 10,
+            borderBottom: '2px solid #fff'
+          }}
+        >
           <Button
             disabled={!addedItems.length}
-            className="order-btn"
+            className="order-btn "
             onClick={onOrder}
             loading={loading}
           >
