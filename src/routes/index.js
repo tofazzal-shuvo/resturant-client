@@ -1,1 +1,4 @@
-export { AppRouter as default, history } from './AppRouter';
+import AppRouter from './AppRouter';
+
+export { history } from './AppRouter';
+export default AppRouter;

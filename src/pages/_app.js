@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { apollo } from '../graphql';
 import { store } from '../store';
@@ -11,24 +11,25 @@ import { LanguageProvider } from '../context';
 
 import packageJson from '../../package.json';
 
-const APP_VERSION = packageJson.version;
-
-console.log(APP_VERSION, process.env.NODE_ENV);
-
-if (process.env.NODE_ENV === 'production') {
-  if (
-    typeof localStorage.APP_VERSION === 'undefined' ||
-    localStorage.APP_VERSION === null
-  ) {
-    localStorage.setItem('APP_VERSION', APP_VERSION);
-  }
-  if (localStorage.APP_VERSION !== APP_VERSION) {
-    localStorage.clear();
-    localStorage.setItem('APP_VERSION', APP_VERSION);
-  }
-}
-
 const CustomApp = () => {
+  const APP_VERSION = packageJson.version;
+
+  console.log(APP_VERSION, process.env.NODE_ENV);
+
+  useEffect(() => {
+    document.title = document.title + `- v${APP_VERSION}`;
+  });
+
+  if (process.env.NODE_ENV === 'production') {
+    if (typeof localStorage.APP_VERSION === 'undefined' || localStorage.APP_VERSION === null) {
+      localStorage.setItem('APP_VERSION', APP_VERSION);
+    }
+    if (localStorage.APP_VERSION !== APP_VERSION) {
+      localStorage.clear();
+      localStorage.setItem('APP_VERSION', APP_VERSION);
+    }
+  }
+  
   return (
     <ApolloProvider client={apollo}>
       <Provider store={store}>

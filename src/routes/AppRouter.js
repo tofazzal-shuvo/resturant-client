@@ -1,22 +1,14 @@
 /* eslint-disable react/jsx-no-undef */
 import React, { useContext, useEffect } from 'react';
 import { createBrowserHistory } from 'history';
-import {
-  Router,
-  Switch,
-  Route,
-  useHistory,
-  useLocation,
-  Redirect,
-} from 'react-router-dom';
+import { Router, Switch, Route, useHistory, useLocation, Redirect } from 'react-router-dom';
 
 // Index Routes
 import { Public } from './Router';
-import Navber from '../components/Navber';
 import { useDispatch, useSelector } from 'react-redux';
-import { LanguageContext } from '../context';
+import { LanguageContext, NavbarContext, NavbarProvider } from '../context';
 import { Select } from 'antd';
-import { useLazyQuery, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import { FETCH_RESTAURANT } from '../graphql/modules';
 import { addInfo } from '../store/modules';
 import { Welcome } from '../pages';
@@ -24,7 +16,7 @@ import { Welcome } from '../pages';
 // Components
 export const history = createBrowserHistory();
 
-const RouterConfig = () => {
+const AppRouter = () => {
   const info = useSelector((state) => state?.info);
 
   const { tableId: tabId, restaurantId: resId } = info;
@@ -32,12 +24,20 @@ const RouterConfig = () => {
   const query = new URLSearchParams(history?.location?.search);
   const restaurantId = query.get('restaurant') || resId; // || "60e9e589304bea001a6a3a95";
   const tableId = query.get('table') || tabId; // || "60e9e734304bea001a6a3a99";
-  console.log(query)
+  console.log(query);
   if (!restaurantId || !tableId) return <Welcome history={history} />;
-  else return <CustomRouter restaurantId={restaurantId} tableId={tableId} />;
+  else {
+    return (
+      <Router history={history}>
+        <NavbarProvider>
+          <CustomRouter restaurantId={restaurantId} tableId={tableId} />
+        </NavbarProvider>
+      </Router>
+    );
+  }
 };
 
-export const AppRouter = RouterConfig;
+export default AppRouter;
 
 const CustomRouter = ({ restaurantId, tableId }) => {
   const { locale, onChangeLang } = useContext(LanguageContext);
@@ -56,9 +56,7 @@ const CustomRouter = ({ restaurantId, tableId }) => {
   useEffect(() => {
     if (Object.keys(restaurant).length !== 0) {
       const { template, ...resInfo } = restaurant;
-      dispatch(
-        addInfo({ tableId, restaurantId, resTemplate: template, resInfo })
-      );
+      dispatch(addInfo({ tableId, restaurantId, resTemplate: template, resInfo }));
     }
   }, [restaurant]);
 
@@ -66,8 +64,18 @@ const CustomRouter = ({ restaurantId, tableId }) => {
     document.body.style.backgroundColor = background;
   });
 
+  const { showOrderBtn } = useContext(NavbarContext);
+
   return (
-    <div>
+    <div
+      style={{
+        paddingBottom: showOrderBtn ? '140px' : '91px',
+        minHeight: '100vh',
+        position: 'relative',
+        overflow: 'auto',
+      }}
+      id="container"
+    >
       <div className="language-selector">
         <Select onChange={onChangeLang} value={locale}>
           <Select.Option value="en">English</Select.Option>
@@ -85,31 +93,11 @@ const CustomRouter = ({ restaurantId, tableId }) => {
           }}
         ></i>
       </div>
-      <Router history={history}>
-        <Switch>
-          {Public.map((R, k) => {
-            return <CustomRoute key={k} {...R} />;
-          })}
-        </Switch>
-        <Navber />
-      </Router>
+      <Switch>
+        {Public.map((R, k) => {
+          return <Route key={k} {...R} />;
+        })}
+      </Switch>
     </div>
-  );
-};
-
-// auth component
-export const CustomRoute = ({ hasNavbar, ...rest }) => {
-  return hasNavbar ? (
-    <div
-      style={{
-        height: 'calc(100vh - 77px)',
-        position: 'relative',
-        overflow: 'auto',
-      }}
-    >
-      <Route {...rest} />
-    </div>
-  ) : (
-    <Route {...rest} />
   );
 };
